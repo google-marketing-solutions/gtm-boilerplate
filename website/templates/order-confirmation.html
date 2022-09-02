@@ -16,3 +16,30 @@ Thank you | Demo E-commerce Store
     </ul>
 </div>
 {% endblock %}
+
+{% block scripts %}
+<script>
+  const CURRENCY = "GBP";
+
+  dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+  dataLayer.push({
+    event: "purchase",
+    ecommerce: {
+        transaction_id: "{{ content.transaction_id }}",
+        value: {{ content.basket.get_total_price() }},
+        currency: CURRENCY,
+        items: [
+        {% for basket_product in content.basket.products.values() %}
+          {
+            item_id: "{{ basket_product.product.sku }}",
+            item_name: "{{ basket_product.product.name }}",
+            price: {{ basket_product.product.price }},
+            currency: CURRENCY,
+            quantity: {{ basket_product.quantity }}
+          }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+  });
+</script>
+{% endblock %}

@@ -20,12 +20,57 @@
 
 {% block scripts %}
 <script>
-    postAndRedirect(
-        "{{ url_for('update_basket') }}",
-        "{{ url_for('view_basket') }}",
-        "add-to-basket",
-        {
-            "sku": "{{ content.product.sku }}"
-        });
+  const CURRENCY = "GBP";
+
+  dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+  dataLayer.push({
+    event: "view_item",
+    ecommerce: {
+      currency: CURRENCY,
+      value: {{ content.product.price }},
+      items: [{
+        item_id: "{{ content.product.sku }}",
+        item_name: "{{ content.product.name }}",
+        price: {{ content.product.price }},
+        currency: CURRENCY
+      }]
+    }
+  });
+
+  /**
+   * Callback function for adding an item to the basket in the datalayer.
+   * @returns {Promise} a success message after updating the datalayer.
+   */
+  function addItemToBasketDatalayer() {
+    return new Promise(resolve => {
+      dataLayer.push({
+        event: "add_to_cart",
+        ecommerce: {
+          currency: CURRENCY,
+          value: {{ content.product.price }},
+          items: [{
+            item_id: "{{ content.product.sku }}",
+            item_name: "{{ content.product.name }}",
+            price: {{ content.product.price }},
+            currency: CURRENCY,
+            quantity: 1
+          }]
+        }
+      });
+      resolve("Resolved.");
+    });
+  }
+
+  // add click event for adding an item to a basket
+  postAndRedirect(
+    "{{ url_for('update_basket') }}",
+    "{{ url_for('view_basket') }}",
+    "add-to-basket",
+    {
+      "sku": "{{ content.product.sku }}"
+    },
+    addItemToBasketDatalayer);
+
 </script>
+
 {% endblock %}

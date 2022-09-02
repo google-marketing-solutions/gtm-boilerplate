@@ -13,7 +13,19 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-function postAndRedirect(postUrl, redirectUrl, btnId, data) {
+/**
+* Make a POST request and redirect to a URL, on a click event.
+*
+* @param {string} postUrl: the URL to make the POST request to.
+* @param {string} redirectUrl: the URL to redirect to after making the POST
+*   request.
+* @param {string} btnId: the ID of the btn to bind the click event to.
+* @param {?Object} data: the data to POST in the body of the request.
+* @param {?function} callback: the callback function to run on success, before
+*   redirecting to the next page. This must return a promise, so the redirect
+*   will wait for the function to finish.
+*/
+function postAndRedirect(postUrl, redirectUrl, btnId, data, callback) {
   document.getElementById(btnId).addEventListener('click', function(e){
     e.preventDefault();
     e.stopPropagation();
@@ -22,8 +34,11 @@ function postAndRedirect(postUrl, redirectUrl, btnId, data) {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {'Content-Type': 'application/json'}
-    }).then(res => {
+    }).then(async res => {
       e.target.classList.remove('clicked');
+      if (callback != null){
+        await callback(e.target);
+      }
       window.location.href = redirectUrl;
     });
   });

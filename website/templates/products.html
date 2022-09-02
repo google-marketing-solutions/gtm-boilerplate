@@ -29,3 +29,26 @@ Products | Demo E-commerce Store
     {% endfor %}
 </div>
 {% endblock %}
+
+{% block scripts %}
+<script>
+  const CURRENCY = "GBP";
+
+  dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+  dataLayer.push({
+    event: "view_item_list",
+    ecommerce: {
+      items: [
+        {% for product in content.products %}
+          {
+            item_id: "{{ product.sku }}",
+            item_name: "{{ product.name }}",
+            price: {{ product.price }},
+            currency: CURRENCY
+          }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+  });
+</script>
+{% endblock %}

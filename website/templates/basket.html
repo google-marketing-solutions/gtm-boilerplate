@@ -27,12 +27,18 @@ Basket | Demo E-commerce Store
                         <p>
                             <a id="moc-{{sku}}"
                                data-sku="{{ basket_product.product.sku }}"
-                               class="btn minus-one-cart"
+                               data-name="{{ basket_product.product.name }}"
+                               data-price="{{ basket_product.product.price }}"
+                               data-quantity="{{ basket_product.quantity }}"
+                               class="btn minus-one-basket"
                                href="#">-</a>
                             {{ basket_product.quantity }}
                             <a id="poc-{{sku}}"
                                data-sku="{{ basket_product.product.sku }}"
-                               class="btn plus-one-cart"
+                               data-name="{{ basket_product.product.name }}"
+                               data-price="{{ basket_product.product.price }}"
+                               data-quantity="{{ basket_product.quantity }}"
+                               class="btn plus-one-basket"
                                href="#">+</a>
                         </p>
                     </div>
@@ -53,38 +59,148 @@ Basket | Demo E-commerce Store
 
 {% block scripts %}
 <script>
-postAndRedirect(
-	"{{ url_for('clear_basket') }}",
-	"{{ url_for('view_basket') }}",
-	"clear-basket",
-	{});
+const CURRENCY = "GBP";
 
-const pocElements = document.getElementsByClassName("plus-one-cart");
-for (let i = 0; i < pocElements.length; i++) {
-	const sku = pocElements[i].getAttribute("data-sku");
-	postAndRedirect(
-		"{{ url_for('update_basket') }}",
-		"{{ url_for('view_basket') }}",
-		"poc-" + sku,
-		{
-	 		"sku": sku,
-	 		"operation": "+",
-	 		"change_quantity": 1
-		});
-}
+{% if not content.basket.is_empty() %}
 
-const mocElements = document.getElementsByClassName("minus-one-cart");
-for (let i = 0; i < mocElements.length; i++) {
-	const sku = mocElements[i].getAttribute("data-sku");
-	postAndRedirect(
-		"{{ url_for('update_basket') }}",
-		"{{ url_for('view_basket') }}",
-		"moc-" + sku,
-		{
-	 		"sku": sku,
-	 		"operation": "-",
-	 		"change_quantity": 1
-		});
-}
+  dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+  dataLayer.push({
+    event: "view_cart",
+    ecommerce: {
+      currency: CURRENCY,
+      value: {{ content.basket.get_total_price() }},
+      items: [
+        {% for basket_product in content.basket.products.values() %}
+          {
+            item_id: "{{ basket_product.product.sku }}",
+            item_name: "{{ basket_product.product.name }}",
+            price: {{ basket_product.product.price }},
+            currency: CURRENCY,
+            quantity: {{ basket_product.quantity }}
+          }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+  });
+
+  /**
+   * Callback function for removing one item from the basket in the datalayer.
+   * @param {HTMLElement} element: the element that contains the product info.
+   * @returns {Promise} a success message after updating the datalayer.
+   */
+  function removeOneItemFromBasketDatalayer(element) {
+    return new Promise(resolve => {
+      dataLayer.push({
+        event: "remove_from_cart",
+        ecommerce: {
+          currency: CURRENCY,
+          value: element.getAttribute("data-price"),
+          items: [{
+            item_id: element.getAttribute("data-sku"),
+            item_name: element.getAttribute("data-name"),
+            price: element.getAttribute("data-price"),
+            currency: CURRENCY,
+            quantity: 1
+          }]
+        }
+      });
+      resolve("Resolved.");
+    });
+  }
+
+  /**
+   * Callback function for removing all items from the basket in the datalayer.
+   * @returns {Promise} a success message after updating the datalayer.
+   */
+  function removeAllItemsFromBasketDatalayer() {
+    return new Promise(resolve => {
+      dataLayer.push({
+        event: "remove_from_cart",
+        ecommerce: {
+          currency: CURRENCY,
+          value: {{ content.basket.get_total_price() }},
+          items: [
+            {% for basket_product in content.basket.products.values() %}
+              {
+                item_id: "{{ basket_product.product.sku }}",
+                item_name: "{{ basket_product.product.name }}",
+                price: {{ basket_product.product.price }},
+                currency: CURRENCY,
+                quantity: {{ basket_product.quantity }}
+              }{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ]
+        }
+      });
+      resolve("Resolved.");
+    });
+  }
+
+  /**
+   * Callback function for adding one item from the basket in the datalayer.
+   * @param {HTMLElement} element: the element that contains the product info.
+   * @returns {Promise} a success message after updating the datalayer.
+   */
+  function addOneItemToBasketDatalayer(element) {
+    return new Promise(resolve => {
+      dataLayer.push({
+        event: "add_to_cart",
+        ecommerce: {
+          currency: CURRENCY,
+          value: element.getAttribute("data-price"),
+          items: [{
+            item_id: element.getAttribute("data-sku"),
+            item_name: element.getAttribute("data-name"),
+            price: element.getAttribute("data-price"),
+            currency: CURRENCY,
+            quantity: 1
+          }]
+        }
+      });
+      resolve("Resolved.");
+    });
+  }
+
+  // Add onClick event for clearing the basket
+  postAndRedirect(
+    "{{ url_for('clear_basket') }}",
+    "{{ url_for('view_basket') }}",
+    "clear-basket",
+    {},
+    removeAllItemsFromBasketDatalayer);
+
+  // Add on click event for all plus one basket buttons
+  const pocElements = document.getElementsByClassName("plus-one-basket");
+  for (let i = 0; i < pocElements.length; i++) {
+    const sku = pocElements[i].getAttribute("data-sku");
+    postAndRedirect(
+      "{{ url_for('update_basket') }}",
+      "{{ url_for('view_basket') }}",
+      "poc-" + sku,
+      {
+        "sku": sku,
+        "operation": "+",
+        "change_quantity": 1
+      },
+      addOneItemToBasketDatalayer);
+  }
+
+  // Add on click event for all minus one basket buttons
+  const mocElements = document.getElementsByClassName("minus-one-basket");
+  for (let i = 0; i < mocElements.length; i++) {
+    const sku = mocElements[i].getAttribute("data-sku");
+    postAndRedirect(
+      "{{ url_for('update_basket') }}",
+      "{{ url_for('view_basket') }}",
+      "moc-" + sku,
+      {
+        "sku": sku,
+        "operation": "-",
+        "change_quantity": 1
+      },
+      removeOneItemFromBasketDatalayer);
+  }
+{% endif %}
+
 </script>
 {% endblock %}
