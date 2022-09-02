@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}
+Basket | Demo E-commerce Store
+{% endblock %}
+
+{% block content %}
+    {% if content.basket.is_empty() %}
+        <div class="container-fluid container-highlight">
+            <h2>Your basket is empty.</h2>
+            <a class="btn" href="{{ url_for('products_page') }}">View products</a>
+        </div>
+    {% else %}
+        {% for sku, basket_product in content.basket.products.items() %}
+            <div class="container-fluid container-highlight">
+                <div class="row">
+                    <div class="col">
+                        <img class="basket-image"
+                             src="{{ url_for('static', filename='images/'+ basket_product.product.image) }}" />
+                    </div>
+                    <div class="col">
+                        <h3>{{ basket_product.product.name }}</h3>
+                        <p>{{ basket_product.product.get_formatted_price() }}</p>
+                    </div>
+                    <div class="col">
+                        <h3>Quantity:</h3>
+                        <p>
+                            <a id="moc-{{sku}}"
+                               data-sku="{{ basket_product.product.sku }}"
+                               class="btn minus-one-cart"
+                               href="#">-</a>
+                            {{ basket_product.quantity }}
+                            <a id="poc-{{sku}}"
+                               data-sku="{{ basket_product.product.sku }}"
+                               class="btn plus-one-cart"
+                               href="#">+</a>
+                        </p>
+                    </div>
+                    <div class="col">
+                        <h3>Total:</h3>
+                        <p>{{ basket_product.get_formatted_price() }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="container-fluid container-highlight clearfix">
+            <h2>TOTAL: {{ content.basket.get_formatted_price() }}</h2>
+            <a class="btn" id="clear-basket" href="#">Clear Basket</a>
+            <a class="btn" id="buy" href="{{ url_for('view_order_page') }}">Buy</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+postAndRedirect(
+	"{{ url_for('clear_basket') }}",
+	"{{ url_for('view_basket') }}",
+	"clear-basket",
+	{});
+
+const pocElements = document.getElementsByClassName("plus-one-cart");
+for (let i = 0; i < pocElements.length; i++) {
+	const sku = pocElements[i].getAttribute("data-sku");
+	postAndRedirect(
+		"{{ url_for('update_basket') }}",
+		"{{ url_for('view_basket') }}",
+		"poc-" + sku,
+		{
+	 		"sku": sku,
+	 		"operation": "+",
+	 		"change_quantity": 1
+		});
+}
+
+const mocElements = document.getElementsByClassName("minus-one-cart");
+for (let i = 0; i < mocElements.length; i++) {
+	const sku = mocElements[i].getAttribute("data-sku");
+	postAndRedirect(
+		"{{ url_for('update_basket') }}",
+		"{{ url_for('view_basket') }}",
+		"moc-" + sku,
+		{
+	 		"sku": sku,
+	 		"operation": "-",
+	 		"change_quantity": 1
+		});
+}
+</script>
+{% endblock %}

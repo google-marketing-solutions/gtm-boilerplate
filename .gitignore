@@ -1,0 +1,12 @@
+# Virtual envs
+env/
+venv/
+
+# IDEs
+.idea/
+
+# Python
+__pycache__
+
+# OS
+.DS_STORE

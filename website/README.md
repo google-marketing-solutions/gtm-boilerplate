@@ -1,7 +1,17 @@
-# sGTM Client Workshop Sample Code
+# Soteria Ecommerce Demo Store
 
-This repo contains the sample code to be used in a client workshop session on
-Server-Side Google Tag Manager.
+This code provides a sample e-commerce demo store that is set up with Google
+Tag Manager.
+
+## Deployment
+
+TODO: write me.
+
+Set environment variables:
+```
+GTM_WEB_CONTAINER_ID=
+SECRET_KEY=
+```
 
 ## Disclaimers
 __This is not an officially supported Google product.__

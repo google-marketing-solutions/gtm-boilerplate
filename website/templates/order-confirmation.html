@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+Thank you | Demo E-commerce Store
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid container-highlight">
+    <h2>Thank you for your order</h2>
+    <p>Order ID: {{ content.transaction_id }}</p>
+    <ul class="ordered-products">
+        {% for sku, basket_product in content.basket.products.items() %}
+            <li>{{ basket_product.quantity }} x {{ basket_product.product.name }} = {{ basket_product.get_formatted_price() }}</li>
+        {% endfor %}
+        <li class="total">TOTAL: {{ content.basket.get_formatted_price() }}</li>
+    </ul>
+</div>
+{% endblock %}

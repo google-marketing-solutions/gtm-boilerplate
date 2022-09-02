@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ content.product.name }} | Demo E-commerce Store
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid container-highlight">
+    <div class="product">
+        <img class="product-image"
+             src="{{ url_for('static', filename='images/'+ content.product.image) }}" />
+        <div class="product-text">
+            <h3>{{ content.product.name }}: {{ content.product.get_formatted_price() }}</h3>
+            <p>{{ content.product.description }}</p>
+            <a class="btn" id="add-to-basket" href="#">Add to Basket</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    postAndRedirect(
+        "{{ url_for('update_basket') }}",
+        "{{ url_for('view_basket') }}",
+        "add-to-basket",
+        {
+            "sku": "{{ content.product.sku }}"
+        });
+</script>
+{% endblock %}

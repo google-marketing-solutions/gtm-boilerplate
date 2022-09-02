@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- GTM Data layer: https://developers.google.com/tag-platform/tag-manager/web/datalayer -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{ gtm_web_container_id }}');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto&display=swap"
+          rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <!-- Our styles -->
+    <link href="{{ url_for('static', filename='css/styles.css') }}"
+          rel="stylesheet"/>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm_web_container_id }}"
+                height="0" width="0" style ="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="page-container">
+        <a href="{{ url_for('home') }}">
+            <img class="primary-logo"
+                 src="{{ url_for('static', filename='images/gtech_logo_emblem_rgb_White.png') }}" />
+        </a>
+        <h1>Demo E-commerce Store</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('products_page') }}">Products</a></li>
+                <li class="basket">
+                    <a href="{{ url_for('view_basket') }}">
+                        <img src="{{ url_for('static', filename='images/cart.png') }}" />
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
