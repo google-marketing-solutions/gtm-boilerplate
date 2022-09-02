@@ -3,17 +3,31 @@
 This code provides a sample e-commerce demo store that is set up with Google
 Tag Manager.
 
-## Deployment
+## Google Tag Manager
 
-TODO: write me.
+If the solution is to be used with Google Tag Manager, a web container needs to
+be set up in advance of the deployment. After setting this up, make a note of
+the web container ID. This is used with the deployment.
 
-Set environment variables:
-```
-GTM_WEB_CONTAINER_ID=
-SECRET_KEY=
-```
+## App Engine Deployment
+
+1. Create a new Google Cloud Project.
+2. Navigate to [App Engine](https://console.cloud.google.com/appengine) and
+   create an instance.
+3. Create a file named `env_variables.yaml`, that contains the following info:
+   ```
+   env_variables:
+     GTM_WEB_CONTAINER_ID: ''
+     SECRET_KEY: ''
+   ```
+   [See the Flask docs](
+   https://flask.palletsprojects.com/en/2.1.x/config/#SECRET_KEY) regarding the
+   secret key.
+4. Run `gcloud init`
+5. Run `gcloud app deploy`
 
 ## Disclaimers
+
 __This is not an officially supported Google product.__
 
 Copyright 2022 Google LLC. This solution, including any related sample code or
