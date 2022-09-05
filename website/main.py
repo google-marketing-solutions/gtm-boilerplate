@@ -16,11 +16,11 @@ import os
 import uuid
 from flask import Flask, redirect, request, session, url_for
 from flask import render_template
+import constants
 import crud
-
-# The port to run the application on
 import models
 
+# The port to run the application on
 PORT = int(os.environ.get('PORT', 8080))
 # The container ID of your Web GTM container
 GTM_WEB_CONTAINER_ID = os.environ.get('GTM_WEB_CONTAINER_ID')
@@ -34,6 +34,14 @@ app.config['SECRET_KEY'] = SECRET_KEY
 @app.context_processor
 def inject_gtm_web_container_id():
     return dict(gtm_web_container_id=GTM_WEB_CONTAINER_ID)
+
+
+@app.context_processor
+def inject_currency():
+    return {
+        'currency_code': constants.CURRENCY_CODE,
+        'currency_symbol': constants.CURRENCY_SYMBOL,
+    }
 
 
 @app.route('/')

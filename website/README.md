@@ -9,6 +9,24 @@ If the solution is to be used with Google Tag Manager, a web container needs to
 be set up in advance of the deployment. After setting this up, make a note of
 the web container ID. This is used with the deployment.
 
+## Currency
+
+By default, the project uses `GBP` `£` as the currency. You can override this by
+optionally setting two environment variables `CURRENCY_CODE` and
+`CURRENCY_SYMBOL`. For example:
+```
+CURRENCY_CODE=USD
+CURRENCY_SYMBOL=$
+```
+Note that the currency code must be in [this list of supported codes](
+https://support.google.com/analytics/answer/9796179).
+
+_**Limitation**: `products.py` declares the example products: the prices are
+hard-coded, and no currency conversion happens. If the currency exchange rate is
+significantly different to the British Pound, these prices might seem unusual
+and would need to be amended._
+
+
 ## App Engine Deployment
 
 1. Create a new Google Cloud Project.

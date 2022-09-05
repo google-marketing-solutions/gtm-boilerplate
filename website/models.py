@@ -13,8 +13,9 @@
 # limitations under the License.
 """The pydantic models for the project."""
 import decimal
-from typing import Dict, Optional
+from typing import Dict
 from pydantic import BaseModel, condecimal, conint
+import constants
 
 
 class Product(BaseModel):
@@ -25,9 +26,11 @@ class Product(BaseModel):
     price: condecimal(ge=decimal.Decimal('0'), decimal_places=2)
     image: str = None
 
-    def get_formatted_price(self) -> str:
+    def get_formatted_price(
+            self,
+            currency_symbol: str = constants.CURRENCY_SYMBOL) -> str:
         """Get the price rounded to 2 dp as a string with the currency."""
-        return '£{0:.2f}'.format(self.price)
+        return f'{currency_symbol}{self.price:.2f}'
 
 
 class BasketProduct(BaseModel):
@@ -39,9 +42,11 @@ class BasketProduct(BaseModel):
         """Get the price for this product."""
         return self.quantity * self.product.price
 
-    def get_formatted_price(self) -> str:
+    def get_formatted_price(
+            self,
+            currency_symbol: str = constants.CURRENCY_SYMBOL) -> str:
         """Get the price rounded to 2 dp as a string with the currency."""
-        return '£{0:.2f}'.format(self.get_price())
+        return f'{currency_symbol}{self.get_price():.2f}'
 
 
 class Basket(BaseModel):
@@ -55,9 +60,11 @@ class Basket(BaseModel):
             total += product.get_price()
         return total
 
-    def get_formatted_price(self) -> str:
+    def get_formatted_price(
+            self,
+            currency_symbol: str = constants.CURRENCY_SYMBOL) -> str:
         """Get the price rounded to 2 dp as a string with the currency."""
-        return '£{0:.2f}'.format(self.get_total_price())
+        return f'{currency_symbol}{self.get_total_price():.2f}'
 
     def is_empty(self) -> bool:
         """Returns True if the basket is empty, else False."""

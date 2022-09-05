@@ -39,6 +39,7 @@ class ModelsTestCase(unittest.TestCase):
         bp = models.BasketProduct(product=product, quantity=3)
         basket.products['def'] = bp
         self.assertEqual(basket.get_formatted_price(), '£190.00')
+        self.assertEqual(basket.get_formatted_price('$'), '$190.00')
 
 
 if __name__ == '__main__':

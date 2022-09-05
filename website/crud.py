@@ -14,6 +14,7 @@
 """The CRUD operations for working with products."""
 from typing import Dict, Optional
 import models
+import products
 
 
 def get_products() -> Dict[str, models.Product]:
@@ -23,26 +24,7 @@ def get_products() -> Dict[str, models.Product]:
         A dictionary where the keys are the product SKUs and the values are
         the products.
     """
-    return {
-        'blazer': models.Product(
-            sku='blazer',
-            name='Blazer',
-            price='50',
-            image='blazer.jpg',
-            description='Lorem ipsum dolor sit amet, consectetur adipiscing.'),
-        'tshirt': models.Product(
-            sku='tshirt',
-            name='T-Shirt',
-            price='30',
-            image='t-shirt.jpg',
-            description='Lorem ipsum dolor sit amet, consectetur adipiscing.'),
-        'shoes': models.Product(
-            sku='shoes',
-            name='Shoes',
-            price='80',
-            image='shoes.jpg',
-            description='Lorem ipsum dolor sit amet, consectetur adipiscing.'),
-    }
+    return {p['sku']: models.Product(**p) for p in products.RAW_PRODUCTS}
 
 
 def get_product(sku: str) -> Optional[models.Product]:
@@ -54,5 +36,5 @@ def get_product(sku: str) -> Optional[models.Product]:
     Returns:
         The product if it exists, else None
     """
-    products = get_products()
-    return products.get(sku)
+    products_dict = get_products()
+    return products_dict.get(sku)

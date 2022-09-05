@@ -32,7 +32,7 @@ Products | Demo E-commerce Store
 
 {% block scripts %}
 <script>
-  const CURRENCY = "GBP";
+  const CURRENCY = "{{ currency_code }}";
 
   dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
   dataLayer.push({

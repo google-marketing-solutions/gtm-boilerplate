@@ -59,7 +59,7 @@ Basket | Demo E-commerce Store
 
 {% block scripts %}
 <script>
-const CURRENCY = "GBP";
+const CURRENCY = "{{ currency_code }}";
 
 {% if not content.basket.is_empty() %}
 
