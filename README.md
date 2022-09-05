@@ -3,6 +3,13 @@
 This repo contains the sample code to be used in a client workshop session on
 Server-Side Google Tag Manager.
 
+## Get Started
+
+1. [Set up Google Tag Manager](./google_tag_manager/README.md).
+2. [Deploy the sample e-commerce website](./website/README.md).
+3. Go to the web data stream in Google Analytics and ensure the correct stream
+   URL is set.
+
 ## Disclaimers
 __This is not an officially supported Google product.__
 
