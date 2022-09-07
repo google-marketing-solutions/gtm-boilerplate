@@ -1,0 +1,558 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2022-09-07 10:16:02",
+    "containerVersion": {
+        "path": "accounts/1234567890/containers/11111111/versions/0",
+        "accountId": "1234567890",
+        "containerId": "11111111",
+        "containerVersionId": "0",
+        "container": {
+            "path": "accounts/1234567890/containers/11111111",
+            "accountId": "1234567890",
+            "containerId": "11111111",
+            "name": "Server Side Container",
+            "publicId": "GTM-2222222",
+            "usageContext": [
+                "SERVER"
+            ],
+            "fingerprint": "0000000000000",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/1234567890/containers/11111111/workspaces?apiLink=container"
+        },
+        "tag": [
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "tagId": "97",
+                "name": "[GA4] All Pages",
+                "type": "sgtmgaaw",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "redactVisitorIp",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "epToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "upToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "{{GA Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "0000000000000",
+                "firingTriggerId": [
+                    "2147479574"
+                ],
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "tagId": "98",
+                "name": "[GA4] View Item List",
+                "type": "sgtmgaaw",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "redactVisitorIp",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "epToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "upToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "{{GA Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "0000000000000",
+                "firingTriggerId": [
+                    "91"
+                ],
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "tagId": "99",
+                "name": "[GA4] View Item",
+                "type": "sgtmgaaw",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "redactVisitorIp",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "epToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "upToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "{{GA Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "0000000000000",
+                "firingTriggerId": [
+                    "92"
+                ],
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "tagId": "100",
+                "name": "[GA4] Add to Cart",
+                "type": "sgtmgaaw",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "redactVisitorIp",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "epToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "upToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "{{GA Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "0000000000000",
+                "firingTriggerId": [
+                    "93"
+                ],
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "tagId": "101",
+                "name": "[GA4] View Cart",
+                "type": "sgtmgaaw",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "redactVisitorIp",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "epToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "upToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "{{GA Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "0000000000000",
+                "firingTriggerId": [
+                    "94"
+                ],
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "tagId": "102",
+                "name": "[GA4] Remove from Cart",
+                "type": "sgtmgaaw",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "redactVisitorIp",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "epToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "upToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "{{GA Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "0000000000000",
+                "firingTriggerId": [
+                    "95"
+                ],
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "tagId": "103",
+                "name": "[GA4] Purchase",
+                "type": "sgtmgaaw",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "redactVisitorIp",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "epToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "upToIncludeDropdown",
+                        "value": "all"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "{{GA Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "0000000000000",
+                "firingTriggerId": [
+                    "96"
+                ],
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            }
+        ],
+        "trigger": [
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "triggerId": "91",
+                "name": "view_item_list",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "view_item_list"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "triggerId": "92",
+                "name": "view_item",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "view_item"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "triggerId": "93",
+                "name": "add_to_cart",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "add_to_cart"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "triggerId": "94",
+                "name": "view_cart",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "view_cart"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "triggerId": "95",
+                "name": "remove_from_cart",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "remove_from_cart"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "triggerId": "96",
+                "name": "purchase",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "purchase"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            }
+        ],
+        "variable": [
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "90",
+                "name": "GA Measurement ID",
+                "type": "c",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "ENTER_ME"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            }
+        ],
+        "builtInVariable": [
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "type": "EVENT_NAME",
+                "name": "Event Name"
+            }
+        ],
+        "fingerprint": "0000000000000",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/1234567890/containers/11111111/versions/0?apiLink=version",
+        "client": [
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "clientId": "1",
+                "name": "Universal Analytics",
+                "type": "ua_client",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "activateDefaultPaths",
+                        "value": "true"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieManagement",
+                        "value": "server"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieName",
+                        "value": "FPID"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieDomain",
+                        "value": "auto"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookiePath",
+                        "value": "/"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieMaxAgeInSec",
+                        "value": "63072000"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "clientId": "2",
+                "name": "GA4",
+                "type": "gaaw_client",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "activateDefaultPaths",
+                        "value": "true"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieManagement",
+                        "value": "server"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieName",
+                        "value": "FPID"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieDomain",
+                        "value": "auto"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookiePath",
+                        "value": "/"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieMaxAgeInSec",
+                        "value": "63072000"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            }
+        ]
+    }
+}

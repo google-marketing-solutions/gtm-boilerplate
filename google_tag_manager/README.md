@@ -28,3 +28,24 @@ This directory contains information about how to set up a Google Tag Manager
 5. Go to Variables -> GA Measurement ID and enter the measurement ID from the
    Google Analytics setup above.
 6. Press submit and publish the web container.
+
+
+## Cheat Sheet
+
+To deploy the Google Tag Manager server container
+
+1. Open [Google Tag Manager](http://tagmanager.google.com).
+2. Add a new server container to the account.
+3. Automatically provision the server to have Google Tag Manager handle
+   deploying the Docker image to App Engine.
+4. Navigate to Admin -> Import Container
+5. Select the `server-container.json` file found under `src/` -> Choose default
+   workspace, overwrite and press confirm.
+6. Go to Variables -> GA Measurement ID and enter the measurement ID from the
+   Google Analytics setup above.
+7. Press submit and publish the server container.
+8. Open the web container -> Tags -> Open `[GA4 Configuration] All Pages` ->
+   Edit -> Tick "Send to server container" and enter the URL of the server
+   container.
+   ![Send to Server screenshot](./docs/images/gtm-send-to-server-container.png)
+9. Press submit and publish the web container.
