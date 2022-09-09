@@ -1,7 +1,11 @@
-# sGTM Client Workshop Sample Code
+# GTM Boilerplate
+**Kickstart your GTM experiments with this repository**
 
-This repo contains the sample code to be used in a client workshop session on
-Server-Side Google Tag Manager.
+This repo contains boilerplate code for working with either a pure Web or
+Server Google Tag Manager setup, including a demo e-commerce website. You'll
+find the templates to set up GTM Web and Server container, and a demo
+e-commerce website you can easily run or deploy on a cloud service.
+
 
 ## Get Started
 
