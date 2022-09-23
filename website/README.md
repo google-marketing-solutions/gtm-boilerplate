@@ -32,18 +32,27 @@ and would need to be amended._
 1. Create a new Google Cloud Project.
 2. Navigate to [App Engine](https://console.cloud.google.com/appengine) and
    create an instance.
-3. Create a file named `env_variables.yaml`, that contains the following info:
-   ```
+3. Open the file named `env_variables.yaml`, that contains the following info:
+   ```yaml
    env_variables:
-     GTM_WEB_CONTAINER_ID: ''
-     SECRET_KEY: ''
+     GTM_WEB_CONTAINER_ID: 'GTM-XXXXXX'
+     SECRET_KEY: 'RANDOM_STRING'
+     CURRENCY_CODE: GBP
+     CURRENCY_SYMBOL: £
    ```
    [See the Flask docs](
    https://flask.palletsprojects.com/en/2.1.x/config/#SECRET_KEY) regarding the
    secret key.
-4. Run `gcloud init`
-5. Run `gcloud app deploy`
+4. Fill in the GTM Web Container ID and set a random string for the secret key. You
+can update the currency variables too if you want.
+5. Run `gcloud init`
+6. Run `gcloud app deploy`
 
+### Guided Deployment
+Click the Open in Cloud Shell button to open this repository in Google Cloud Shell
+and follow a guided tutorial.
+
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fgtech-professional-services%2Fgtm-boilerplate&cloudshell_git_branch=main&cloudshell_workspace=.%2Fwebsite&cloudshell_tutorial=tutorial.md)
 ## Disclaimers
 
 __This is not an officially supported Google product.__

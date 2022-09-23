@@ -10,6 +10,3 @@ __pycache__
 
 # OS
 .DS_STORE
-
-# Secrets
-env_variables.yaml
