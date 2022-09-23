@@ -29,7 +29,7 @@ Google Cloud Project: <walkthrough-project-id/>
 Before we deploy the solution let's modify the file that holds the environment
 variables the site needs.
 
-Open <walkthrough-editor-open-file filePath="./website/env_variables.yaml">
+Open <walkthrough-editor-open-file filePath="./env_variables.yaml">
 env_variables.yaml</walkthrough-editor-open-file>
 
 Fill in the GTM Web Container ID and set a random string for the secret key. You
@@ -46,17 +46,19 @@ After that, let's get the deployment started.
 
 ## Deploying
 
-Run the following in cloud shell to navigate to the website directory.
-```bash 
-cd website
+We'll first initialise `gcloud`, making sure you're logged in and have an
+active account selected. If you've already intialised `gcloud` you can skip
+this step. Follow the prompts in the console during the initialisation.
+```bash
+gcloud init
 ```
 
-Deploy website on App Engine 
+With the next command we'll deploy the website on AppEngine, run the next
+command in the console and follow the prompts during the deployment.
 ```bash
 gcloud app deploy
 ```
 
-It will ask to confirm the deployment, type `y` and press `enter` to confirm.
 Once the deployment is completed you can use the follow command to describe the
 newly deployed service, showing you the hostname and more details of the
 deployed app.
