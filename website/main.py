@@ -16,6 +16,7 @@ import os
 import uuid
 from flask import Flask, redirect, request, session, url_for
 from flask import render_template
+from is_safe_url import is_safe_url
 import constants
 import crud
 import models
@@ -41,6 +42,13 @@ def inject_currency():
     return {
         'currency_code': constants.CURRENCY_CODE,
         'currency_symbol': constants.CURRENCY_SYMBOL,
+    }
+
+
+@app.context_processor
+def inject_user():
+    return {
+        'user': session.get('user')
     }
 
 
@@ -139,6 +147,37 @@ def view_order_page():
         'transaction_id': str(uuid.uuid4()),
     }
     return render_template('order-confirmation.html', content=response)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """Simulated login - this does not actually log a user in.
+
+    It saves the user information from the form into the session and redirects
+    back to the "next" location.
+    """
+    redirect_url = request.args.get('next', '/')
+    # Check to make sure the redirect is safe. None is the allowed hosts. This
+    # can be None as we're not providing any full links
+    redirect_url = redirect_url if is_safe_url(redirect_url, None) else '/'
+    if request.method == 'GET':
+        content = {'next': redirect_url}
+        return render_template('login.html', content=content)
+
+    session['user'] = models.User(**request.form).dict()
+    return redirect(redirect_url)
+
+
+@app.route('/logout')
+def logout():
+    """Remove the user from the session, and redirect to the "next" location."""
+    redirect_url = request.args.get('next', '/')
+    # Check to make sure the redirect is safe. None is the allowed hosts. This
+    # can be None as we're not providing any full links
+    redirect_url = redirect_url if is_safe_url(redirect_url, None) else '/'
+    if 'user' in session:
+        session.pop('user')
+    return redirect(redirect_url)
 
 
 if __name__ == '__main__':

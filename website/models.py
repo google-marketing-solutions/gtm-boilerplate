@@ -69,3 +69,10 @@ class Basket(BaseModel):
     def is_empty(self) -> bool:
         """Returns True if the basket is empty, else False."""
         return len(self.products) == 0
+
+
+class User(BaseModel):
+    """A logged-in user of the website."""
+    user_id: str
+    name: str
+    email: str

@@ -17,6 +17,7 @@
 
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock %}</title>
     <!-- GTM Data layer: https://developers.google.com/tag-platform/tag-manager/web/datalayer -->
     <script>
@@ -47,27 +48,54 @@
         <iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm_web_container_id }}"
                 height="0" width="0" style ="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <div class="topbar">
+        <div class="company-logo">
+            <a href="{{ url_for('home') }}">
+                <img class="primary-logo"
+                     src="{{ url_for('static', filename='images/gtech_logo_emblem_rgb_White.png') }}" />
+            </a>
+        </div>
+        <div class="company-name">
+            <h1>Demo E-commerce Store</h1>
+        </div>
+        <div class="account">
+            {% if user %}
+                <div class="hello-container">
+                    <span class="hello">Hello <a href="mailto:{{ user.email }}">{{ user.name }}</a></span>
+                    <span class="user-id">ID: {{ user.user_id }}</span>
+                </div>
+                <a class="logout btn" href="{{ url_for('logout') }}?next={{ request.path }}">Log out</a>
+            {% else %}
+            <a class="login btn" href="{{ url_for('login') }}?next={{ request.path }}">Log In</a>
+            {% endif %}
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('products_page') }}">Products</a></li>
+            <li class="basket">
+                <a href="{{ url_for('view_basket') }}">
+                    <img src="{{ url_for('static', filename='images/cart.png') }}" />
+                </a>
+            </li>
+        </ul>
+    </nav>
 
     <div class="page-container">
-        <a href="{{ url_for('home') }}">
-            <img class="primary-logo"
-                 src="{{ url_for('static', filename='images/gtech_logo_emblem_rgb_White.png') }}" />
-        </a>
-        <h1>Demo E-commerce Store</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('products_page') }}">Products</a></li>
-                <li class="basket">
-                    <a href="{{ url_for('view_basket') }}">
-                        <img src="{{ url_for('static', filename='images/cart.png') }}" />
-                    </a>
-                </li>
-            </ul>
-        </nav>
         {% block content %}{% endblock %}
     </div>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    {% if user %}
+        <script>
+            dataLayer.push({
+                "user": {
+                    "id": "{{ user.user_id }}",
+                    "email": "{{ user.email }}"
+                }
+            });
+        </script>
+    {% endif %}
     {% block scripts %}{% endblock %}
 </body>
 </html>

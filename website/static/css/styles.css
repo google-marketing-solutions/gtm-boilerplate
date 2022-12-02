@@ -33,7 +33,7 @@ a:hover {
   color: #03DAC5;
 }
 
-a.btn{
+.btn{
   background: #BB86FC;
   color: #fff;
   padding: 5px 15px;
@@ -42,12 +42,71 @@ a.btn{
   margin: 0 auto;
 }
 
-a.btn:hover {
+.btn:hover {
   background: #03DAC5;
 }
 
-a.btn.clicked {
+.btn.clicked {
   background: #666666;
+}
+
+.topbar{
+  background: #251b32;
+  text-align:left;
+}
+
+.topbar::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.topbar .company-logo,
+.topbar .company-name{
+  float: left;
+}
+
+.topbar .company-logo img {
+  height: 60px;
+  display: inline-block;
+  margin: 10px;
+}
+
+.topbar .company-name h1{
+  margin: 22px 0px;
+  font-size: 30px;
+}
+
+.topbar .account{
+  float: right;
+  margin: 10px;
+}
+
+.topbar .account .hello-container{
+  float: left;
+  padding: 8px 15px 0;
+  text-align: right;
+}
+
+.topbar .account .hello-container span {
+  display: block;
+}
+
+.topbar .account .hello-container .hello a {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.topbar .account .hello-container span.user-id {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.topbar .account a.btn{
+  float: left;
+  display: block;
+  background: #38284c;
+  margin-top: 12px;
 }
 
 .page-container{
@@ -94,12 +153,6 @@ nav ul li a:hover {
   color: #fff;
 }
 
-.primary-logo {
-  max-width: 150px;
-  margin: 20px auto 0;
-  display: block;
-}
-
 .container-highlight{
   background: #242424;
   margin: 10px 0;
@@ -133,4 +186,23 @@ ul.ordered-products{
 ul.ordered-products li.total{
   margin: 10px;
   font-weight: bold;
+}
+
+form.login {
+  max-width: 500px;
+  margin: auto;
+}
+
+.form-group {
+  display:block;
+  margin-bottom: 10px
+}
+
+.form-group label{
+  display: block;
+}
+
+.form-group input{
+  width: 100%;
+  text-align:center;
 }
