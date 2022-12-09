@@ -206,3 +206,46 @@ form.login {
   width: 100%;
   text-align:center;
 }
+
+#cookie-banner-overlay{
+  position: absolute;
+  top:0;
+  bottom:0;
+  right: 0;
+  left: 0;
+  animation: fadeIn 0.1s;
+  animation-fill-mode: forwards;
+  display:none;
+}
+
+@keyframes fadeIn {
+  from { background: rgba(0, 0, 0, 0); }
+  to { background: rgba(0, 0, 0, 0.8); }
+}
+
+#cookie-banner-icon {
+  position: fixed;
+  bottom:5px;
+  right: 5px;
+}
+
+#cookie-banner-icon:hover{
+  background: #03DAC5;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+#cookie-banner-icon img{
+  height: 60px;
+}
+
+.cookie-banner-container{
+  background: #251b32;
+  max-width: 550px;
+  padding: 20px;
+  margin: 80px auto;
+}
+
+.cookie-banner-text form input[type='checkbox'] {
+  margin-bottom: 25px;
+}
