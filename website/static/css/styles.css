@@ -216,6 +216,7 @@ form.login {
   animation: fadeIn 0.1s;
   animation-fill-mode: forwards;
   display:none;
+  z-index: 1;
 }
 
 @keyframes fadeIn {
