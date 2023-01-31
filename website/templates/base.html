@@ -71,7 +71,7 @@
         <div class="account">
             {% if user %}
                 <div class="hello-container">
-                    <span class="hello">Hello <a href="mailto:{{ user.email }}">{{ user.name }}</a></span>
+                    <span class="hello">Hello <a href="{{ url_for('login') }}?next={{ request.path }}">{{ user.name }}</a></span>
                     <span class="user-id">ID: {{ user.user_id }}</span>
                 </div>
                 <a class="logout btn" href="{{ url_for('logout') }}?next={{ request.path }}">Log out</a>

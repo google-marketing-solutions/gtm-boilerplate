@@ -25,17 +25,17 @@ Login | Demo E-commerce Store
     <form class="login" action="{{ url_for('login') }}?next={{ content.next }}" method="post">
         <div class="form-group">
             <label>Name:</label>
-            <input name="name" type="text" value="Jane" required="required"/>
+            <input name="name" type="text" value="{{ user.name|default("Jane", true) }}" required="required"/>
         </div>
         <div class="form-group">
             <label>Email:</label>
-            <input name="email" type="text" value="jane.doe@example.com" required="required"/>
+            <input name="email" type="text" value="{{ user.email|default("jane.doe@example.com", true) }}" required="required"/>
         </div>
         <div class="form-group">
             <label>User ID:</label>
-            <input name="user_id" type="text" value="123" required="required"/>
+            <input name="user_id" type="text" value="{{ user.user_id|default("123", true) }}" required="required"/>
         </div>
-        <button class="btn" type="submit">Login</button>
+        <button class="btn" type="submit">{% if user.user_id %}Update{% else %}Login{% endif %}</button>
     </form>
 </div>
 {% endblock %}
