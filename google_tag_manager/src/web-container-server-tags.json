@@ -1,6 +1,6 @@
 {
   "exportFormatVersion": 2,
-  "exportTime": "2023-03-01 12:51:11",
+  "exportTime": "2023-03-01 12:50:24",
   "containerVersion": {
       "path": "accounts/1234567890/containers/11111111/versions/0",
       "accountId": "1234567890",
@@ -40,175 +40,20 @@
           {
               "accountId": "1234567890",
               "containerId": "11111111",
-              "tagId": "9",
-              "name": "[Floodlight] - Sales Tag",
-              "type": "fls",
+              "tagId": "31",
+              "name": "[GA4 Configuration] All Pages - sGTM",
+              "type": "gaawc",
               "parameter": [
+                  {
+                      "type": "TEMPLATE",
+                      "key": "serverContainerUrl",
+                      "value": "https://example.com"
+                  },
                   {
                       "type": "TEMPLATE",
                       "key": "userDataVariable",
                       "value": "{{User-Provided Data}}"
                   },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "revenue",
-                      "value": "{{Transaction Value}}"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enableConversionLinker",
-                      "value": "true"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "countingMethod",
-                      "value": "TRANSACTIONS"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enhancedUserData",
-                      "value": "true"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "orderId",
-                      "value": "{{Transaction ID}}"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enableProductReporting",
-                      "value": "false"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "groupTag",
-                      "value": "retail"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "useImageTag",
-                      "value": "false"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "activityTag",
-                      "value": "purchase"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "conversionCookiePrefix",
-                      "value": "_gcl"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "advertiserId",
-                      "value": "0"
-                  }
-              ],
-              "fingerprint": "0000000000000",
-              "firingTriggerId": [
-                  "8"
-              ],
-              "tagFiringOption": "ONCE_PER_EVENT",
-              "monitoringMetadata": {
-                  "type": "MAP"
-              },
-              "consentSettings": {
-                  "consentStatus": "NOT_SET"
-              }
-          },
-          {
-              "accountId": "1234567890",
-              "containerId": "11111111",
-              "tagId": "11",
-              "name": "[GAds] Conversion Tracking",
-              "type": "awct",
-              "parameter": [
-                  {
-                      "type": "TEMPLATE",
-                      "key": "orderId",
-                      "value": "{{Transaction ID}}"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enableProductReporting",
-                      "value": "false"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "cssProvidedEnhancedConversionValue",
-                      "value": "{{User-Provided Data}}"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enableShippingData",
-                      "value": "false"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enableNewCustomerReporting",
-                      "value": "false"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enableConversionLinker",
-                      "value": "true"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enableEnhancedConversion",
-                      "value": "true"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "conversionValue",
-                      "value": "{{Transaction Value}}"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "conversionCookiePrefix",
-                      "value": "_gcl"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "conversionId",
-                      "value": "1234567890"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "currencyCode",
-                      "value": "{{Currency}}"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "conversionLabel",
-                      "value": "abcdEFGHijklmnop"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "rdp",
-                      "value": "false"
-                  }
-              ],
-              "fingerprint": "0000000000000",
-              "firingTriggerId": [
-                  "8"
-              ],
-              "tagFiringOption": "ONCE_PER_EVENT",
-              "monitoringMetadata": {
-                  "type": "MAP"
-              },
-              "consentSettings": {
-                  "consentStatus": "NOT_SET"
-              }
-          },
-          {
-              "accountId": "1234567890",
-              "containerId": "11111111",
-              "tagId": "13",
-              "name": "[GA4 Configuration] All Pages",
-              "type": "gaawc",
-              "parameter": [
                   {
                       "type": "LIST",
                       "key": "fieldsToSet",
@@ -247,153 +92,23 @@
                   },
                   {
                       "type": "BOOLEAN",
+                      "key": "enhancedUserId",
+                      "value": "true"
+                  },
+                  {
+                      "type": "BOOLEAN",
                       "key": "sendPageView",
                       "value": "true"
                   },
                   {
                       "type": "BOOLEAN",
                       "key": "enableSendToServerContainer",
-                      "value": "false"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "measurementId",
-                      "value": "{{GA Measurement ID}}"
-                  }
-              ],
-              "fingerprint": "0000000000000",
-              "firingTriggerId": [
-                  "2147479553"
-              ],
-              "tagFiringOption": "ONCE_PER_EVENT",
-              "monitoringMetadata": {
-                  "type": "MAP"
-              },
-              "consentSettings": {
-                  "consentStatus": "NOT_SET"
-              }
-          },
-          {
-              "accountId": "1234567890",
-              "containerId": "11111111",
-              "tagId": "15",
-              "name": "[GA4] Ecommerce Events",
-              "type": "gaawe",
-              "parameter": [
-                  {
-                      "type": "BOOLEAN",
-                      "key": "sendEcommerceData",
                       "value": "true"
                   },
                   {
                       "type": "TEMPLATE",
-                      "key": "getEcommerceDataFrom",
-                      "value": "dataLayer"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "eventName",
-                      "value": "{{Event}}"
-                  },
-                  {
-                      "type": "TAG_REFERENCE",
                       "key": "measurementId",
-                      "value": "[GA4 Configuration] All Pages"
-                  }
-              ],
-              "fingerprint": "0000000000000",
-              "firingTriggerId": [
-                  "14"
-              ],
-              "tagFiringOption": "ONCE_PER_EVENT",
-              "monitoringMetadata": {
-                  "type": "MAP"
-              },
-              "consentSettings": {
-                  "consentStatus": "NOT_SET"
-              }
-          },
-          {
-              "accountId": "1234567890",
-              "containerId": "11111111",
-              "tagId": "18",
-              "name": "[GA4] Select Content",
-              "type": "gaawe",
-              "parameter": [
-                  {
-                      "type": "BOOLEAN",
-                      "key": "sendEcommerceData",
-                      "value": "false"
-                  },
-                  {
-                      "type": "TEMPLATE",
-                      "key": "eventName",
-                      "value": "select_content"
-                  },
-                  {
-                      "type": "LIST",
-                      "key": "eventParameters",
-                      "list": [
-                          {
-                              "type": "MAP",
-                              "map": [
-                                  {
-                                      "type": "TEMPLATE",
-                                      "key": "name",
-                                      "value": "content_type"
-                                  },
-                                  {
-                                      "type": "TEMPLATE",
-                                      "key": "value",
-                                      "value": "{{Click Text}}"
-                                  }
-                              ]
-                          }
-                      ]
-                  },
-                  {
-                      "type": "TAG_REFERENCE",
-                      "key": "measurementId",
-                      "value": "[GA4 Configuration] All Pages"
-                  }
-              ],
-              "fingerprint": "0000000000000",
-              "firingTriggerId": [
-                  "16",
-                  "3",
-                  "17",
-                  "10",
-                  "4"
-              ],
-              "tagFiringOption": "ONCE_PER_EVENT",
-              "monitoringMetadata": {
-                  "type": "MAP"
-              },
-              "consentSettings": {
-                  "consentStatus": "NOT_SET"
-              }
-          },
-          {
-              "accountId": "1234567890",
-              "containerId": "11111111",
-              "tagId": "19",
-              "name": "Conversion Linker",
-              "type": "gclidw",
-              "parameter": [
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enableCrossDomain",
-                      "value": "false"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enableUrlPassthrough",
-                      "value": "false"
-                  },
-                  {
-                      "type": "BOOLEAN",
-                      "key": "enableCookieOverrides",
-                      "value": "false"
+                      "value": "{{GA Measurement ID - sGTM}}"
                   }
               ],
               "fingerprint": "0000000000000",
@@ -411,8 +126,8 @@
           {
               "accountId": "1234567890",
               "containerId": "11111111",
-              "tagId": "27",
-              "name": "[GA4] Login/Logout",
+              "tagId": "32",
+              "name": "[GA4] Login/Logout - sGTM",
               "type": "gaawe",
               "parameter": [
                   {
@@ -449,13 +164,113 @@
                   {
                       "type": "TAG_REFERENCE",
                       "key": "measurementId",
-                      "value": "[GA4 Configuration] All Pages"
+                      "value": "[GA4 Configuration] All Pages - sGTM"
                   }
               ],
               "fingerprint": "0000000000000",
               "firingTriggerId": [
                   "26",
                   "28"
+              ],
+              "tagFiringOption": "ONCE_PER_EVENT",
+              "monitoringMetadata": {
+                  "type": "MAP"
+              },
+              "consentSettings": {
+                  "consentStatus": "NOT_SET"
+              }
+          },
+          {
+              "accountId": "1234567890",
+              "containerId": "11111111",
+              "tagId": "33",
+              "name": "[GA4] Ecommerce Events - sGTM",
+              "type": "gaawe",
+              "parameter": [
+                  {
+                      "type": "BOOLEAN",
+                      "key": "sendEcommerceData",
+                      "value": "true"
+                  },
+                  {
+                      "type": "TEMPLATE",
+                      "key": "getEcommerceDataFrom",
+                      "value": "dataLayer"
+                  },
+                  {
+                      "type": "TEMPLATE",
+                      "key": "eventName",
+                      "value": "{{Event}}"
+                  },
+                  {
+                      "type": "TAG_REFERENCE",
+                      "key": "measurementId",
+                      "value": "[GA4 Configuration] All Pages - sGTM"
+                  }
+              ],
+              "fingerprint": "0000000000000",
+              "firingTriggerId": [
+                  "14"
+              ],
+              "tagFiringOption": "ONCE_PER_EVENT",
+              "monitoringMetadata": {
+                  "type": "MAP"
+              },
+              "consentSettings": {
+                  "consentStatus": "NOT_SET"
+              }
+          },
+          {
+              "accountId": "1234567890",
+              "containerId": "11111111",
+              "tagId": "34",
+              "name": "[GA4] Select Content - sGTM",
+              "type": "gaawe",
+              "parameter": [
+                  {
+                      "type": "BOOLEAN",
+                      "key": "sendEcommerceData",
+                      "value": "false"
+                  },
+                  {
+                      "type": "TEMPLATE",
+                      "key": "eventName",
+                      "value": "select_content"
+                  },
+                  {
+                      "type": "LIST",
+                      "key": "eventParameters",
+                      "list": [
+                          {
+                              "type": "MAP",
+                              "map": [
+                                  {
+                                      "type": "TEMPLATE",
+                                      "key": "name",
+                                      "value": "content_type"
+                                  },
+                                  {
+                                      "type": "TEMPLATE",
+                                      "key": "value",
+                                      "value": "{{Click Text}}"
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "type": "TAG_REFERENCE",
+                      "key": "measurementId",
+                      "value": "[GA4 Configuration] All Pages - sGTM"
+                  }
+              ],
+              "fingerprint": "0000000000000",
+              "firingTriggerId": [
+                  "16",
+                  "3",
+                  "17",
+                  "10",
+                  "4"
               ],
               "tagFiringOption": "ONCE_PER_EVENT",
               "monitoringMetadata": {
@@ -790,22 +605,6 @@
           {
               "accountId": "1234567890",
               "containerId": "11111111",
-              "variableId": "12",
-              "name": "GA Measurement ID",
-              "type": "c",
-              "parameter": [
-                  {
-                      "type": "TEMPLATE",
-                      "key": "value",
-                      "value": "G-AAAAAAAAAA"
-                  }
-              ],
-              "fingerprint": "0000000000000",
-              "formatValue": {}
-          },
-          {
-              "accountId": "1234567890",
-              "containerId": "11111111",
               "variableId": "21",
               "name": "User-Provided Data",
               "type": "awec",
@@ -928,6 +727,22 @@
                               ]
                           }
                       ]
+                  }
+              ],
+              "fingerprint": "0000000000000",
+              "formatValue": {}
+          },
+          {
+              "accountId": "1234567890",
+              "containerId": "11111111",
+              "variableId": "30",
+              "name": "GA Measurement ID - sGTM",
+              "type": "c",
+              "parameter": [
+                  {
+                      "type": "TEMPLATE",
+                      "key": "value",
+                      "value": "G-AAAAAAAAAA"
                   }
               ],
               "fingerprint": "0000000000000",
