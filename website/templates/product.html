@@ -28,6 +28,10 @@
         <div class="product-text">
             <h3>{{ content.product.name }}: {{ content.product.get_formatted_price() }}</h3>
             <p>{{ content.product.description }}</p>
+            <a id="buy-one-click-{{ content.product.sku }}"
+               class="btn buy-one-click"
+               data-sku="{{ content.product.sku }}"
+               href="#">Buy</a>
             <a class="btn" id="add-to-basket" href="#">Add to Basket</a>
         </div>
     </div>
@@ -86,6 +90,10 @@
       "sku": "{{ content.product.sku }}"
     },
     addItemToBasketDatalayer);
+
+  // Add on click event for buy with one click buttons
+  addBuyWithOneClickEvents(
+    "{{ url_for('update_basket') }}", "{{ url_for('view_order_page') }}");
 
 </script>
 

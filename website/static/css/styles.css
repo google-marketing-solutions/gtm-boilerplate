@@ -42,6 +42,10 @@ a:hover {
   margin: 0 auto;
 }
 
+.btn.buy-one-click{
+  background: #FC868C;
+}
+
 .btn:hover {
   background: #03DAC5;
 }

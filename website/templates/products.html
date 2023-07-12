@@ -32,6 +32,10 @@ Products | Demo E-commerce Store
                     </a>
                     <div class="product-text">
                         <h3>{{ product.name }}: {{ product.get_formatted_price() }}</h3>
+                        <a id="buy-one-click-{{ product.sku }}"
+                           class="btn buy-one-click"
+                           data-sku="{{ product.sku }}"
+                           href="#">Buy</a>
                         <a class="btn"
                            href="{{ url_for('product_page', sku=product.sku) }}">View Product</a>
                     </div>
@@ -66,5 +70,9 @@ Products | Demo E-commerce Store
       ]
     }
   });
+
+  // Add on click event for all buy with one click buttons
+  addBuyWithOneClickEvents(
+    "{{ url_for('update_basket') }}", "{{ url_for('view_order_page') }}");
 </script>
 {% endblock %}

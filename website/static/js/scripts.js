@@ -43,3 +43,24 @@ function postAndRedirect(postUrl, redirectUrl, btnId, data, callback) {
     });
   });
 }
+/**
+ * Add click events for the buy with one click buttons.
+ * @param {string} basketUrl: the URL of the basket.
+ * @param {string} buyUrl: the URL of the buy page.
+ */
+function addBuyWithOneClickEvents(basketUrl, buyUrl) {
+  const buyOneClickElements = document.getElementsByClassName("buy-one-click");
+  for (let i = 0; i < buyOneClickElements.length; i++) {
+    const sku = buyOneClickElements[i].getAttribute("data-sku");
+    postAndRedirect(
+      basketUrl,
+      buyUrl,
+      "buy-one-click-" + sku,
+      {
+        "sku": sku,
+        "operation": "+",
+        "change_quantity": 1
+      },
+      null);
+  }
+}
