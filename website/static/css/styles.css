@@ -251,6 +251,17 @@ form.login {
   margin: 80px auto;
 }
 
-.cookie-banner-text form input[type='checkbox'] {
+.cookie-banner-text form .form-rows {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   margin-bottom: 25px;
+}
+
+.cookie-banner-text form .form-rows label {
+  flex: 0 0 12em;
+}
+
+.cookie-banner-text form input[type='checkbox'] {
+  margin-right: 5px;
 }

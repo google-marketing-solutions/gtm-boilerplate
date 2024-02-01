@@ -3,26 +3,36 @@
         <div class="cookie-banner-text">
             <h1>Cookie Settings</h1>
             <form id="cookie-consent-form" onsubmit="onCookieFormSubmit()">
-                <input type="checkbox"
-                       id="ad_storage"
-                       name="ad_storage"
-                       value="granted">
-                <label for="ad_storage"> Ad Storage</label>
-                <input type="checkbox"
-                       id="analytics_storage"
-                       name="analytics_storage"
-                       value="granted">
-                <label for="analytics_storage"> Analytics Storage</label>
-                <input type="checkbox"
-                       id="ad_user_data"
-                       name="ad_user_data"
-                       value="granted">
-                <label for="ad_user_data"> Ad User Data</label>
-                <input type="checkbox"
-                       id="ad_personalization"
-                       name="ad_personalization"
-                       value="granted">
-                <label for="ad_personalization"> Ad Personalization</label>
+                <div class="form-rows">
+                    <label for="ad_storage">
+                        <input type="checkbox"
+                        id="ad_storage"
+                        name="ad_storage"
+                        value="granted">
+                        <span>Ad Storage</span>
+                    </label>
+                    <label for="analytics_storage">
+                        <input type="checkbox"
+                        id="analytics_storage"
+                        name="analytics_storage"
+                        value="granted">
+                        <span>Analytics Storage</span>
+                    </label>
+                    <label for="ad_user_data">
+                        <input type="checkbox"
+                        id="ad_user_data"
+                        name="ad_user_data"
+                        value="granted">
+                        <span>Ad User Data</span>
+                    </label>
+                    <label for="ad_personalization">
+                        <input type="checkbox"
+                        id="ad_personalization"
+                        name="ad_personalization"
+                        value="granted">
+                        <span>Ad Personalization</span>
+                    </label>
+                </div>
                 <div class="cookie-btns">
                     <a class="default btn"
                        href="javascript:;"
