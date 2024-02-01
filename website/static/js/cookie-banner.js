@@ -102,10 +102,14 @@ function onCookieFormSubmit() {
   const form = document.getElementById(COOKIE_CONSENT_FORM);
   const adStorageChecked = form.querySelector("#ad_storage").checked;
   const analyticsChecked = form.querySelector("#analytics_storage").checked;
+  const adUserData = form.querySelector("#ad_user_data").checked;
+  const adPersonalization = form.querySelector("#ad_personalization").checked;
 
   const newConsent = {
     "ad_storage": (adStorageChecked === true) ? "granted" : "denied",
     "analytics_storage": (analyticsChecked === true) ? "granted" : "denied",
+    "ad_user_data": (adUserData === true) ? "granted" : "denied",
+    "ad_personalization": (adPersonalization === true) ? "granted" : "denied",
   }
 
   // update the preferences in the consent cookie
