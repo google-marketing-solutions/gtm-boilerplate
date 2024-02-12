@@ -1,0 +1,49 @@
+<!--
+ Copyright 2024 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<div class="login-form">
+  <div class="login-form-overlay" [ngClass]="{'show-banner': showOverlay}">
+    <a class="close" (click)="toggleOverlay()">
+      <img src="assets/images/close.png" alt="close icon" />
+    </a>
+    <div class="container-fluid container-highlight login-form-container">
+      <form class="login" [formGroup]="userForm" (ngSubmit)="login()">
+        <div class="form-group">
+          <label for="id">ID:</label>
+          <input type="text" formControlName="id" required="required">
+        </div>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" formControlName="name" required="required">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" formControlName="email" required="required">
+        </div>
+        <button class="btn" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="loginService.isLoggedIn">
+    <div class="hello-container">
+      <span class="hello">Hello <a (click)="toggleOverlay()">{{ loginService.user.name }}</a></span>
+      <span class="user-id">ID: {{ loginService.user.id }}</span>
+    </div>
+    <a class="logout btn" (click)="logout()">Log out</a>
+  </div>
+  <div *ngIf="!loginService.isLoggedIn">
+    <a class="login btn" (click)="toggleOverlay()">Log In</a>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+{
+  "name": "gtm-boilerplate",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^17.1.2",
+    "@angular/common": "^17.1.2",
+    "@angular/compiler": "^17.1.2",
+    "@angular/core": "^17.1.2",
+    "@angular/forms": "^17.1.2",
+    "@angular/platform-browser": "^17.1.2",
+    "@angular/platform-browser-dynamic": "^17.1.2",
+    "@angular/router": "^17.1.2",
+    "angular-google-tag-manager": "^1.9.0",
+    "js-beautify": "^1.14.11",
+    "ngx-cookie-service": "^17.0.1",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "uuid": "^9.0.1",
+    "zone.js": "~0.14.3"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.1.2",
+    "@angular/cli": "^17.1.2",
+    "@angular/compiler-cli": "^17.1.2",
+    "@types/jasmine": "~3.10.0",
+    "@types/js-beautify": "^1.14.3",
+    "@types/node": "^12.11.1",
+    "@types/uuid": "^9.0.8",
+    "jasmine-core": "~4.0.0",
+    "karma": "~6.3.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.1.0",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "~1.7.0",
+    "typescript": "~5.3.3"
+  }
+}

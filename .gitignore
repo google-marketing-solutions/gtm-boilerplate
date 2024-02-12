@@ -1,12 +1,59 @@
-# Virtual envs
+# =============== #
+# Angular         #
+# =============== #
+
+**/node_modules
+/dist
+npm-debug.log
+yarn-error.log
+*.lock
+
+# Angular environment specifics
+.angular/
+
+# =============== #
+# Python          #
+# =============== #
+
+__pycache__/
+*.py[cod]
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
 env/
 venv/
+ENV/
 
-# IDEs
+# Editor and IDEs
+.vscode/
 .idea/
 
-# Python
-__pycache__
+# Test results
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
 
-# OS
-.DS_STORE
+# Other
+*.log
+.DS_Store

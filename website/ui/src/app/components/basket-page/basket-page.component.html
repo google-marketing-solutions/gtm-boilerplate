@@ -1,0 +1,58 @@
+<!--
+ Copyright 2024 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<div class="container-fluid container-highlight" *ngIf="basketService.isBasketEmpty()">
+  <h2>Your basket is empty.</h2>
+  <a class="btn" routerLink="/products">View products</a>
+</div>
+<div *ngIf="!basketService.isBasketEmpty()">
+  <div class="container-fluid container-highlight"
+    *ngFor="let item of basketService.getBasket() | keyvalue">
+    <div class="container-fluid container-highlight">
+      <div class="row">
+        <div class="col">
+          <a [routerLink]="['/product', item.value.product.id]">
+            <img class="basket-image"
+              src="assets/images/{{ item.value.productVariant.image }}"
+              alt="Image for {{ item.value.product.name }}"/>
+          </a>
+        </div>
+        <div class="col">
+          <h3>{{ item.value.product.name }}: {{ item.value.productVariant.display_name }}</h3>
+          <p>{{ productsService.getProductVariantPriceAsCurrency(item.value.productVariant)}}</p>
+        </div>
+        <div class="col">
+          <h3>Quantity:</h3>
+          <p>
+            <a class="btn minus-one-basket"
+              (click)="updateBasket(item.value.product.id, item.value.productVariant, -1)">-</a>
+            {{ item.value.quantity }}
+            <a class="btn plus-one-basket"
+              (click)="updateBasket(item.value.product.id, item.value.productVariant, 1)">+</a>
+          </p>
+        </div>
+        <div class="col">
+          <h3>Total:</h3>
+          <p>{{ basketService.calculateBasketProductPrice(item.value) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid container-highlight clearfix">
+    <h2>TOTAL: {{ basketService.calculateTotalBasketPrice() }}</h2>
+    <a class="btn" id="clear-basket" (click)="basketService.clearBasket()">Clear Basket</a>
+    <a class="btn" id="buy" routerLink="/thank-you">Buy</a>
+  </div>
+</div>
