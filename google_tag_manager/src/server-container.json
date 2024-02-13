@@ -1,6 +1,6 @@
 {
     "exportFormatVersion": 2,
-    "exportTime": "2023-03-01 12:54:12",
+    "exportTime": "2024-02-13 17:06:17",
     "containerVersion": {
         "path": "accounts/1234567890/containers/11111111/versions/0",
         "accountId": "1234567890",
@@ -30,21 +30,47 @@
                 "supportTriggers": true,
                 "supportVariables": true,
                 "supportVersions": true,
-                "supportZones": true
+                "supportZones": true,
+                "supportTransformations": true
             },
             "tagIds": [
                 "GTM-ABCDEFG"
             ],
             "taggingServerUrls": [
-                "https://example.com"
+                "https://sgtm.example.com"
             ]
         },
         "tag": [
             {
                 "accountId": "1234567890",
                 "containerId": "11111111",
-                "tagId": "54",
-                "name": "[GA4] All Events",
+                "tagId": "123",
+                "name": "Conversion Linker",
+                "type": "sgtmadscl",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableCookieOverrides",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "0000000000000",
+                "firingTriggerId": [
+                    "2147479574"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "tagId": "177",
+                "name": "Google Analytics - All Events",
                 "type": "sgtmgaaw",
                 "parameter": [
                     {
@@ -61,67 +87,17 @@
                         "type": "TEMPLATE",
                         "key": "upToIncludeDropdown",
                         "value": "all"
-                    }
-                ],
-                "fingerprint": "0000000000000",
-                "firingTriggerId": [
-                    "59"
-                ],
-                "monitoringMetadata": {
-                    "type": "MAP"
-                },
-                "consentSettings": {
-                    "consentStatus": "NOT_SET"
-                }
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "tagId": "55",
-                "name": "[Floodlight] Sales Tag",
-                "type": "sgtmfls",
-                "parameter": [
+                    },
                     {
                         "type": "BOOLEAN",
-                        "key": "enableConversionLinker",
+                        "key": "enableEuid",
                         "value": "true"
-                    },
-                    {
-                        "type": "BOOLEAN",
-                        "key": "enableProductReporting",
-                        "value": "false"
-                    },
-                    {
-                        "type": "TEMPLATE",
-                        "key": "groupTag",
-                        "value": "retail"
-                    },
-                    {
-                        "type": "TEMPLATE",
-                        "key": "uniqueParamsDataSource",
-                        "value": "EVENT"
-                    },
-                    {
-                        "type": "TEMPLATE",
-                        "key": "activityTag",
-                        "value": "purchase"
-                    },
-                    {
-                        "type": "TEMPLATE",
-                        "key": "ordinalType",
-                        "value": "TRANSACTIONS"
-                    },
-                    {
-                        "type": "TEMPLATE",
-                        "key": "advertiserId",
-                        "value": "0"
                     }
                 ],
                 "fingerprint": "0000000000000",
                 "firingTriggerId": [
-                    "58"
+                    "116"
                 ],
-                "tagFiringOption": "ONCE_PER_EVENT",
                 "monitoringMetadata": {
                     "type": "MAP"
                 },
@@ -132,8 +108,8 @@
             {
                 "accountId": "1234567890",
                 "containerId": "11111111",
-                "tagId": "56",
-                "name": "[GAds] Conversion Tracking",
+                "tagId": "178",
+                "name": "Google Ads Tag",
                 "type": "sgtmadsct",
                 "parameter": [
                     {
@@ -184,7 +160,7 @@
                 ],
                 "fingerprint": "0000000000000",
                 "firingTriggerId": [
-                    "58"
+                    "121"
                 ],
                 "tagFiringOption": "ONCE_PER_EVENT",
                 "monitoringMetadata": {
@@ -197,19 +173,54 @@
             {
                 "accountId": "1234567890",
                 "containerId": "11111111",
-                "tagId": "57",
-                "name": "Conversion Linker",
-                "type": "sgtmadscl",
+                "tagId": "179",
+                "name": "Floodlight Tag",
+                "type": "sgtmfls",
                 "parameter": [
                     {
                         "type": "BOOLEAN",
-                        "key": "enableCookieOverrides",
+                        "key": "enableConversionLinker",
+                        "value": "true"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableProductReporting",
                         "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "groupTag",
+                        "value": "retail"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "uniqueParamsDataSource",
+                        "value": "EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "activityTag",
+                        "value": "purchase"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "ordinalType",
+                        "value": "TRANSACTIONS"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableEnhancedMatch",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "advertiserId",
+                        "value": "0"
                     }
                 ],
                 "fingerprint": "0000000000000",
                 "firingTriggerId": [
-                    "2147479574"
+                    "121"
                 ],
                 "tagFiringOption": "ONCE_PER_EVENT",
                 "monitoringMetadata": {
@@ -224,32 +235,7 @@
             {
                 "accountId": "1234567890",
                 "containerId": "11111111",
-                "triggerId": "58",
-                "name": "Event - purchase",
-                "type": "CUSTOM_EVENT",
-                "customEventFilter": [
-                    {
-                        "type": "EQUALS",
-                        "parameter": [
-                            {
-                                "type": "TEMPLATE",
-                                "key": "arg0",
-                                "value": "{{_event}}"
-                            },
-                            {
-                                "type": "TEMPLATE",
-                                "key": "arg1",
-                                "value": "purchase"
-                            }
-                        ]
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "triggerId": "59",
+                "triggerId": "116",
                 "name": "All Events",
                 "type": "CUSTOM_EVENT",
                 "customEventFilter": [
@@ -270,397 +256,38 @@
                     }
                 ],
                 "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "triggerId": "121",
+                "name": "Event - purchase",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "purchase"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "0000000000000"
             }
         ],
         "variable": [
             {
                 "accountId": "1234567890",
                 "containerId": "11111111",
-                "variableId": "3",
-                "name": "Transaction Value",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "epn.value"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "4",
-                "name": "Cookie",
-                "type": "rh",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "headerName",
-                        "value": "Cookie"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "5",
-                "name": "Client ID (cid)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "cid"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "6",
-                "name": "Session Count (sct)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "sct"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "9",
-                "name": "Event Time (_et)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "_et"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "10",
-                "name": "Transaction Affiliation",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ep.affiliation"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "11",
-                "name": "Item List Name",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ep.item_list_name"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "12",
-                "name": "Referrer",
-                "type": "rh",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "headerName",
-                        "value": "Referrer"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "13",
-                "name": "Screen Resolution (sr)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "sr"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "14",
-                "name": "Custom Campaign ID (ci)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ci"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "15",
-                "name": "Item List ID",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ep.item_list_id"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "16",
-                "name": "Promotion Name",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ep.promotion_name"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "17",
-                "name": "Session ID (sid)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "sid"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "18",
-                "name": "User language (ul)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ul"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "19",
-                "name": "Document Location (dl)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "dl"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "21",
-                "name": "Promotion ID",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ep.promotion_id"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "22",
-                "name": "Currency (cu)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "cu"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "24",
-                "name": "Consent Status (gcs)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "gcs"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "26",
-                "name": "Custom Campaign Name (cn)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "cn"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "27",
-                "name": "Creative Location ID",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ep.creative_location_id"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "28",
-                "name": "Transaction Shipping",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "epn.shipping"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "30",
-                "name": "Transaction Tax",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "epn.tax"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "31",
-                "name": "Session Start (_ss)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "_ss"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "32",
-                "name": "Consent Default (gcd)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "gcd"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "33",
+                "variableId": "69",
                 "name": "content_type",
                 "type": "qp",
                 "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
@@ -676,207 +303,15 @@
             {
                 "accountId": "1234567890",
                 "containerId": "11111111",
-                "variableId": "34",
-                "name": "User Country (_uc)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "_uc"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "35",
-                "name": "Session Hit Count (_s)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "_s"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "36",
-                "name": "Custom Campaign Term (ct)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ct"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "38",
-                "name": "Custom Campaign Source (cs)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "cs"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "39",
-                "name": "GA4 Measurement ID (tid)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "tid"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "41",
-                "name": "Transaction ID",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ep.transaction_id"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "42",
-                "name": "Transaction Coupon",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ep.coupon"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "43",
-                "name": "Document Referer (dr)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "dr"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "44",
-                "name": "Custom Campaign Content (cc)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "cc"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "45",
-                "name": "Creative Name",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ep.creative_name"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "46",
-                "name": "First Visit (_fv)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "_fv"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "47",
-                "name": "Creative Slot",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "ep.creative_slot"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "48",
-                "name": "Origin",
+                "variableId": "70",
+                "name": "Cookie",
                 "type": "rh",
                 "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
                 "parameter": [
                     {
                         "type": "TEMPLATE",
                         "key": "headerName",
-                        "value": "Origin"
+                        "value": "Cookie"
                     }
                 ],
                 "fingerprint": "0000000000000"
@@ -884,23 +319,7 @@
             {
                 "accountId": "1234567890",
                 "containerId": "11111111",
-                "variableId": "49",
-                "name": "Custom Campaign Medium (cm)",
-                "type": "qp",
-                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
-                "parameter": [
-                    {
-                        "type": "TEMPLATE",
-                        "key": "queryParamName",
-                        "value": "cm"
-                    }
-                ],
-                "fingerprint": "0000000000000"
-            },
-            {
-                "accountId": "1234567890",
-                "containerId": "11111111",
-                "variableId": "50",
+                "variableId": "71",
                 "name": "Host",
                 "type": "rh",
                 "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
@@ -916,7 +335,215 @@
             {
                 "accountId": "1234567890",
                 "containerId": "11111111",
-                "variableId": "51",
+                "variableId": "72",
+                "name": "Origin",
+                "type": "rh",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "headerName",
+                        "value": "Origin"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "73",
+                "name": "Referrer",
+                "type": "rh",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "headerName",
+                        "value": "Referrer"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "74",
+                "name": "Consent Status (gcs)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "gcs"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "75",
+                "name": "Consent Default (gcd)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "gcd"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "76",
+                "name": "Client ID (cid)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "cid"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "77",
+                "name": "GA4 Measurement ID (tid)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "tid"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "78",
+                "name": "User language (ul)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ul"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "79",
+                "name": "Screen Resolution (sr)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "sr"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "82",
+                "name": "Session Hit Count (_s)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "_s"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "83",
+                "name": "Event Time (_et)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "_et"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "84",
+                "name": "Session Start (_ss)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "_ss"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "85",
+                "name": "Session ID (sid)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "sid"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "86",
+                "name": "Session Count (sct)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "sct"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "87",
                 "name": "Session Engagement (seg)",
                 "type": "qp",
                 "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
@@ -932,7 +559,391 @@
             {
                 "accountId": "1234567890",
                 "containerId": "11111111",
-                "variableId": "53",
+                "variableId": "88",
+                "name": "Document Location (dl)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "dl"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "89",
+                "name": "Document Referer (dr)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "dr"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "90",
+                "name": "Currency (cu)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "cu"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "91",
+                "name": "First Visit (_fv)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "_fv"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "92",
+                "name": "User Country (_uc)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "_uc"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "93",
+                "name": "Custom Campaign Source (cs)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "cs"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "94",
+                "name": "Custom Campaign Name (cn)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "cn"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "95",
+                "name": "Custom Campaign Medium (cm)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "cm"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "96",
+                "name": "Custom Campaign ID (ci)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ci"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "97",
+                "name": "Custom Campaign Term (ct)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ct"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "98",
+                "name": "Custom Campaign Content (cc)",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "cc"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "99",
+                "name": "Transaction ID",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ep.transaction_id"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "100",
+                "name": "Transaction Affiliation",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ep.affiliation"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "101",
+                "name": "Transaction Value",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "epn.value"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "102",
+                "name": "Transaction Tax",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "epn.tax"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "103",
+                "name": "Transaction Shipping",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "epn.shipping"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "104",
+                "name": "Transaction Coupon",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ep.coupon"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "105",
+                "name": "Creative Name",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ep.creative_name"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "106",
+                "name": "Creative Slot",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ep.creative_slot"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "107",
+                "name": "Creative Location ID",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ep.creative_location_id"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "108",
+                "name": "Promotion ID",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ep.promotion_id"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "109",
+                "name": "Promotion Name",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ep.promotion_name"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "110",
+                "name": "Item List Name",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ep.item_list_name"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "111",
+                "name": "Item List ID",
+                "type": "qp",
+                "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "queryParamName",
+                        "value": "ep.item_list_id"
+                    }
+                ],
+                "fingerprint": "0000000000000"
+            },
+            {
+                "accountId": "1234567890",
+                "containerId": "11111111",
+                "variableId": "124",
                 "name": "method",
                 "type": "qp",
                 "notes": "This variable has been created by the sGTM Migrator tool. It is based on either an event parameter, an user property or standard parameter from your GA4 tags pointing at this server container.",
@@ -1048,14 +1059,29 @@
             {
                 "accountId": "1234567890",
                 "containerId": "11111111",
-                "clientId": "2",
+                "clientId": "176",
                 "name": "GA4",
                 "type": "gaaw_client",
                 "parameter": [
                     {
+                        "type": "TEMPLATE",
+                        "key": "cookieDomain",
+                        "value": "auto"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieMaxAgeInSec",
+                        "value": "63072000"
+                    },
+                    {
                         "type": "BOOLEAN",
                         "key": "activateDefaultPaths",
                         "value": "true"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookiePath",
+                        "value": "/"
                     },
                     {
                         "type": "TEMPLATE",
@@ -1066,21 +1092,6 @@
                         "type": "TEMPLATE",
                         "key": "cookieName",
                         "value": "FPID"
-                    },
-                    {
-                        "type": "TEMPLATE",
-                        "key": "cookieDomain",
-                        "value": "auto"
-                    },
-                    {
-                        "type": "TEMPLATE",
-                        "key": "cookiePath",
-                        "value": "/"
-                    },
-                    {
-                        "type": "TEMPLATE",
-                        "key": "cookieMaxAgeInSec",
-                        "value": "63072000"
                     }
                 ],
                 "fingerprint": "0000000000000"
