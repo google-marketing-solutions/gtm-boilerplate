@@ -46,7 +46,11 @@ After that, let's get the deployment started.
 
 First we need to build the angular code by running:
 ```bash
-(cd ui && ng build)
+cd ui
+npm install -g @angular/cli
+npm install
+ng build
+cd ..
 ```
 
 Then initialise `gcloud`, making sure you're logged in and have an active

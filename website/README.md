@@ -36,7 +36,11 @@ might seem unusual and would need to be amended._
    file and change the settings accordingly.
 4. Build the angular project by running:
    ```
-   (cd ui && ng build)
+   cd ui
+   npm install -g @angular/cli
+   npm install
+   ng build
+   cd ..
    ```
 5. Run `gcloud init`
 6. Run `gcloud app deploy`
