@@ -31,7 +31,7 @@ export class LoginService {
   isLoggedIn = false;
   user: User;
 
-  private cookieName = 'login';
+  private cookieName = 'login-cookie';
   private cookieExpiryDays = 365;
   private nullUser: User = {
     id: null,

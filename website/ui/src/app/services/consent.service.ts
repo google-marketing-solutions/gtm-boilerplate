@@ -36,7 +36,7 @@ export class ConsentService {
     'ad_personalization': ConsentStatus.DENIED,
     'analytics_storage': ConsentStatus.DENIED,
   };
-  private cookieName = 'consent';
+  private cookieName = 'consent-cookie';
   private cookieExpiryDays = 365;
 
   // The gtag is hard coded in the index.html, so it should always be present

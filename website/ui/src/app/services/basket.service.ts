@@ -39,7 +39,8 @@ import {ProductsService} from './products.service';
 export class BasketService {
   basket?: Basket;
   private addToCartSubject = new Subject<boolean>();
-  private cookieName = 'basket-contents';
+  private cookieName = 'basket-cookie';
+  private cookieExpiryDays = 365;
 
   constructor(
     private cookieService: CookieService,
@@ -147,7 +148,14 @@ export class BasketService {
   private setBasketInCookie(basket: Basket): void {
     const cookieProducts: BasketProductCookie[] =
       this.parseBasketToCookie(basket);
-    this.cookieService.set(this.cookieName, JSON.stringify(cookieProducts));
+    const expiryDate = new Date();
+    expiryDate.setTime(
+      expiryDate.getTime() + this.cookieExpiryDays * 24 * 60 * 60 * 1000
+    );
+    this.cookieService.set(
+      this.cookieName,
+      JSON.stringify(cookieProducts)
+    );
   }
 
   /**
