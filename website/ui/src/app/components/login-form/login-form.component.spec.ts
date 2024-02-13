@@ -25,6 +25,11 @@ import {LoginFormComponent} from './login-form.component';
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let mockLoginService: jasmine.SpyObj<LoginService>;
+  const mockUserData = {
+    id: '2',
+    name: 'John Smith',
+    email: 'john.smith@example.com',
+  };
 
   beforeEach(async () => {
     mockLoginService = jasmine.createSpyObj('LoginService', [
@@ -33,6 +38,7 @@ describe('LoginFormComponent', () => {
       'setUserInDataLayer',
       'user',
     ]);
+    mockLoginService.user = mockUserData;
 
     await TestBed.configureTestingModule({
       declarations: [LoginFormComponent],
@@ -63,9 +69,8 @@ describe('LoginFormComponent', () => {
     });
 
     it('should call setUserInDataLayer on initialization', () => {
-      mockLoginService.user = {} as User;
       expect(mockLoginService.setUserInDataLayer).toHaveBeenCalledWith(
-        {} as User,
+        mockUserData,
       );
     });
   });
