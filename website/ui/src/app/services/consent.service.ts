@@ -73,7 +73,7 @@ export class ConsentService {
   }
 
   /**
-   * Get the current consent
+   * Get the current consent.
    */
   getCurrentConsent(): Consent {
     return this.currentConsent;
@@ -121,8 +121,7 @@ export class ConsentService {
     } else {
       this.hasConsentCookie = true;
       const consent: Consent = JSON.parse(consentCookie);
-      console.log('You have a cookie set with these preferences:');
-      console.log(consent);
+      console.log('You have a cookie set with these preferences:', consent);
       this.currentConsent = consent;
     }
   }

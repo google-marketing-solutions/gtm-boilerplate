@@ -51,7 +51,7 @@ export class BasketService {
   }
 
   /**
-   * Get the basket
+   * Get the basket.
    */
   getBasket(): Basket | undefined {
     this.refreshBasketFromCookie();

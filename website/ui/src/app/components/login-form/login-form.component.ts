@@ -36,12 +36,6 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit(): void {
     // Initialize form with user data (if available)
-    const u = this.loginService.user;
-    const uid = u.id;
-    const uname = u.name;
-    console.log(u);
-    console.log(u.id);
-    console.log(u.name);
     this.userForm = new FormGroup({
       id: new FormControl(this.loginService.user.id || '1'),
       name: new FormControl(this.loginService.user.name || 'Jane Doe'),

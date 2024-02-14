@@ -54,7 +54,7 @@ export class CookieBannerComponent implements OnInit {
   /**
    * Toggle the cookie banner overlay to show or be hidden.
    */
-  toggleCookieBanner() {
+  toggleCookieBanner(): void {
     this.showOverlay = !this.showOverlay;
   }
 

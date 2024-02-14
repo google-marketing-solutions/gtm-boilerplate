@@ -59,11 +59,6 @@ describe('LoginFormComponent', () => {
 
   describe('ngOnInit()', () => {
     it('should initialize form with user data from LoginService', () => {
-      const mockUserData = {
-        id: '2',
-        name: 'John Smith',
-        email: 'john.smith@example.com',
-      };
       mockLoginService.user = mockUserData;
       expect(component.userForm.value).toEqual(mockUserData);
     });

@@ -51,7 +51,7 @@ export class LoginService {
   }
 
   /**
-   * Pull the datalayer from the page..
+   * Pull the datalayer from the page.
    */
   private getDataLayerFromPage(): void {
     const defaultView = this.document.defaultView;

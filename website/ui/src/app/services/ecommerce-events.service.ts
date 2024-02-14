@@ -110,8 +110,7 @@ export class EcommerceEventsService {
    * @param event the event to output
    */
   private logEvent(event: EcommerceEvent): void {
-    console.log('Generated ecommerce event:');
-    console.log(event);
+    console.log('Generated ecommerce event:', event);
   }
 
   /**
@@ -314,7 +313,6 @@ export class EcommerceEventsService {
    * Send the view_cart event to GTM.
    * @param basket the basket containing the products.
    * @param value the total value of the basket.
-   * @return a view_cart ecommerce event.
    */
   sendViewCartEvent(basket: Basket, value: number): void {
     // clear previous ecommerce object
@@ -329,7 +327,6 @@ export class EcommerceEventsService {
    * @param basket the basket containing the products.
    * @param value the total value of the basket.
    * @param transaction_id the ID of the transaction.
-   * @return a purchase ecommerce event.
    */
   sendPurchaseEvent(
     basket: Basket,
