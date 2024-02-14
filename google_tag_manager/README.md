@@ -60,6 +60,9 @@ For hybrid mode there is dual conversion/event reporting:
 If you want to run a web only configuration, you do not need to follow these
 steps.
 
+If you would like to deploy an sGTM configuration, ensure you have imported
+either the hybrid or full sGTM web setup above.
+
 To deploy the Google Tag Manager server container:
 
 1.  Open [Google Tag Manager](http://tagmanager.google.com).
@@ -70,7 +73,8 @@ To deploy the Google Tag Manager server container:
 5.  Select the [server-container.json](./src/server-container.json) file ->
     Choose default workspace, overwrite and press confirm.
 6.  Press submit and publish the server container.
-7.  Open the web container -> Tags -> Open `[GA4 Configuration] All Pages -
-    sGTM` -> Edit -> and enter the URL of the server container.
-    ![Send to Server screenshot](./docs/images/gtm-send-to-server-container.png)
+7.  Open the web container -> variables, then update both the
+    `GA Measurement ID - sGTM` & `Server Container URL` variables. The
+    measurement ID should be different for sGTM & web tagging. Set up a
+    different GA4 property if needed.
 8.  Press submit and publish the web container.
