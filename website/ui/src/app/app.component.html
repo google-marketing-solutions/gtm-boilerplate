@@ -21,7 +21,7 @@
         <img class="hamburger-icon"
             src="assets/images/hamburger-icon.png"
             (click)="toggleSidebar()"/>
-        <div [ngClass]="{'hide': !showSidebar}">
+        <div *ngIf="showSidebar">
           <app-event-stream></app-event-stream>
         </div>
       </div>

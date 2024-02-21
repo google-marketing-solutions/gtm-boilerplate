@@ -203,7 +203,13 @@ export class BasketService {
     if (basketJson == null || basketJson === '') {
       return {};
     } else {
-      return this.parseCookieToBasket(JSON.parse(basketJson));
+      try {
+        return this.parseCookieToBasket(JSON.parse(basketJson));
+      }
+      catch (error) {
+        console.error('Error parsing cookie to a basket: ', error);
+        return {};
+      }
     }
   }
 

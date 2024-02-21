@@ -33,10 +33,6 @@
   width: 50px;
 }
 
-.sidebar .hide {
-  display: none;
-}
-
 .sidebar .hamburger-icon {
   width: 30px;
   display: block;
