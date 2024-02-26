@@ -1,7 +1,12 @@
-# Soteria Ecommerce Demo Store
+# Google Tag Manager Ecommerce Demo Store
 
 This code provides a sample e-commerce demo store that is set up with Google
 Tag Manager.
+
+It is a predominantly Angular solution, that uses a Flask backend to serve the
+website, so it can be deployed on App Engine.
+
+The Angular code sits in the `/ui` subdirectory.
 
 ## Google Tag Manager
 
@@ -11,20 +16,15 @@ the web container ID. This is used with the deployment.
 
 ## Currency
 
-By default, the project uses `GBP` `£` as the currency. You can override this by
-optionally setting two environment variables `CURRENCY_CODE` and
-`CURRENCY_SYMBOL`. For example:
-```
-CURRENCY_CODE=USD
-CURRENCY_SYMBOL=$
-```
-Note that the currency code must be in [this list of supported codes](
-https://support.google.com/analytics/answer/9796179).
+By default, the project uses `GBP` as the currency. You can override this by
+changing the environment settings in [environment.prod.ts](
+./ui/src/environments/environment.prod.ts).
 
-_**Limitation**: `products.py` declares the example products: the prices are
-hard-coded, and no currency conversion happens. If the currency exchange rate is
-significantly different to the British Pound, these prices might seem unusual
-and would need to be amended._
+_**Limitation**: [products.service.ts](
+./ui/src/app/services/products.service.ts) declares the example products: the
+prices are hard-coded, and no currency conversion happens. If the currency
+exchange rate is significantly different to the British Pound, these prices
+might seem unusual and would need to be amended._
 
 
 ## App Engine Deployment
@@ -32,33 +32,31 @@ and would need to be amended._
 1. Create a new Google Cloud Project.
 2. Navigate to [App Engine](https://console.cloud.google.com/appengine) and
    create an instance.
-3. Open the file named `env_variables.yaml`, that contains the following info:
-   ```yaml
-   env_variables:
-     GTM_WEB_CONTAINER_ID: 'GTM-XXXXXX'
-     SECRET_KEY: 'RANDOM_STRING'
-     CURRENCY_CODE: GBP
-     CURRENCY_SYMBOL: £
+3. Open the [environment.prod.ts](./ui/src/environments/environment.prod.ts)
+   file and change the settings accordingly.
+4. Build the angular project by running:
    ```
-   [See the Flask docs](
-   https://flask.palletsprojects.com/en/2.1.x/config/#SECRET_KEY) regarding the
-   secret key.
-4. Fill in the GTM Web Container ID and set a random string for the secret key. You
-can update the currency variables too if you want.
+   cd ui
+   npm install -g @angular/cli
+   npm install
+   ng build
+   cd ..
+   ```
 5. Run `gcloud init`
 6. Run `gcloud app deploy`
 
 ### Guided Deployment
-Click the Open in Cloud Shell button to open this repository in Google Cloud Shell
-and follow a guided tutorial.
+Click the Open in Cloud Shell button to open this repository in Google Cloud
+Shell and follow a guided tutorial.
 
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fgtech-professional-services%2Fgtm-boilerplate&cloudshell_git_branch=main&cloudshell_workspace=.%2Fwebsite&cloudshell_tutorial=tutorial.md)
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](
+https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fgtech-professional-services%2Fgtm-boilerplate&cloudshell_git_branch=main&cloudshell_workspace=.%2Fwebsite&cloudshell_tutorial=tutorial.md)
 
 ## Disclaimers
 
 __This is not an officially supported Google product.__
 
-Copyright 2022 Google LLC. This solution, including any related sample code or
+Copyright 2024 Google LLC. This solution, including any related sample code or
 data, is made available on an “as is,” “as available,” and “with all faults”
 basis, solely for illustrative purposes, and without warranty or representation
 of any kind. This solution is experimental, unsupported and provided solely for

@@ -29,26 +29,33 @@ Google Cloud Project: <walkthrough-project-id/>
 Before we deploy the solution let's modify the file that holds the environment
 variables the site needs.
 
-Open <walkthrough-editor-open-file filePath="./env_variables.yaml">
-env_variables.yaml</walkthrough-editor-open-file>
+Open <walkthrough-editor-open-file filePath="././ui/src/environments/environment.prod.ts">
+environment.prod.ts</walkthrough-editor-open-file>
 
-Fill in the GTM Web Container ID and set a random string for the secret key. You
-can update the currency variables too if you want.
+Fill in the GTM Web Container ID and change locale settings accordingly.
 
 Variable             | Description
 -------------------- | -----------
-GTM_WEB_CONTAINER_ID | Paste your GTM Web Container ID here (formatted as GTM-XXXXXX).
-SECRET_KEY           | A secret key that will be used for securely signing the session cookie. [See the Flask docs](https://flask.palletsprojects.com/en/2.1.x/config/#SECRET_KEY) for further information regarding the secret key.
-CURRENCY_CODE        | Currency code used in the e-commerce shop, this is also reported in the purchase events.
-CURRENCY_SYMBOL      | Currency symbol used in the e-commerce shop.
+currency             | This is the currency used for all products and tagging/conversions
+localCode            | This is used to determine the pricing number format.
+gtmContainerId       | Paste your GTM Web Container ID here (formatted as GTM-XXXXXX)
 
 After that, let's get the deployment started.
 
 ## Deploying
 
-We'll first initialise `gcloud`, making sure you're logged in and have an
-active account selected. If you've already intialised `gcloud` you can skip
-this step. Follow the prompts in the console during the initialisation.
+First we need to build the angular code by running:
+```bash
+cd ui
+npm install -g @angular/cli
+npm install
+ng build
+cd ..
+```
+
+Then initialise `gcloud`, making sure you're logged in and have an active
+account selected. If you've already intialised `gcloud` you can skip this step.
+Follow the prompts in the console during the initialisation.
 ```bash
 gcloud init
 ```

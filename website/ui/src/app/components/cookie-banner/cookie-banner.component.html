@@ -1,0 +1,44 @@
+<!--
+ Copyright 2024 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<div id="cookie-banner-overlay" [ngClass]="{'show-banner': showOverlay}">
+  <div class="cookie-banner-container">
+    <div class="cookie-banner-text">
+      <h1>Cookie Settings</h1>
+      <form id="cookie-consent-form" onsubmit="onCookieFormSubmit()" [formGroup]="consentForm">
+        <div class="form-group">
+          <input type="checkbox" id="ad_storage" formControlName="ad_storage">
+          <label for="ad_storage"> Ad Storage</label>
+          <input type="checkbox" id="ad_user_data" formControlName="ad_user_data">
+          <label for="ad_user_data"> Ad User Data</label>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="ad_personalization" formControlName="ad_personalization">
+          <label for="ad_personalization"> Ad Personalization</label>
+          <input type="checkbox" id="analytics_storage" formControlName="analytics_storage">
+          <label for="analytics_storage"> Analytics Storage</label>
+        </div>
+        <div class="cookie-btns">
+          <a class="default btn" (click)="acceptAll()">Accept All</a>
+          <a class="default btn" (click)="denyAll()">Deny All</a>
+          <a class="btn" (click)="save()">Save Custom</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="cookie-banner-icon" (click)="toggleCookieBanner()">
+  <img src="assets/images/cookie.png" alt="cookie icon"/>
+</div>

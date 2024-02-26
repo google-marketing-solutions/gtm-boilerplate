@@ -1,0 +1,31 @@
+<!--
+ Copyright 2024 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<div class="container-fluid container-highlight">
+  <div *ngIf="!basketService.isBasketEmpty()">
+    <h2>Thank you for your order</h2>
+    <p>Order ID: {{ transactionId }}</p>
+    <ul class="ordered-products">
+      <li *ngFor="let item of getBasket() | keyvalue">
+        {{ item.value.quantity }} x {{ item.value.product.name }} 
+        {{ item.value.productVariant.display_name }} = 
+        {{ productsService.getProductVariantPriceAsCurrency(
+          item.value.productVariant
+        ) }}
+      </li>
+      <li class="total">TOTAL: {{ basketService.calculateTotalBasketPrice() }}</li>
+    </ul>
+  </div>
+</div>

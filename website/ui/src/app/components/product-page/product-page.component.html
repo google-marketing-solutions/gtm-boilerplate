@@ -1,0 +1,40 @@
+<!--
+ Copyright 2024 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<div class="container-fluid container-highlight">
+  <div class="product" *ngIf="product !== undefined && productVariant !== undefined">
+    <img class="product-image"
+      src="assets/images/{{ productVariant.image }}"
+      alt="product-logo-{{ product.name }}-{{ productVariant.name }}"/>
+    <div class="product-text">
+      <h3>
+        {{ product.name }}: {{ productsService.getProductVariantPriceAsCurrency(productVariant) }}
+      </h3>
+      <p>{{ product.description }}</p>
+      <div class="size-group">
+        <a class="variant-btn btn"
+          *ngFor="let item of product.variants | keyvalue"
+          [ngClass]="{'selected': item.value == productVariant}"
+          (click)="updateProductVariant(item.value.sku)">{{ item.value.display_name }}</a>
+      </div>
+      <a class="btn buy-one-click" (click)="basketService.buyWithOneClick(product, productVariant)">
+        Buy
+      </a>
+      <a class="btn add-to-basket" [ngClass]="{'added': addedToCart}" (click)="addToBasket()">
+        {{ addToCartText }}
+      </a>
+    </div>
+  </div>
+</div>

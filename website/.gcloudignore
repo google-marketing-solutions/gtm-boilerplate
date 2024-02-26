@@ -10,3 +10,7 @@ __pycache__/
 
 # Ignore tutorial file
 tutorial.md
+
+# Ignore all angular files except the build output
+ui/*
+!ui/dist
