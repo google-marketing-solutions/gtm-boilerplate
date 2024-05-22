@@ -54,6 +54,7 @@ import {TopBarComponent} from './components/top-bar/top-bar.component';
     ReactiveFormsModule,
     GoogleTagManagerModule.forRoot({
       id: environment.gtmContainerId,
+      gtm_resource_path: environment.gtmResourcePath,
     }),
   ],
   providers: [],
