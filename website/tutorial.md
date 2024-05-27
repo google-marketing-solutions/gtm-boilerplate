@@ -32,13 +32,14 @@ variables the site needs.
 Open <walkthrough-editor-open-file filePath="././ui/src/environments/environment.prod.ts">
 environment.prod.ts</walkthrough-editor-open-file>
 
-Fill in the GTM Web Container ID and change locale settings accordingly.
+Fill in the GTM Web Container ID and change local settings accordingly.
 
 Variable             | Description
 -------------------- | -----------
 currency             | This is the currency used for all products and tagging/conversions
 localCode            | This is used to determine the pricing number format.
 gtmContainerId       | Paste your GTM Web Container ID here (formatted as GTM-XXXXXX)
+gtmResourcePath      | [optional] Change the Resource path to your (sub)domain for serving Google scripts through your server-side tagging 
 
 After that, let's get the deployment started.
 
