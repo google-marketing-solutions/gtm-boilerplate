@@ -32,7 +32,7 @@ variables the site needs.
 Open <walkthrough-editor-open-file filePath="././ui/src/environments/environment.prod.ts">
 environment.prod.ts</walkthrough-editor-open-file>
 
-Fill in the GTM Web Container ID and change local settings accordingly.
+Fill in the GTM Web Container ID and change locale settings accordingly.
 
 Variable             | Description
 -------------------- | -----------
