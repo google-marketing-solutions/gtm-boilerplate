@@ -67,6 +67,9 @@ export class LoginService {
   logUserIn(user: User): void {
     this.user = user;
     this.setUserInDataLayer(user);
+    this.dataLayer.push({
+      'event': 'login'
+    });
     this.isLoggedIn = true;
     this.setUserInCookie();
   }
@@ -87,6 +90,9 @@ export class LoginService {
    * Log out a user.
    */
   logUserOut(): void {
+    this.dataLayer.push({
+      'event': 'logout'
+    });
     this.isLoggedIn = false;
     this.cookieService.delete(this.cookieName);
     this.setUserInDataLayer(this.nullUser);
