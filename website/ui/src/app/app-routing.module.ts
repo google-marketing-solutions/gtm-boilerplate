@@ -21,6 +21,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {BasketPageComponent} from './components/basket-page/basket-page.component';
 import {ConfirmationPageComponent} from './components/confirmation-page/confirmation-page.component';
 import {HomePageComponent} from './components/home-page/home-page.component';
+import {BusinessPageComponent} from './components/business-page/business-page.component';
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {ProductsPageComponent} from './components/products-page/products-page.component';
 
@@ -51,6 +52,11 @@ const routes: Routes = [
     component: ConfirmationPageComponent,
     title: `Thank you ${storeNameSuffix}`,
   },
+  {
+    path: 'business',
+    component: BusinessPageComponent,
+    title: `Business ${storeNameSuffix}`,
+  }
 ];
 
 @NgModule({

@@ -21,6 +21,28 @@
  * limitations under the License.
  */
 
+
+/**
+ * The base class for the Event Objects.
+ */
+export interface Event {
+  event: EventName
+}
+
+/**
+ * Enums for each of the ecommerce events that are configured.
+ */
+export enum EventName {
+  VIEW_ITEM_LIST = 'view_item_list',
+  VIEW_ITEM = 'view_item',
+  ADD_TO_CART = 'add_to_cart',
+  REMOVE_FROM_CART = 'remove_from_cart',
+  VIEW_CART = 'view_cart',
+  PURCHASE = 'purchase',
+  LOGIN = "login",
+  LOGOUT = "logout"
+}
+
 /**
  * The base class for the Ecommerce Objects.
  * All ecommerce events contains an ecommerce object. This is the base class
@@ -31,22 +53,9 @@ export interface EcommerceObject {
 }
 
 /**
- * Enums for each of the ecommerce events that are configured.
- */
-export enum EcommerceEventName {
-  VIEW_ITEM_LIST = 'view_item_list',
-  VIEW_ITEM = 'view_item',
-  ADD_TO_CART = 'add_to_cart',
-  REMOVE_FROM_CART = 'remove_from_cart',
-  VIEW_CART = 'view_cart',
-  PURCHASE = 'purchase',
-}
-
-/**
  * The base class for Ecommerce Events.
  */
-export interface EcommerceEvent {
-  event: EcommerceEventName;
+export interface EcommerceEvent extends Event {
   ecommerce: EcommerceObject;
 }
 
@@ -131,4 +140,18 @@ export interface Purchase extends EcommerceObject {
   coupon?: string;
   shipping?: number;
   tax?: number;
+}
+
+export interface Login extends Event {
+  logged_in: true;
+  user_id?: string;
+  email?: string;
+  name?: string;
+}
+
+export interface Logout extends Event {
+  logged_in: false;
+  user_id?: string;
+  email?: string;
+  name?: string;
 }

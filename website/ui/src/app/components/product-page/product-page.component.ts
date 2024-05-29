@@ -20,7 +20,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Product, ProductVariant} from 'src/app/models/products';
 import {BasketService} from 'src/app/services/basket.service';
-import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {EventsService} from 'src/app/services/events.service';
 import {ProductsService} from 'src/app/services/products.service';
 
 /**
@@ -42,7 +42,7 @@ export class ProductPageComponent implements OnInit {
     private route: ActivatedRoute,
     public productsService: ProductsService,
     public basketService: BasketService,
-    private ecommerceEventsService: EcommerceEventsService,
+    private eventsService: EventsService,
   ) {
     this.setDefaultAddToCartText();
   }
@@ -56,7 +56,7 @@ export class ProductPageComponent implements OnInit {
       this.productVariant = this.productsService.getDefaultProductVariant(
         this.product,
       );
-      this.ecommerceEventsService.sendViewItemEvent(
+      this.eventsService.sendViewItemEvent(
         this.product,
         this.productVariant,
       );
@@ -77,7 +77,7 @@ export class ProductPageComponent implements OnInit {
   updateProductVariant(sku: string): void {
     if (this.product !== undefined) {
       this.productVariant = this.product.variants[sku];
-      this.ecommerceEventsService.sendViewItemEvent(
+      this.eventsService.sendViewItemEvent(
         this.product,
         this.productVariant,
       );
@@ -92,7 +92,7 @@ export class ProductPageComponent implements OnInit {
       this.addedToCart = true;
       this.addToCartText = 'Done';
       this.basketService.updateBasket(this.product, this.productVariant, 1);
-      this.ecommerceEventsService.sendAddToCartEvent(
+      this.eventsService.sendAddToCartEvent(
         this.product,
         this.productVariant,
       );

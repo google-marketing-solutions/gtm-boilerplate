@@ -19,7 +19,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {BasketService} from 'src/app/services/basket.service';
-import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {EventsService} from 'src/app/services/events.service';
 import {ProductsService} from 'src/app/services/products.service';
 import {ConfirmationPageComponent} from './confirmation-page.component';
 
@@ -27,7 +27,7 @@ describe('ConfirmationPageComponent', () => {
   let component: ConfirmationPageComponent;
   let fixture: ComponentFixture<ConfirmationPageComponent>;
   let mockBasketService: jasmine.SpyObj<BasketService>;
-  let mockEcommerceEventsService: jasmine.SpyObj<EcommerceEventsService>;
+  let mockEventsService: jasmine.SpyObj<EventsService>;
   let mockProductsService: jasmine.SpyObj<ProductsService>;
 
   beforeEach(async () => {
@@ -37,8 +37,8 @@ describe('ConfirmationPageComponent', () => {
       'isBasketEmpty',
       'calculateTotalBasketPrice',
     ]);
-    mockEcommerceEventsService = jasmine.createSpyObj(
-      'EcommerceEventsService',
+    mockEventsService = jasmine.createSpyObj(
+      'EventsService',
       ['sendPurchaseEvent'],
     );
     mockProductsService = jasmine.createSpyObj('ProductsService', [
@@ -51,7 +51,7 @@ describe('ConfirmationPageComponent', () => {
       declarations: [ConfirmationPageComponent],
       providers: [
         {provide: BasketService, useValue: mockBasketService},
-        {provide: EcommerceEventsService, useValue: mockEcommerceEventsService},
+        {provide: EventsService, useValue: mockEventsService},
         {provide: ProductsService, useValue: mockProductsService},
       ],
     }).compileComponents();

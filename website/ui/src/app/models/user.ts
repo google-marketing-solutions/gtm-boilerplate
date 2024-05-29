@@ -20,7 +20,7 @@
  * Represents a logged in user.
  */
 export interface User {
-  id: string | null;
+  id: string | null; 
   name: string | null;
   email: string | null;
 }

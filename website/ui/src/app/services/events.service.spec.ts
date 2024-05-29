@@ -1,5 +1,5 @@
 /**
- * @fileoverview unit tests for the EcommerceEventsService.
+ * @fileoverview unit tests for the EventsService.
  *
  * Copyright 2024 Google LLC
  *
@@ -18,14 +18,14 @@
 
 import {TestBed} from '@angular/core/testing';
 
-import {EcommerceEventsService} from './ecommerce-events.service';
+import {EventsService} from './events.service';
 
-describe('EcommerceEventsService', () => {
-  let service: EcommerceEventsService;
+describe('EventsService', () => {
+  let service: EventsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(EcommerceEventsService);
+    service = TestBed.inject(EventsService);
   });
 
   it('should be created', () => {
