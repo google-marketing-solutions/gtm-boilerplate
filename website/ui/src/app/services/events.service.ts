@@ -33,11 +33,12 @@ import {
   Purchase,
   ViewCart,
   ViewItem,
-  Login,
-  Logout
+  AuthEvent,
 } from '../models/events';
 import {Basket, Product, ProductVariant, Products} from '../models/products';
 import {ProductsService} from './products.service';
+import {User} from '../models/user';
+
 
 /**
  * Service for sending ecommerce events to Google Tag Manager.
@@ -113,7 +114,7 @@ export class EventsService {
    * @param event the event to output
    */
   private logEvent(event: Event): void {
-    console.log('Generated ecommerce event:', event);
+    console.log('Generated event:', event);
   }
 
   /**
@@ -247,36 +248,17 @@ export class EventsService {
   }
 
   /**
-   * Generate a login event.
+   * Generate a AuthEvent.
+   * @param logged_in Boolean based on uuth state of the user
    * @param userId (Optional) The ID of the user.
    * @param userEmail (Optional) The email of the user.
    * @return a login event.
    */
-  private getLoginEvent(userId?: string | undefined, userEmail?: string | undefined, userName?: string | undefined): Login {
-    const event: Login = {
-      event: EventName.LOGIN,
+  private getAuthEvent(logged_in: boolean, user : User): AuthEvent {
+    const event: AuthEvent = {
+      event: logged_in == true ? EventName.LOGIN : EventName.LOGOUT,
       logged_in: true,
-      user_id: userId,
-      email: userEmail,
-      name: userName,
-    };
-    this.logEvent(event);
-    return event;
-  }
-
-  /**
-   * Generate a logout event.
-   * @param userId (Optional) The ID of the user.
-   * @param userEmail (Optional) The email of the user.
-   * @return a logout event.
-   */
-  private getLogoutEvent(userId?: string | undefined, userEmail?: string | undefined, userName?: string | undefined): Logout {
-    const event: Logout = {
-      event: EventName.LOGOUT,
-      logged_in: false,
-      user_id: userId,
-      email: userEmail,
-      name: userName,
+      user: user,
     };
     this.logEvent(event);
     return event;
@@ -381,24 +363,12 @@ export class EventsService {
 
   /**
    * Send the login event to GTM.
-   * @param userId (Optional) The ID of the user.
-   * @param userEmail (Optional) The email of the user.
+   * @param logged_in true for logged_in, false for logged_out
+   * @param user the user being logged in or out
    */
-  sendLoginEvent(userId?: string | undefined, userEmail?: string | undefined, userName?: string | undefined): void {
+  sendAuthEvent(logged_in: boolean, user: User): void {
     this.gtmService.pushTag({ ecommerce: null }); // Clear previous object
-    const event = this.getLoginEvent(userId, userEmail, userName);
-    this.gtmService.pushTag(event);
-    this.events.unshift(this.formatEventAsString(event));
-  }
-
-  /**
-   * Send the logout event to GTM.
-   * @param userId (Optional) The ID of the user.
-   * @param userEmail (Optional) The email of the user.
-   */
-  sendLogoutEvent(userId?: string | undefined, userEmail?: string | undefined, userName?: string | undefined): void {
-    this.gtmService.pushTag({ ecommerce: null }); // Clear previous object
-    const event = this.getLogoutEvent(userId, userEmail, userName);
+    const event = this.getAuthEvent(logged_in, user);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEventAsString(event));
   }

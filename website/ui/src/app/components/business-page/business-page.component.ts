@@ -1,5 +1,5 @@
 /**
- * @fileoverview models for working with users.
+ * @fileoverview this is the component for the home page.
  *
  * Copyright 2024 Google LLC
  *
@@ -16,12 +16,15 @@
  * limitations under the License.
  */
 
-
+import {Component, OnInit} from '@angular/core';
 /**
- * Represents a logged in user.
+ * The business page component.
  */
-export interface User {
-  id: string | null;
-  name: string | null;
-  email: string | null;
+@Component({
+  selector: 'app-business-page',
+  templateUrl: './business-page.component.html',
+  styleUrls: ['./business-page.component.css'],
+})
+export class BusinessPageComponent implements OnInit {
+  ngOnInit(): void {}
 }

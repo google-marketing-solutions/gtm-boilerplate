@@ -22,9 +22,14 @@
  */
 
 
+
+
 /**
  * The base class for the Event Objects.
  */
+
+import {User} from './user';
+
 export interface Event {
   event: EventName
 }
@@ -142,16 +147,7 @@ export interface Purchase extends EcommerceObject {
   tax?: number;
 }
 
-export interface Login extends Event {
-  logged_in: true;
-  user_id?: string;
-  email?: string;
-  name?: string;
-}
-
-export interface Logout extends Event {
-  logged_in: false;
-  user_id?: string;
-  email?: string;
-  name?: string;
+export interface AuthEvent extends Event {
+  logged_in: boolean;
+  user: User
 }

@@ -20,7 +20,7 @@ import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable} from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import {User} from '../models/user';
-import { EventsService } from './events.service'; // Import the service
+import {EventsService} from './events.service'; // Import the service
 
 
 /**
@@ -73,7 +73,7 @@ export class LoginService {
     this.dataLayer.push({
       'event': 'login'
     });
-    this.eventsService.sendLoginEvent(this.user.id as string, this.user.email as string, this.user.name as string); 
+    this.eventsService.sendAuthEvent(true, user); 
     this.isLoggedIn = true;
     this.setUserInCookie();
   }
@@ -92,12 +92,13 @@ export class LoginService {
 
   /**
    * Log out a user.
+   * @param user the user being logged out.
    */
-  logUserOut(): void {
+  logUserOut(user: User): void {
     this.dataLayer.push({
       'event': 'logout'
     });
-    this.eventsService.sendLogoutEvent(this.user.id as string, this.user.email as string, this.user.name as string)
+    this.eventsService.sendAuthEvent(false, this.user)
     this.isLoggedIn = false;
     this.cookieService.delete(this.cookieName);
     this.setUserInDataLayer(this.nullUser);
