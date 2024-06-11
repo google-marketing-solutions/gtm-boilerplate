@@ -70,9 +70,6 @@ export class LoginService {
   logUserIn(user: User): void {
     this.user = user;
     this.setUserInDataLayer(user);
-    this.dataLayer.push({
-      'event': 'login'
-    });
     this.eventsService.sendAuthEvent(true, user); 
     this.isLoggedIn = true;
     this.setUserInCookie();
@@ -95,9 +92,6 @@ export class LoginService {
    * @param user the user being logged out.
    */
   logUserOut(user: User): void {
-    this.dataLayer.push({
-      'event': 'logout'
-    });
     this.eventsService.sendAuthEvent(false, this.user)
     this.isLoggedIn = false;
     this.cookieService.delete(this.cookieName);
