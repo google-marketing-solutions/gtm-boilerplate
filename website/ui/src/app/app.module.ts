@@ -33,6 +33,7 @@ import {ProductPageComponent} from './components/product-page/product-page.compo
 import {ProductsPageComponent} from './components/products-page/products-page.component';
 import {TopBarComponent} from './components/top-bar/top-bar.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -20,6 +20,8 @@ import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable} from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import {User} from '../models/user';
+import {EventsService} from './events.service'; // Import the service
+
 
 /**
  * A service to manage user login/logouts in the app.
@@ -45,6 +47,7 @@ export class LoginService {
   constructor(
     private cookieService: CookieService,
     @Inject(DOCUMENT) private document: Document,
+    private eventsService: EventsService, 
   ) {
     this.user = this.getUserFromCookie();
     this.getDataLayerFromPage();
@@ -67,6 +70,7 @@ export class LoginService {
   logUserIn(user: User): void {
     this.user = user;
     this.setUserInDataLayer(user);
+    this.eventsService.sendAuthEvent(true, user); 
     this.isLoggedIn = true;
     this.setUserInCookie();
   }
@@ -85,8 +89,10 @@ export class LoginService {
 
   /**
    * Log out a user.
+   * @param user the user being logged out.
    */
-  logUserOut(): void {
+  logUserOut(user: User): void {
+    this.eventsService.sendAuthEvent(false, this.user)
     this.isLoggedIn = false;
     this.cookieService.delete(this.cookieName);
     this.setUserInDataLayer(this.nullUser);

@@ -58,7 +58,7 @@ export class LoginFormComponent implements OnInit {
    * Log the user out.
    */
   logout(): void {
-    this.loginService.logUserOut();
+    this.loginService.logUserOut(this.userForm.value);
   }
 
   /**

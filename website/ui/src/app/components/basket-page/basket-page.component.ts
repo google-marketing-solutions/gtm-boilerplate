@@ -19,7 +19,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Product, ProductVariant} from 'src/app/models/products';
 import {BasketService} from 'src/app/services/basket.service';
-import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {EventsService} from 'src/app/services/events.service';
 import {ProductsService} from 'src/app/services/products.service';
 
 /**
@@ -34,7 +34,7 @@ export class BasketPageComponent implements OnInit {
   constructor(
     public basketService: BasketService,
     public productsService: ProductsService,
-    private ecommerceEventsService: EcommerceEventsService,
+    private eventsService: EventsService,
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class BasketPageComponent implements OnInit {
   sendViewCartEvent(): void {
     const basket = this.basketService.getBasket();
     if (basket) {
-      this.ecommerceEventsService.sendViewCartEvent(
+      this.eventsService.sendViewCartEvent(
         basket,
         this.basketService.calculateTotalBasketPrice(false) as number,
       );
@@ -73,13 +73,13 @@ export class BasketPageComponent implements OnInit {
     const product: Product = this.productsService.products[id];
     this.basketService.updateBasket(product, productVariant, changeQuantity);
     if (changeQuantity > 0) {
-      this.ecommerceEventsService.sendAddToCartEvent(
+      this.eventsService.sendAddToCartEvent(
         product,
         productVariant,
         changeQuantity,
       );
     } else {
-      this.ecommerceEventsService.sendRemoveFromCartEvent(
+      this.eventsService.sendRemoveFromCartEvent(
         product,
         productVariant,
         Math.abs(changeQuantity),

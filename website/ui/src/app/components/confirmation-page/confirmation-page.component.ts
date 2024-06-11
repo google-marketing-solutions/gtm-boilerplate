@@ -20,7 +20,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Basket} from 'src/app/models/products';
 import {BasketService} from 'src/app/services/basket.service';
-import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {EventsService} from 'src/app/services/events.service';
 import {ProductsService} from 'src/app/services/products.service';
 import {v4 as uuidv4} from 'uuid';
 
@@ -39,7 +39,7 @@ export class ConfirmationPageComponent implements OnInit {
     private router: Router,
     public basketService: BasketService,
     public productsService: ProductsService,
-    private ecommerceEventsService: EcommerceEventsService,
+    private eventsService: EventsService,
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +47,7 @@ export class ConfirmationPageComponent implements OnInit {
     if (this.basketService.isBasketEmpty()) {
       this.router.navigate(['/products']);
     }
-    this.ecommerceEventsService.sendPurchaseEvent(
+    this.eventsService.sendPurchaseEvent(
       this.basketService.basket!,
       this.basketService.calculateTotalBasketPrice(false) as number,
       this.transactionId,

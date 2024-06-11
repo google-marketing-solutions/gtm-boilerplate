@@ -17,7 +17,7 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {EventsService} from 'src/app/services/events.service';
 import {ProductsService} from 'src/app/services/products.service';
 
 /**
@@ -31,11 +31,11 @@ import {ProductsService} from 'src/app/services/products.service';
 export class ProductsPageComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
-    private ecommerceEventsService: EcommerceEventsService,
+    private eventsService: EventsService,
   ) {}
 
   ngOnInit(): void {
-    this.ecommerceEventsService.sendViewItemListEvent(
+    this.eventsService.sendViewItemListEvent(
       this.productsService.products,
     );
   }

@@ -20,7 +20,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ProductPageComponent} from './product-page.component';
 import {BasketService} from 'src/app/services/basket.service';
-import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {EventsService} from 'src/app/services/events.service';
 import {ProductsService} from 'src/app/services/products.service';
 import {Product, Products} from 'src/app/models/products';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -29,7 +29,7 @@ describe('ProductPageComponent', () => {
   let component: ProductPageComponent;
   let fixture: ComponentFixture<ProductPageComponent>;
   let mockBasketService: jasmine.SpyObj<BasketService>;
-  let mockEcommerceEventsService: jasmine.SpyObj<EcommerceEventsService>;
+  let mockEventsService: jasmine.SpyObj<EventsService>;
   let mockProductsService: Partial<ProductsService>;
   let mockProducts: Products;
   let mockProduct: Product;
@@ -39,8 +39,8 @@ describe('ProductPageComponent', () => {
       'BasketService',
       ['updateBasket',]
     );
-    mockEcommerceEventsService = jasmine.createSpyObj(
-      'EcommerceEventsService',
+    mockEventsService = jasmine.createSpyObj(
+      'EventsService',
       ['sendViewItemEvent',]
     );
 
@@ -74,7 +74,7 @@ describe('ProductPageComponent', () => {
       imports: [RouterTestingModule],
       providers: [
         { provide: BasketService, useValue: mockBasketService },
-        { provide: EcommerceEventsService, useValue: mockEcommerceEventsService },
+        { provide: EventsService, useValue: mockEventsService },
         { provide: ProductsService, useValue: mockProductsService },
       ]
     })

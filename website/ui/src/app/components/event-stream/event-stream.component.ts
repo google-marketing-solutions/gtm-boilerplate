@@ -18,7 +18,7 @@
  */
 
 import {Component} from '@angular/core';
-import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {EventsService} from 'src/app/services/events.service';
 
 /**
  * Event Stream Component
@@ -29,13 +29,13 @@ import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service'
   styleUrl: './event-stream.component.css',
 })
 export class EventStreamComponent {
-  constructor(private ecommerceEventsService: EcommerceEventsService) {}
+  constructor(private eventsService: EventsService) {}
 
   /**
    * Get all the events that have been sent
    * @return the events as an array of formatted strings.
    */
   getEvents(): string[] {
-    return this.ecommerceEventsService.events;
+    return this.eventsService.events;
   }
 }

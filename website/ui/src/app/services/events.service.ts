@@ -25,16 +25,20 @@ import {GoogleTagManagerService} from 'angular-google-tag-manager';
 import {js_beautify} from 'js-beautify';
 import {environment} from 'src/environments/environment';
 import {
+  Event,
   AddToCart,
   EcommerceEvent,
-  EcommerceEventName,
+  EventName,
   Item,
   Purchase,
   ViewCart,
   ViewItem,
-} from '../models/ecommerce-events';
+  AuthEvent,
+} from '../models/events';
 import {Basket, Product, ProductVariant, Products} from '../models/products';
 import {ProductsService} from './products.service';
+import {User} from '../models/user';
+
 
 /**
  * Service for sending ecommerce events to Google Tag Manager.
@@ -42,7 +46,7 @@ import {ProductsService} from './products.service';
 @Injectable({
   providedIn: 'root',
 })
-export class EcommerceEventsService {
+export class EventsService {
   events: string[] = [];
 
   constructor(
@@ -109,8 +113,8 @@ export class EcommerceEventsService {
    * Output the event to the console.
    * @param event the event to output
    */
-  private logEvent(event: EcommerceEvent): void {
-    console.log('Generated ecommerce event:', event);
+  private logEvent(event: Event): void {
+    console.log('Generated event:', event);
   }
 
   /**
@@ -120,7 +124,7 @@ export class EcommerceEventsService {
    */
   private getViewItemListEvent(products: Products): EcommerceEvent {
     const event: EcommerceEvent = {
-      event: EcommerceEventName.VIEW_ITEM_LIST,
+      event: EventName.VIEW_ITEM_LIST,
       ecommerce: {
         items: this.getItems(products),
       },
@@ -140,7 +144,7 @@ export class EcommerceEventsService {
     productVariant: ProductVariant,
   ): EcommerceEvent {
     const event: EcommerceEvent = {
-      event: EcommerceEventName.VIEW_ITEM,
+      event: EventName.VIEW_ITEM,
       ecommerce: {
         currency: environment.currency,
         value: productVariant.price,
@@ -164,7 +168,7 @@ export class EcommerceEventsService {
     quantity = 1,
   ): EcommerceEvent {
     const event: EcommerceEvent = {
-      event: EcommerceEventName.ADD_TO_CART,
+      event: EventName.ADD_TO_CART,
       ecommerce: {
         currency: environment.currency,
         value: productVariant.price,
@@ -188,7 +192,7 @@ export class EcommerceEventsService {
     quantity = 1,
   ): EcommerceEvent {
     const event: EcommerceEvent = {
-      event: EcommerceEventName.REMOVE_FROM_CART,
+      event: EventName.REMOVE_FROM_CART,
       ecommerce: {
         currency: environment.currency,
         value: productVariant.price,
@@ -207,7 +211,7 @@ export class EcommerceEventsService {
    */
   private getViewCartEvent(basket: Basket, value: number): EcommerceEvent {
     const event: EcommerceEvent = {
-      event: EcommerceEventName.VIEW_CART,
+      event: EventName.VIEW_CART,
       ecommerce: {
         currency: environment.currency,
         value,
@@ -231,13 +235,30 @@ export class EcommerceEventsService {
     transaction_id: string,
   ): EcommerceEvent {
     const event: EcommerceEvent = {
-      event: EcommerceEventName.PURCHASE,
+      event: EventName.PURCHASE,
       ecommerce: {
         currency: environment.currency,
         value,
         items: this.getItemsFromBasket(basket),
         transaction_id,
       } as Purchase,
+    };
+    this.logEvent(event);
+    return event;
+  }
+
+  /**
+   * Generate a AuthEvent.
+   * @param logged_in Boolean based on uuth state of the user
+   * @param userId (Optional) The ID of the user.
+   * @param userEmail (Optional) The email of the user.
+   * @return a login event.
+   */
+  private getAuthEvent(logged_in: boolean, user : User): AuthEvent {
+    const event: AuthEvent = {
+      event: logged_in == true ? EventName.LOGIN : EventName.LOGOUT,
+      logged_in: true,
+      user: user,
     };
     this.logEvent(event);
     return event;
@@ -252,7 +273,7 @@ export class EcommerceEventsService {
     this.gtmService.pushTag({ecommerce: null});
     const event = this.getViewItemListEvent(products);
     this.gtmService.pushTag(event);
-    this.events.unshift(this.formatEcommerceEventAsString(event));
+    this.events.unshift(this.formatEventAsString(event));
   }
 
   /**
@@ -265,7 +286,7 @@ export class EcommerceEventsService {
     this.gtmService.pushTag({ecommerce: null});
     const event = this.getViewItemEvent(product, productVariant);
     this.gtmService.pushTag(event);
-    this.events.unshift(this.formatEcommerceEventAsString(event));
+    this.events.unshift(this.formatEventAsString(event));
   }
 
   /**
@@ -283,7 +304,7 @@ export class EcommerceEventsService {
     this.gtmService.pushTag({ecommerce: null});
     const event = this.getAddToCartEvent(product, productVariant, quantity);
     this.gtmService.pushTag(event);
-    this.events.unshift(this.formatEcommerceEventAsString(event));
+    this.events.unshift(this.formatEventAsString(event));
   }
 
   /**
@@ -306,7 +327,7 @@ export class EcommerceEventsService {
       quantity,
     );
     this.gtmService.pushTag(event);
-    this.events.unshift(this.formatEcommerceEventAsString(event));
+    this.events.unshift(this.formatEventAsString(event));
   }
 
   /**
@@ -319,7 +340,7 @@ export class EcommerceEventsService {
     this.gtmService.pushTag({ecommerce: null});
     const event = this.getViewCartEvent(basket, value);
     this.gtmService.pushTag(event);
-    this.events.unshift(this.formatEcommerceEventAsString(event));
+    this.events.unshift(this.formatEventAsString(event));
   }
 
   /**
@@ -337,7 +358,19 @@ export class EcommerceEventsService {
     this.gtmService.pushTag({ecommerce: null});
     const event = this.getPurchaseEvent(basket, value, transaction_id);
     this.gtmService.pushTag(event);
-    this.events.unshift(this.formatEcommerceEventAsString(event));
+    this.events.unshift(this.formatEventAsString(event));
+  }
+
+  /**
+   * Send the login event to GTM.
+   * @param logged_in true for logged_in, false for logged_out
+   * @param user the user being logged in or out
+   */
+  sendAuthEvent(logged_in: boolean, user: User): void {
+    this.gtmService.pushTag({ ecommerce: null }); // Clear previous object
+    const event = this.getAuthEvent(logged_in, user);
+    this.gtmService.pushTag(event);
+    this.events.unshift(this.formatEventAsString(event));
   }
 
   /**
@@ -345,7 +378,7 @@ export class EcommerceEventsService {
    * @param event the event to format.
    * @return the event as a string.
    */
-  private formatEcommerceEventAsString(event: EcommerceEvent): string {
+  private formatEventAsString(event: Event): string {
     const eventJson = JSON.stringify(event);
     const options = {
       indent_size: 2,
