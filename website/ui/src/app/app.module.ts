@@ -33,7 +33,6 @@ import {ProductPageComponent} from './components/product-page/product-page.compo
 import {ProductsPageComponent} from './components/products-page/products-page.component';
 import {TopBarComponent} from './components/top-bar/top-bar.component';
 import {LeadFormComponent} from './components/lead-form/lead-form.component';
-import {BusinessPageComponent} from './components/business-page/business-page.component';
 
 
 @NgModule({
@@ -49,8 +48,6 @@ import {BusinessPageComponent} from './components/business-page/business-page.co
     CookieBannerComponent,
     LoginFormComponent,
     EventStreamComponent,
-    LeadFormComponent,
-    BusinessPageComponent,
   ],
   imports: [
     BrowserModule,
