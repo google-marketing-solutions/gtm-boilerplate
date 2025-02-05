@@ -2,21 +2,23 @@
 
 **Kickstart your GTM experiments with this repository**
 
-This repo contains boilerplate code for working with Google Tag Manager in a
-pure Web, a Server Google Tag Manager setup, or hybrid setup, including a demo
-e-commerce website. You'll find the templates to set up GTM Web and Server
-container, and a demo e-commerce website you can easily run or deploy on a cloud
-service.
+This repo contains boilerplate code for working with Google Tag Manager in a pure Web, a Server Google Tag Manager setup, or hybrid setup, including demo e-commerce website and an Android app. You'll find the templates to set up GTM Web and Server containers, and demo e-commerce website you can easily run or deploy on a cloud service.  The Android demo app showcases a server-side GTM implementation.
 
-The GTM configurations are set up to showcase both Enhanced Conversions &
-Consent mode with Google Ads only.
+The GTM configurations are set up to showcase both Enhanced Conversions & Consent mode with Google Ads (for web) and Firebase/GA4 conversion tracking (for Android).
 
 ## Get Started
 
-1.  [Set up Google Tag Manager](./google_tag_manager/README.md).
+### Web
+1.  [Set up Google Tag Manager](./google_tag_manager_web/README.md).
 2.  [Deploy the sample e-commerce website](./website/README.md).
 3.  Go to the web data stream in Google Analytics and ensure the correct stream
     URL is set.
+
+### App (Android)
+
+1. [Set up Google Tag Manager](google_tag_manager_android/README.md).
+2. [Deploy the sample e-commerce Android app](app/README.md).
+3. Go to the Android app data stream in Google Analytics and ensure the correct stream URL is set.
 
 ## Disclaimers
 
