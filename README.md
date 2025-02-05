@@ -16,7 +16,7 @@ The GTM configurations are set up to showcase both Enhanced Conversions & Consen
 
 ### App (Android)
 
-1. [Set up Google Tag Manager](google_tag_manager_app/).
+1. [Set up Google Tag Manager](google_tag_manager_android/README.md).
 2. [Deploy the sample e-commerce Android app](app/README.md).
 3. Go to the Android app data stream in Google Analytics and ensure the correct stream URL is set.
 

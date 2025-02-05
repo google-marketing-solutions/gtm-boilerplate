@@ -10,7 +10,7 @@ Server-side tagging with GTM involves sending data from your Android app to Goog
 
 ### 1. Prerequisites
 
-* [An Android app](../app/) with the Google Analytics for Firebase SDK installed and linked to a GA4 property.
+* [An Android app](../app/README.md) with the Google Analytics for Firebase SDK installed and linked to a GA4 property.
 * A Google Tag Manager account and a server container.
 * A tagging server to host your server-side GTM container.
 
