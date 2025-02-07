@@ -18,14 +18,14 @@
 
 import {TestBed} from '@angular/core/testing';
 import {BasketService} from 'src/app/services/basket.service';
-import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {EventsService} from 'src/app/services/events.service';
 import {ProductsService} from 'src/app/services/products.service';
 import {BasketPageComponent} from './basket-page.component';
 
 describe('BasketPageComponent', () => {
   let component: BasketPageComponent;
   let mockBasketService: jasmine.SpyObj<BasketService>;
-  let mockEcommerceEventsService: jasmine.SpyObj<EcommerceEventsService>;
+  let mockEventsService: jasmine.SpyObj<EventsService>;
   let mockProductsService: jasmine.SpyObj<ProductsService>;
 
   beforeEach(async () => {
@@ -35,8 +35,8 @@ describe('BasketPageComponent', () => {
       'updateBasket',
       'calculateTotalBasketPrice',
     ]);
-    mockEcommerceEventsService = jasmine.createSpyObj(
-      'EcommerceEventsService',
+    mockEventsService = jasmine.createSpyObj(
+      'EventsService',
       ['sendViewCartEvent', 'sendAddToCartEvent', 'sendRemoveFromCartEvent'],
     );
     mockProductsService = jasmine.createSpyObj('ProductsService', ['products']);
@@ -45,7 +45,7 @@ describe('BasketPageComponent', () => {
       declarations: [BasketPageComponent],
       providers: [
         {provide: BasketService, useValue: mockBasketService},
-        {provide: EcommerceEventsService, useValue: mockEcommerceEventsService},
+        {provide: EventsService, useValue: mockEventsService},
         {provide: ProductsService, useValue: mockProductsService},
       ],
     }).compileComponents();
@@ -72,7 +72,7 @@ describe('BasketPageComponent', () => {
 
       component.sendViewCartEvent();
 
-      expect(mockEcommerceEventsService.sendViewCartEvent).toHaveBeenCalledWith(
+      expect(mockEventsService.sendViewCartEvent).toHaveBeenCalledWith(
         mockBasket,
         mockTotalPrice,
       );
@@ -84,7 +84,7 @@ describe('BasketPageComponent', () => {
       component.sendViewCartEvent();
 
       expect(
-        mockEcommerceEventsService.sendViewCartEvent,
+        mockEventsService.sendViewCartEvent,
       ).not.toHaveBeenCalled();
     });
   });

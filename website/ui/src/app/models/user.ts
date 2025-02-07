@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 
+
 /**
  * Represents a logged in user.
  */
