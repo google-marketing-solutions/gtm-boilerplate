@@ -13,6 +13,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
+
+
 <div class="container-fluid container-highlight" *ngIf="basketService.isBasketEmpty()">
   <h2>Your basket is empty.</h2>
   <a class="btn" routerLink="/products">View products</a>
@@ -50,6 +52,38 @@
       </div>
     </div>
   </div>
+
+  <div class="container-fluid container-highlight">
+    <h3>Shipping info</h3>
+      <div class="form-check shipping">
+       <input type="radio" name="shipping" value="Standard Shipping" [(ngModel)]="selectedShippingOption" (change)="onShippingOptionChange($event)">
+        <label class="form-check-label" for="shippingStandard">
+          Standard Shipping
+        </label>
+      </div>
+      <div class="form-check shipping">
+        <input type="radio" name="shipping" value="Express Shipping" [(ngModel)]="selectedShippingOption" (change)="onShippingOptionChange($event)">
+        <label class="form-check-label" for="shippingExpress">
+          Express Shipping
+        </label>
+      </div>
+  </div>
+  <div class="container-fluid container-highlight">
+    <h3>Payment info</h3>
+      <div class="form-check payment">
+        <input type="radio" name="payment" value="Credit Card" [(ngModel)]="selectedPaymentOption" (change)="onPaymentOptionChange($event)">
+        <label class="form-check-label" for="paymentCard">
+          Credit Card
+        </label>
+      </div>
+      <div class="form-check payment">
+        <input type="radio" name="payment" value="PayPal" [(ngModel)]="selectedPaymentOption" (change)="onPaymentOptionChange($event)">
+        <label class="form-check-label" for="paymentPaypal">
+          Paypal
+        </label>
+      </div>
+  </div>
+
   <div class="container-fluid container-highlight clearfix">
     <h2>TOTAL: {{ basketService.calculateTotalBasketPrice() }}</h2>
     <a class="btn" id="clear-basket" (click)="basketService.clearBasket()">Clear Basket</a>

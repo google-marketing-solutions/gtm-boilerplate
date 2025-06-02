@@ -29,6 +29,19 @@ import {Product, ProductVariant, Products} from '../models/products';
   providedIn: 'root',
 })
 export class ProductsService {
+
+    // Stores the active promotion context for a specific product.
+  // This is used to persist promotion data across events for the promoted item.
+  // This property MUST be declared here for it to be accessible.
+  public activePromotionContext: {
+    productId: string;
+    promotion_id: string;
+    promotion_name: string;
+    creative_name: string;
+    creative_slot: string;
+  } | null = null;
+
+
   products: Products = {
     'blazer': {
       'id': 'blazer',
@@ -36,6 +49,14 @@ export class ProductsService {
       'description': `This elegant blazer adds a bold pop of color to any
                       outfit. Classic button-up design offers timeless style.`,
       'default_variant': 'blazer_red_m',
+      'item_brand': 'FashionCorp', // New: Example brand
+      'item_category': 'Apparel', // New: Example category
+      'item_category2': 'Outerwear', // New: Example sub-category
+      'item_availability': 'In Stock', // New: Example availability
+      'item_material_type': 'Wool Blend', // New: Example material type
+      'item_list_id': 'listing-123',
+      'item_list_name': 'Product listing page',
+      'index': 1,
       'variants': {
         'blazer_red_m': {
           'sku': 'blazer_red_m',
@@ -44,6 +65,7 @@ export class ProductsService {
           'price': 150,
           'size': 'M',
           'image': 'blazer-red.png',
+          'item_color': 'Red', // New: Default color for the product
         },
         'blazer_green_m': {
           'sku': 'blazer_green_m',
@@ -52,6 +74,7 @@ export class ProductsService {
           'price': 180,
           'size': 'M',
           'image': 'blazer-green.png',
+          'item_color': 'Green', // New: Default color for the product
         },
         'blazer_brown_m': {
           'sku': 'blazer_brown_m',
@@ -60,6 +83,7 @@ export class ProductsService {
           'price': 155,
           'size': 'M',
           'image': 'blazer-brown.png',
+          'item_color': 'Brown', // New: Default color for the product
         },
       },
     },
@@ -70,6 +94,14 @@ export class ProductsService {
                       short-sleeved t-shirt. Soft, breathable fabric for all-day
                       comfort.`,
       'default_variant': 'tshirt_m',
+      'item_brand': 'ComfortWear',
+      'item_category': 'Apparel', 
+      'item_category2': 'Tops', 
+      'item_availability': 'In Stock', 
+      'item_material_type': 'Cotton', 
+      'item_list_id': 'shirts-123',
+      'item_list_name': 'Summer sale',
+      'index': 2,
       'variants': {
         'tshirt_l': {
           'sku': 'tshirt_l',
@@ -78,6 +110,7 @@ export class ProductsService {
           'price': 30,
           'size': 'L',
           'image': 't-shirt.jpg',
+          'item_color': 'Yellow', // New: Default color for the product
         },
         'tshirt_m': {
           'sku': 'tshirt_m',
@@ -86,6 +119,7 @@ export class ProductsService {
           'price': 30,
           'size': 'M',
           'image': 't-shirt.jpg',
+          'item_color': 'Yellow', // New: Default color for the product
         },
         'tshirt_s': {
           'sku': 'tshirt_s',
@@ -94,6 +128,7 @@ export class ProductsService {
           'price': 30,
           'size': 'S',
           'image': 't-shirt.jpg',
+          'item_color': 'Yellow', // New: Default color for the product
         },
       },
     },
@@ -104,6 +139,14 @@ export class ProductsService {
                       comfort and style. Perfect for casual outings or a pop of
                       color at work.`,
       'default_variant': 'shoes_6',
+      'item_brand': 'StepRight', // New: Example brand
+      'item_category': 'Footwear', // New: Example category
+      'item_availability': 'In Stock', // New: Example availability
+      'item_material_type': 'Synthetic', // New: Example material type
+      'item_list_id': 'shoes-123',
+      'item_list_name': 'New arrivals',
+      'index': 3,
+
       'variants': {
         'shoes_4': {
           'sku': 'shoes_4',
@@ -112,6 +155,7 @@ export class ProductsService {
           'price': 80,
           'size': '4',
           'image': 'shoes.jpg',
+          'item_color': 'Black', // New: Default color for the product
         },
         'shoes_5': {
           'sku': 'shoes_5',
@@ -120,6 +164,7 @@ export class ProductsService {
           'price': 80,
           'size': '5',
           'image': 'shoes.jpg',
+          'item_color': 'Gray', // New: Default color for the product
         },
         'shoes_6': {
           'sku': 'shoes_6',
@@ -128,6 +173,7 @@ export class ProductsService {
           'price': 80,
           'size': '6',
           'image': 'shoes.jpg',
+          'item_color': 'Blue', // New: Default color for the product
         },
         'shoes_7': {
           'sku': 'shoes_7',
@@ -136,6 +182,7 @@ export class ProductsService {
           'price': 80,
           'size': '7',
           'image': 'shoes.jpg',
+          'item_color': 'Yellow', // New: Default color for the product
         },
         'shoes_8': {
           'sku': 'shoes_8',
@@ -144,6 +191,7 @@ export class ProductsService {
           'price': 80,
           'size': '8',
           'image': 'shoes.jpg',
+          'item_color': 'Black', // New: Default color for the product
         },
       },
     },
@@ -184,6 +232,53 @@ export class ProductsService {
     }
     return '';
   }
+
+
+
+
+
+  /**
+   * Set the active promotion context.
+   * @param productId The ID of the product related to the promotion.
+   * @param promotionId The ID of the promotion.
+   * @param promotionName The name of the promotion.
+   * @param creativeName The name of the creative.
+   * @param creativeSlot The slot of the creative.
+   */
+  setPromotionContext(
+    productId: string,
+    promotionId: string,
+    promotionName: string,
+    creativeName: string,
+    creativeSlot: string,
+  ): void {
+    this.activePromotionContext = {
+      productId,
+      promotion_id: promotionId,
+      promotion_name: promotionName,
+      creative_name: creativeName,
+      creative_slot: creativeSlot,
+    };
+  }
+
+  /**
+   * Clear the active promotion context.
+   */
+  clearPromotionContext(): void {
+    this.activePromotionContext = null;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
   /**
    * Format a number as a currency.

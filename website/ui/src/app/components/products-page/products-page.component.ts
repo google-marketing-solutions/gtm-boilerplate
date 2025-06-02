@@ -1,3 +1,4 @@
+// website/ui/src/app/components/products-page/products-page.component.ts
 /**
  * @fileoverview this is the component for the products page.
  *
@@ -7,7 +8,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,8 +18,18 @@
  */
 
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Product, ProductVariant} from 'src/app/models/products';
 import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
 import {ProductsService} from 'src/app/services/products.service';
+
+interface PromotionData {
+  promotion_id: string;
+  promotion_name: string;
+  creative_name: string;
+  creative_slot: string;
+}
+
 
 /**
  * Products page component.
@@ -29,14 +40,92 @@ import {ProductsService} from 'src/app/services/products.service';
   styleUrls: ['./products-page.component.css'],
 })
 export class ProductsPageComponent implements OnInit {
+  private promotionDataOptions: PromotionData[] = [
+    {
+      promotion_id: 'summer_sale_hats',
+      promotion_name: 'Summer Hats Blowout',
+      creative_name: 'Summer Hats Banner A',
+      creative_slot: 'products_page_bottom_slot_1',
+    },
+    {
+      promotion_id: 'new_arrivals_hats',
+      promotion_name: 'Fresh Hat Styles',
+      creative_name: 'New Hat Styles Banner B',
+      creative_slot: 'products_page_bottom_slot_2',
+    },
+    {
+      promotion_id: 'hat_clearance',
+      promotion_name: 'Hat Clearance Event',
+      creative_name: 'Clearance Hat Banner C',
+      creative_slot: 'products_page_bottom_slot_3',
+    },
+    {
+      promotion_id: 'hat_essentials',
+      promotion_name: 'Everyday Hat Essentials',
+      creative_name: 'Essential Hat Banner D',
+      creative_slot: 'products_page_bottom_slot_4',
+    },
+  ];
+
+    // This property will store the randomly selected promotion data for the current page load.
+  // It is initialized to null and assigned in the constructor.
+  private currentPromotionData: PromotionData | null = null;
+
   constructor(
     private productsService: ProductsService,
     private ecommerceEventsService: EcommerceEventsService,
-  ) {}
+    private router: Router, // Inject Router
+  ) {
+        // Select a random promotion data set when the component is initialized
+        const randomIndex = Math.floor(Math.random() * this.promotionDataOptions.length);
+        this.currentPromotionData = this.promotionDataOptions[randomIndex];
+
+
+  }
 
   ngOnInit(): void {
     this.ecommerceEventsService.sendViewItemListEvent(
       this.productsService.products,
     );
+
+    // Send view_promotion event for the T-shirt banner
+    const tshirtProduct: Product = this.productsService.products['tshirt'];
+    const tshirtVariant: ProductVariant = this.productsService.getDefaultProductVariant(tshirtProduct);
+
+      // Only send view_promotion event if currentPromotionData is not null
+      if (this.currentPromotionData) {
+    this.ecommerceEventsService.sendViewPromotionEvent(
+      tshirtProduct,
+      tshirtVariant,
+      this.currentPromotionData.promotion_id,
+      this.currentPromotionData.promotion_name,
+      this.currentPromotionData.creative_name,
+      this.currentPromotionData.creative_slot,
+    );
+  }
+  }
+
+  /**
+   * Handles the click on the promotion banner.
+   * Sends a select_promotion event and navigates to the T-shirt product page.
+   */
+  onPromotionClick(): void {
+    const tshirtProduct: Product = this.productsService.products['tshirt'];
+    const tshirtVariant: ProductVariant = this.productsService.getDefaultProductVariant(tshirtProduct);
+
+        // Only send select_promotion event if currentPromotionData is not null
+        if (this.currentPromotionData) {
+    this.ecommerceEventsService.sendSelectPromotionEvent(
+      tshirtProduct,
+      tshirtVariant,
+      this.currentPromotionData.promotion_id,
+      this.currentPromotionData.promotion_name,
+      this.currentPromotionData.creative_name,
+      this.currentPromotionData.creative_slot,
+    );
+  }
+
+    // Navigate to the T-shirt product page
+    this.router.navigate(['/product', 'tshirt']);
   }
 }

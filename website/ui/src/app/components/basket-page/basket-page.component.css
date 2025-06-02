@@ -27,3 +27,10 @@
 #buy.btn {
   float: right;
 }
+
+
+
+.form-check {
+  text-align: left;
+  margin-bottom: 10px;
+}

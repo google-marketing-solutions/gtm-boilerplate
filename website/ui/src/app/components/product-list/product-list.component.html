@@ -14,7 +14,7 @@
  limitations under the License.
 -->
 <div class="row">
-  <div class="col" *ngFor="let item of productsService.products | keyvalue">
+  <div class="col items" *ngFor="let item of productsService.products | keyvalue; let i = index">
     <div class="container-fluid container-highlight">
       <div class="product">
         <a [routerLink]="['/product', item.value.id]">
@@ -32,7 +32,7 @@
               item.value,
               productsService.getDefaultProductVariant(item.value)
             )">Buy</a>
-          <a class="btn" [routerLink]="['/product', item.value.id]">View Product</a>
+          <a class="btn view-product" [routerLink]="['/product', item.value.id]" (click)="selectItem(item.value, i)">View Product</a>
         </div>
       </div>
     </div>

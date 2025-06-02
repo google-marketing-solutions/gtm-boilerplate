@@ -13,3 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+
+
+ .promotion-banner {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #38284c; /* A slightly different background to stand out */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .promotion-banner:hover {
+    transform: translateY(-5px);
+  }
+
+  .promotion-banner h2 {
+    color: #03dac5; /* Highlight color */
+    margin-bottom: 10px;
+  }
+
+  .promotion-banner p {
+    color: #fff;
+    margin-bottom: 15px;
+  }
+
+  .promotion-banner .product-image {
+    max-width: 150px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+  .promotion-banner .btn {
+    background: #bb86fc;
+    color: #fff;
+    padding: 8px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+  }

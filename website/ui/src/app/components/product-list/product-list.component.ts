@@ -19,6 +19,9 @@
 import {Component, OnInit} from '@angular/core';
 import {BasketService} from 'src/app/services/basket.service';
 import {ProductsService} from 'src/app/services/products.service';
+import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service'; // Add this import
+import {Product} from 'src/app/models/products'; // Make sure Product is imported
+
 
 /**
  * Product List Component
@@ -32,7 +35,24 @@ export class ProductListComponent implements OnInit {
   constructor(
     public productsService: ProductsService,
     public basketService: BasketService,
+    private ecommerceEventsService: EcommerceEventsService, // Add this line
   ) {}
 
   ngOnInit(): void {}
+
+
+  /**
+   * Sends the 'select_item' event when a product is clicked.
+   * @param product The product that was clicked.
+   * @param index The index of the product in the list.
+   */
+  selectItem(product: Product, index: number): void {
+    const productVariant = this.productsService.getDefaultProductVariant(product);
+    // You might want to include the item's position in the list if available
+    // For simplicity, we are not adding 'index' to the item object here,
+    // but you can extend the 'getItem' method in EcommerceEventsService
+    // to include it if needed.
+    this.ecommerceEventsService.sendSelectItemEvent(product, productVariant);
+  }
+
 }
