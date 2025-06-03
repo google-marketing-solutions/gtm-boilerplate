@@ -45,6 +45,7 @@ export interface Product {
   creative_name?: string;
   creative_slot?: string;
   location_id?: string;
+  review_rating?: string;
 }
 
 /**
@@ -60,6 +61,7 @@ export interface ProductVariant {
   image: string;
   price: number;
   item_color?: string;
+  item_size?: string;
 }
 
 /**

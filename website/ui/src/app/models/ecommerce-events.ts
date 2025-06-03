@@ -79,6 +79,8 @@ export interface Item {
   price?: number;
   quantity?: number;
   item_color?: string;
+  item_size?: string;
+  review_rating?: string;
   item_availability?: string;
   item_material_type?: string;
   promotion_id?: string;
