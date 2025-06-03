@@ -20,10 +20,10 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
-import {GoogleTagManagerService} from 'angular-google-tag-manager';
-import {js_beautify} from 'js-beautify';
-import {environment} from 'src/environments/environment';
+import { Injectable } from "@angular/core";
+import { GoogleTagManagerService } from "angular-google-tag-manager";
+import { js_beautify } from "js-beautify";
+import { environment } from "src/environments/environment";
 import {
   AddToCart,
   EcommerceEvent,
@@ -34,25 +34,25 @@ import {
   ViewItem,
   ViewPromotion,
   SelectPromotion,
-  AddShippingInfo, // New import
-  AddPaymentInfo, // New import
-} from '../models/ecommerce-events';
-import {Basket, Product, ProductVariant, Products} from '../models/products';
-import {ProductsService} from './products.service';
-import { isNgTemplate } from '@angular/compiler';
+  AddShippingInfo,
+  AddPaymentInfo,
+} from "../models/ecommerce-events";
+import { Basket, Product, ProductVariant, Products } from "../models/products";
+import { ProductsService } from "./products.service";
+import { isNgTemplate } from "@angular/compiler";
 
 /**
  * Service for sending ecommerce events to Google Tag Manager.
  */
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class EcommerceEventsService {
   events: string[] = [];
 
   constructor(
     private gtmService: GoogleTagManagerService,
-    private productService: ProductsService,
+    private productService: ProductsService
   ) {}
 
   /**
@@ -70,32 +70,26 @@ export class EcommerceEventsService {
     return items;
   }
 
-/**
+  /**
    * Generate a select_item event.
    * @param product The product that was selected.
    * @param productVariant The variant of the product that was selected.
    * @return A select_item ecommerce event.
    */
 
-
-private getSelectItemEvent(
-  product: Product,
-  productVariant: ProductVariant,
-): EcommerceEvent {
-  const event: EcommerceEvent = {
-    event: EcommerceEventName.SELECT_ITEM,
-    ecommerce: {
-      items: [this.getItem(product, productVariant)],
-    } as ViewItem, // Using ViewItem interface as it's the closest structure
-  };
-  this.logEvent(event);
-  return event;
-}
-
-
-
-
-
+  private getSelectItemEvent(
+    product: Product,
+    productVariant: ProductVariant
+  ): EcommerceEvent {
+    const event: EcommerceEvent = {
+      event: EcommerceEventName.SELECT_ITEM,
+      ecommerce: {
+        items: [this.getItem(product, productVariant)],
+      } as ViewItem,
+    };
+    this.logEvent(event);
+    return event;
+  }
 
   /**
    * For the given basket return as Item in ecommerce datalayer schema.
@@ -109,8 +103,8 @@ private getSelectItemEvent(
         this.getItem(
           basketProduct.product,
           basketProduct.productVariant,
-          basketProduct.quantity,
-        ),
+          basketProduct.quantity
+        )
       );
     }
     return items;
@@ -126,7 +120,7 @@ private getSelectItemEvent(
   private getItem(
     product: Product,
     productVariant: ProductVariant,
-    quantity = 1,
+    quantity = 1
   ): Item {
     const item: Item = {
       item_id: productVariant.sku,
@@ -145,28 +139,25 @@ private getSelectItemEvent(
       item_material_type: product.item_material_type,
       item_list_id: product.item_list_id,
       item_list_name: product.item_list_name,
-      location_id: 'loc_' + product.id.toUpperCase().substring(0, 3), // Example: loc_BLA, loc_TSH, loc_SHO, loc_HAT
+      location_id: "loc_" + product.id.toUpperCase().substring(0, 3),
     };
 
-    // Conditionally add promotion parameters if context exists and matches the product
     if (
       this.productService.activePromotionContext &&
       this.productService.activePromotionContext.productId === product.id
     ) {
-      item.promotion_id = this.productService.activePromotionContext.promotion_id;
-      item.promotion_name = this.productService.activePromotionContext.promotion_name;
-      item.creative_name = this.productService.activePromotionContext.creative_name;
-      item.creative_slot = this.productService.activePromotionContext.creative_slot;
+      item.promotion_id =
+        this.productService.activePromotionContext.promotion_id;
+      item.promotion_name =
+        this.productService.activePromotionContext.promotion_name;
+      item.creative_name =
+        this.productService.activePromotionContext.creative_name;
+      item.creative_slot =
+        this.productService.activePromotionContext.creative_slot;
     }
-
-
 
     return item;
   }
-
-
-
-
 
   /**
    * For the given product return as an Item in ecommerce datalayer schema for promotions.
@@ -185,15 +176,13 @@ private getSelectItemEvent(
     promotionId: string,
     promotionName: string,
     creativeName: string,
-    creativeSlot: string,
+    creativeSlot: string
   ): Item {
-    // This method is specifically for promotion events (view_promotion, select_promotion)
-    // where the promotion details are directly provided, not from a stored context.
     return {
       item_id: productVariant.sku,
       item_name: product.name,
       price: productVariant.price,
-      quantity: 1, // Promotions usually involve a single item representation
+      quantity: 1,
       item_variant: productVariant.name,
       item_brand: product.item_brand,
       item_category: product.item_category,
@@ -211,21 +200,12 @@ private getSelectItemEvent(
     };
   }
 
-
-
-
-
-
-
-
-
-
   /**
    * Output the event to the console.
    * @param event the event to output
    */
   private logEvent(event: EcommerceEvent): void {
-    console.log('Generated ecommerce event:', event);
+    console.log("Generated ecommerce event:", event);
   }
 
   /**
@@ -252,7 +232,7 @@ private getSelectItemEvent(
    */
   private getViewItemEvent(
     product: Product,
-    productVariant: ProductVariant,
+    productVariant: ProductVariant
   ): EcommerceEvent {
     const event: EcommerceEvent = {
       event: EcommerceEventName.VIEW_ITEM,
@@ -276,7 +256,7 @@ private getSelectItemEvent(
   private getAddToCartEvent(
     product: Product,
     productVariant: ProductVariant,
-    quantity = 1,
+    quantity = 1
   ): EcommerceEvent {
     const event: EcommerceEvent = {
       event: EcommerceEventName.ADD_TO_CART,
@@ -300,7 +280,7 @@ private getSelectItemEvent(
   private getRemoveFromCartEvent(
     product: Product,
     productVariant: ProductVariant,
-    quantity = 1,
+    quantity = 1
   ): EcommerceEvent {
     const event: EcommerceEvent = {
       event: EcommerceEventName.REMOVE_FROM_CART,
@@ -344,8 +324,8 @@ private getSelectItemEvent(
     basket: Basket,
     value: number,
     transaction_id: string,
-    shippingTier?: string, 
-    paymentType?: string,
+    shippingTier?: string,
+    paymentType?: string
   ): EcommerceEvent {
     const event: EcommerceEvent = {
       event: EcommerceEventName.PURCHASE,
@@ -354,17 +334,13 @@ private getSelectItemEvent(
         value,
         items: this.getItemsFromBasket(basket),
         transaction_id,
-        shipping_tier: shippingTier, 
+        shipping_tier: shippingTier,
         payment_type: paymentType,
       } as Purchase,
     };
     this.logEvent(event);
     return event;
   }
-
-
-
-
 
   /**
    * Generate a view_promotion event.
@@ -382,7 +358,7 @@ private getSelectItemEvent(
     promotionId: string,
     promotionName: string,
     creativeName: string,
-    creativeSlot: string,
+    creativeSlot: string
   ): EcommerceEvent {
     const event: EcommerceEvent = {
       event: EcommerceEventName.VIEW_PROMOTION,
@@ -394,7 +370,7 @@ private getSelectItemEvent(
             promotionId,
             promotionName,
             creativeName,
-            creativeSlot,
+            creativeSlot
           ),
         ],
       } as ViewPromotion,
@@ -419,7 +395,7 @@ private getSelectItemEvent(
     promotionId: string,
     promotionName: string,
     creativeName: string,
-    creativeSlot: string,
+    creativeSlot: string
   ): EcommerceEvent {
     const event: EcommerceEvent = {
       event: EcommerceEventName.SELECT_PROMOTION,
@@ -431,7 +407,7 @@ private getSelectItemEvent(
             promotionId,
             promotionName,
             creativeName,
-            creativeSlot,
+            creativeSlot
           ),
         ],
       } as SelectPromotion,
@@ -439,10 +415,6 @@ private getSelectItemEvent(
     this.logEvent(event);
     return event;
   }
-
-
-
-
 
   /**
    * Generate an add_shipping_info event.
@@ -454,7 +426,7 @@ private getSelectItemEvent(
   private getAddShippingInfoEvent(
     basket: Basket,
     value: number,
-    shippingTier: string,
+    shippingTier: string
   ): EcommerceEvent {
     const event: EcommerceEvent = {
       event: EcommerceEventName.ADD_SHIPPING_INFO,
@@ -479,7 +451,7 @@ private getSelectItemEvent(
   private getAddPaymentInfoEvent(
     basket: Basket,
     value: number,
-    paymentType: string,
+    paymentType: string
   ): EcommerceEvent {
     const event: EcommerceEvent = {
       event: EcommerceEventName.ADD_PAYMENT_INFO,
@@ -494,47 +466,28 @@ private getSelectItemEvent(
     return event;
   }
 
-
-
-
-
-
-
-
-
-
-
-
   /**
    * Send the view_item_list event to GTM.
    * @param products the products to include.
    */
   sendViewItemListEvent(products: Products): void {
-    // clear previous ecommerce object
-    this.gtmService.pushTag({ecommerce: null});
+    this.gtmService.pushTag({ ecommerce: null });
     const event = this.getViewItemListEvent(products);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
   }
 
-
- /**
+  /**
    * Send the select_item event to GTM.
    * @param product The product that was selected.
    * @param productVariant The variant of the product that was selected.
    */
- sendSelectItemEvent(product: Product, productVariant: ProductVariant): void {
-  // clear previous ecommerce object
-  this.gtmService.pushTag({ecommerce: null});
-  const event = this.getSelectItemEvent(product, productVariant);
-  this.gtmService.pushTag(event);
-  this.events.unshift(this.formatEcommerceEventAsString(event));
-}
-
-
-
-
-
+  sendSelectItemEvent(product: Product, productVariant: ProductVariant): void {
+    this.gtmService.pushTag({ ecommerce: null });
+    const event = this.getSelectItemEvent(product, productVariant);
+    this.gtmService.pushTag(event);
+    this.events.unshift(this.formatEcommerceEventAsString(event));
+  }
 
   /**
    * Send the view_item event to GTM.
@@ -542,8 +495,7 @@ private getSelectItemEvent(
    * @param productVariant the variant of the product to use.
    */
   sendViewItemEvent(product: Product, productVariant: ProductVariant): void {
-    // clear previous ecommerce object
-    this.gtmService.pushTag({ecommerce: null});
+    this.gtmService.pushTag({ ecommerce: null });
     const event = this.getViewItemEvent(product, productVariant);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -558,10 +510,9 @@ private getSelectItemEvent(
   sendAddToCartEvent(
     product: Product,
     productVariant: ProductVariant,
-    quantity = 1,
+    quantity = 1
   ): void {
-    // clear previous ecommerce object
-    this.gtmService.pushTag({ecommerce: null});
+    this.gtmService.pushTag({ ecommerce: null });
     const event = this.getAddToCartEvent(product, productVariant, quantity);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -577,14 +528,13 @@ private getSelectItemEvent(
   sendRemoveFromCartEvent(
     product: Product,
     productVariant: ProductVariant,
-    quantity: number,
+    quantity: number
   ): void {
-    // clear previous ecommerce object
-    this.gtmService.pushTag({ecommerce: null});
+    this.gtmService.pushTag({ ecommerce: null });
     const event = this.getRemoveFromCartEvent(
       product,
       productVariant,
-      quantity,
+      quantity
     );
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -596,8 +546,7 @@ private getSelectItemEvent(
    * @param value the total value of the basket.
    */
   sendBeginCheckoutEvent(basket: Basket, value: number): void {
-    // clear previous ecommerce object
-    this.gtmService.pushTag({ecommerce: null});
+    this.gtmService.pushTag({ ecommerce: null });
     const event = this.getBeginCheckoutEvent(basket, value);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -613,21 +562,20 @@ private getSelectItemEvent(
     basket: Basket,
     value: number,
     transaction_id: string,
-    shippingTier?: string, 
-    paymentType?: string,
+    shippingTier?: string,
+    paymentType?: string
   ): void {
-    // clear previous ecommerce object
-    this.gtmService.pushTag({ecommerce: null});
-    const event = this.getPurchaseEvent(basket, value, transaction_id, shippingTier, paymentType);
+    this.gtmService.pushTag({ ecommerce: null });
+    const event = this.getPurchaseEvent(
+      basket,
+      value,
+      transaction_id,
+      shippingTier,
+      paymentType
+    );
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
   }
-
-
-
-
-
-
 
   /**
    * Send the view_promotion event to GTM.
@@ -644,17 +592,16 @@ private getSelectItemEvent(
     promotionId: string,
     promotionName: string,
     creativeName: string,
-    creativeSlot: string,
+    creativeSlot: string
   ): void {
-    // clear previous ecommerce object
-    this.gtmService.pushTag({ecommerce: null});
+    this.gtmService.pushTag({ ecommerce: null });
     const event = this.getViewPromotionEvent(
       product,
       productVariant,
       promotionId,
       promotionName,
       creativeName,
-      creativeSlot,
+      creativeSlot
     );
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -675,31 +622,27 @@ private getSelectItemEvent(
     promotionId: string,
     promotionName: string,
     creativeName: string,
-    creativeSlot: string,
+    creativeSlot: string
   ): void {
-     // Set the promotion context when a promotion is selected
-     this.productService.setPromotionContext( // <--- This line calls setPromotionContext
+    this.productService.setPromotionContext(
       product.id,
       promotionId,
       promotionName,
       creativeName,
-      creativeSlot,
+      creativeSlot
     );
-    // clear previous ecommerce object
-    this.gtmService.pushTag({ecommerce: null});
+    this.gtmService.pushTag({ ecommerce: null });
     const event = this.getSelectPromotionEvent(
       product,
       productVariant,
       promotionId,
       promotionName,
       creativeName,
-      creativeSlot,
+      creativeSlot
     );
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
   }
-
-
 
   /**
    * Send the add_shipping_info event to GTM.
@@ -710,9 +653,9 @@ private getSelectItemEvent(
   sendAddShippingInfoEvent(
     basket: Basket,
     value: number,
-    shippingTier: string,
+    shippingTier: string
   ): void {
-    this.gtmService.pushTag({ecommerce: null});
+    this.gtmService.pushTag({ ecommerce: null });
     const event = this.getAddShippingInfoEvent(basket, value, shippingTier);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -727,19 +670,13 @@ private getSelectItemEvent(
   sendAddPaymentInfoEvent(
     basket: Basket,
     value: number,
-    paymentType: string,
+    paymentType: string
   ): void {
-    this.gtmService.pushTag({ecommerce: null});
+    this.gtmService.pushTag({ ecommerce: null });
     const event = this.getAddPaymentInfoEvent(basket, value, paymentType);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
   }
-
-
-
-
-
-
 
   /**
    * Format a given EcommerceEvent as a string.
@@ -751,9 +688,8 @@ private getSelectItemEvent(
     const options = {
       indent_size: 2,
       space_in_empty_paren: true,
-      brace_style: 'expand' as 'expand',
+      brace_style: "expand" as "expand",
     };
     return js_beautify(eventJson, options);
   }
 }
-

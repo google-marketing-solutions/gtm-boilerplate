@@ -16,38 +16,36 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {CookieService} from 'ngx-cookie-service';
-import {Subject} from 'rxjs';
-import {environment} from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
+import { Subject } from "rxjs";
+import { environment } from "../../environments/environment";
 import {
   Basket,
   BasketProduct,
   BasketProductCookie,
   Product,
   ProductVariant,
-} from '../models/products';
-import {ProductsService} from './products.service';
-
+} from "../models/products";
+import { ProductsService } from "./products.service";
 
 /**
  * Service for managing the user's basket.
  */
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class BasketService {
   basket?: Basket;
   private addToCartSubject = new Subject<boolean>();
-  private cookieName = 'basket-cookie';
+  private cookieName = "basket-cookie";
   private cookieExpiryDays = 365;
-
 
   constructor(
     private cookieService: CookieService,
     private router: Router,
-    private productsService: ProductsService,
+    private productsService: ProductsService
   ) {
     this.refreshBasketFromCookie();
   }
@@ -94,7 +92,7 @@ export class BasketService {
   updateBasket(
     product: Product,
     productVariant: ProductVariant,
-    changeQuantity = 1,
+    changeQuantity = 1
   ): void {
     let basketProduct: BasketProduct;
     const basket = this.getBasketFromCookie();
@@ -126,7 +124,7 @@ export class BasketService {
    */
   buyWithOneClick(product: Product, productVariant: ProductVariant): void {
     this.updateBasket(product, productVariant, 1);
-    this.router.navigate(['/thank-you']);
+    this.router.navigate(["/thank-you"]);
   }
 
   /**
@@ -154,10 +152,7 @@ export class BasketService {
     expiryDate.setTime(
       expiryDate.getTime() + this.cookieExpiryDays * 24 * 60 * 60 * 1000
     );
-    this.cookieService.set(
-      this.cookieName,
-      JSON.stringify(cookieProducts)
-    );
+    this.cookieService.set(this.cookieName, JSON.stringify(cookieProducts));
   }
 
   /**
@@ -202,14 +197,13 @@ export class BasketService {
    */
   private getBasketFromCookie(): Basket {
     const basketJson = this.cookieService.get(this.cookieName);
-    if (basketJson == null || basketJson === '') {
+    if (basketJson == null || basketJson === "") {
       return {};
     } else {
       try {
         return this.parseCookieToBasket(JSON.parse(basketJson));
-      }
-      catch (error) {
-        console.error('Error parsing cookie to a basket: ', error);
+      } catch (error) {
+        console.error("Error parsing cookie to a basket: ", error);
         return {};
       }
     }
@@ -235,14 +229,14 @@ export class BasketService {
    */
   calculateBasketProductPrice(
     basketProduct: BasketProduct,
-    formatAsCurrency = true,
+    formatAsCurrency = true
   ): string | number {
     const total = basketProduct.quantity * basketProduct.productVariant.price;
     if (formatAsCurrency === false) {
       return total;
     }
     return new Intl.NumberFormat(environment.localCode, {
-      style: 'currency',
+      style: "currency",
       currency: environment.currency,
     }).format(total);
   }
@@ -255,16 +249,19 @@ export class BasketService {
    */
   calculateTotalBasketPrice(formatAsCurrency = true): string | number {
     let total = 0;
-    if (this.basket){
+    if (this.basket) {
       for (const basketProduct of Object.values(this.basket)) {
-        total += this.calculateBasketProductPrice(basketProduct, false) as number;
+        total += this.calculateBasketProductPrice(
+          basketProduct,
+          false
+        ) as number;
       }
     }
     if (formatAsCurrency === false) {
       return total;
     }
     return new Intl.NumberFormat(environment.localCode, {
-      style: 'currency',
+      style: "currency",
       currency: environment.currency,
     }).format(total);
   }

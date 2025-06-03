@@ -27,14 +27,14 @@ export interface Product {
   id: string;
   name: string;
   description: string;
-  default_variant: string; // the sku of the default variant
-  variants: {[sku: string]: ProductVariant};
+  default_variant: string;
+  variants: { [sku: string]: ProductVariant };
   item_brand?: string;
-  item_category?: string; // Main category
-  item_category2?: string; // Sub-category 1
-  item_category3?: string; // Sub-category 2
-  item_category4?: string; // Sub-category 3
-  item_category5?: string; // Sub-category 4
+  item_category?: string;
+  item_category2?: string;
+  item_category3?: string;
+  item_category4?: string;
+  item_category5?: string;
   item_availability?: string;
   item_material_type?: string;
   item_list_id?: string;

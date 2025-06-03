@@ -34,17 +34,17 @@ export interface EcommerceObject {
  * Enums for each of the ecommerce events that are configured.
  */
 export enum EcommerceEventName {
-  VIEW_ITEM_LIST = 'view_item_list',
-  VIEW_ITEM = 'view_item',
-  ADD_TO_CART = 'add_to_cart',
-  REMOVE_FROM_CART = 'remove_from_cart',
-  BEGIN_CHECKOUT = 'begin_checkout',
-  PURCHASE = 'purchase',
-  SELECT_ITEM = 'select_item',
-  VIEW_PROMOTION = 'view_promotion', 
-  SELECT_PROMOTION = 'select_promotion',
-  ADD_SHIPPING_INFO = 'add_shipping_info', // New event name
-  ADD_PAYMENT_INFO = 'add_payment_info', // New event name
+  VIEW_ITEM_LIST = "view_item_list",
+  VIEW_ITEM = "view_item",
+  ADD_TO_CART = "add_to_cart",
+  REMOVE_FROM_CART = "remove_from_cart",
+  BEGIN_CHECKOUT = "begin_checkout",
+  PURCHASE = "purchase",
+  SELECT_ITEM = "select_item",
+  VIEW_PROMOTION = "view_promotion",
+  SELECT_PROMOTION = "select_promotion",
+  ADD_SHIPPING_INFO = "add_shipping_info",
+  ADD_PAYMENT_INFO = "add_payment_info",
 }
 
 /**
@@ -81,10 +81,10 @@ export interface Item {
   item_color?: string;
   item_availability?: string;
   item_material_type?: string;
-  promotion_id?: string; 
-  promotion_name?: string; 
-  creative_name?: string; 
-  creative_slot?: string; 
+  promotion_id?: string;
+  promotion_name?: string;
+  creative_name?: string;
+  creative_slot?: string;
 }
 
 /**
@@ -147,7 +147,6 @@ export interface Purchase extends EcommerceObject {
   payment_type?: string;
 }
 
-
 /**
  * An ecommerce view_promotion event.
  */
@@ -162,8 +161,6 @@ export interface SelectPromotion extends EcommerceObject {
   // No additional properties beyond EcommerceObject.items for this event in GA4 schema
 }
 
-
-
 /**
  * An ecommerce add_shipping_info event.
  * {@link https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtm#add_shipping_info}
@@ -171,7 +168,7 @@ export interface SelectPromotion extends EcommerceObject {
 export interface AddShippingInfo extends EcommerceObject {
   currency: string;
   value: number;
-  shipping_tier: string; // New parameter
+  shipping_tier: string;
 }
 
 /**
@@ -181,5 +178,5 @@ export interface AddShippingInfo extends EcommerceObject {
 export interface AddPaymentInfo extends EcommerceObject {
   currency: string;
   value: number;
-  payment_type: string; // New parameter
+  payment_type: string;
 }

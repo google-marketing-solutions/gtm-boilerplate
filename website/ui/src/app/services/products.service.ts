@@ -18,21 +18,17 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
-import {Product, ProductVariant, Products} from '../models/products';
+import { Injectable } from "@angular/core";
+import { environment } from "../../environments/environment";
+import { Product, ProductVariant, Products } from "../models/products";
 
 /**
  * A service used to manage working with products within the application.
  */
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ProductsService {
-
-    // Stores the active promotion context for a specific product.
-  // This is used to persist promotion data across events for the promoted item.
-  // This property MUST be declared here for it to be accessible.
   public activePromotionContext: {
     productId: string;
     promotion_id: string;
@@ -41,157 +37,156 @@ export class ProductsService {
     creative_slot: string;
   } | null = null;
 
-
   products: Products = {
-    'blazer': {
-      'id': 'blazer',
-      'name': 'Blazer',
-      'description': `This elegant blazer adds a bold pop of color to any
+    blazer: {
+      id: "blazer",
+      name: "Blazer",
+      description: `This elegant blazer adds a bold pop of color to any
                       outfit. Classic button-up design offers timeless style.`,
-      'default_variant': 'blazer_red_m',
-      'item_brand': 'FashionCorp', // New: Example brand
-      'item_category': 'Apparel', // New: Example category
-      'item_category2': 'Outerwear', // New: Example sub-category
-      'item_availability': 'In Stock', // New: Example availability
-      'item_material_type': 'Wool Blend', // New: Example material type
-      'item_list_id': 'listing-123',
-      'item_list_name': 'Product listing page',
-      'index': 1,
-      'variants': {
-        'blazer_red_m': {
-          'sku': 'blazer_red_m',
-          'name': 'blazer#red#m',
-          'display_name': 'Red',
-          'price': 150,
-          'size': 'M',
-          'image': 'blazer-red.png',
-          'item_color': 'Red', // New: Default color for the product
+      default_variant: "blazer_red_m",
+      item_brand: "FashionCorp",
+      item_category: "Apparel",
+      item_category2: "Outerwear",
+      item_availability: "In Stock",
+      item_material_type: "Wool Blend",
+      item_list_id: "listing-123",
+      item_list_name: "Product listing page",
+      index: 1,
+      variants: {
+        blazer_red_m: {
+          sku: "blazer_red_m",
+          name: "blazer#red#m",
+          display_name: "Red",
+          price: 150,
+          size: "M",
+          image: "blazer-red.png",
+          item_color: "Red",
         },
-        'blazer_green_m': {
-          'sku': 'blazer_green_m',
-          'name': 'blazer#green#m',
-          'display_name': 'Green',
-          'price': 180,
-          'size': 'M',
-          'image': 'blazer-green.png',
-          'item_color': 'Green', // New: Default color for the product
+        blazer_green_m: {
+          sku: "blazer_green_m",
+          name: "blazer#green#m",
+          display_name: "Green",
+          price: 180,
+          size: "M",
+          image: "blazer-green.png",
+          item_color: "Green",
         },
-        'blazer_brown_m': {
-          'sku': 'blazer_brown_m',
-          'name': 'blazer#brown#m',
-          'display_name': 'Brown',
-          'price': 155,
-          'size': 'M',
-          'image': 'blazer-brown.png',
-          'item_color': 'Brown', // New: Default color for the product
+        blazer_brown_m: {
+          sku: "blazer_brown_m",
+          name: "blazer#brown#m",
+          display_name: "Brown",
+          price: 155,
+          size: "M",
+          image: "blazer-brown.png",
+          item_color: "Brown",
         },
       },
     },
-    'tshirt': {
-      'id': 'tshirt',
-      'name': 'T-Shirt',
-      'description': `Brighten your wardrobe with this sunny yellow
+    tshirt: {
+      id: "tshirt",
+      name: "T-Shirt",
+      description: `Brighten your wardrobe with this sunny yellow
                       short-sleeved t-shirt. Soft, breathable fabric for all-day
                       comfort.`,
-      'default_variant': 'tshirt_m',
-      'item_brand': 'ComfortWear',
-      'item_category': 'Apparel', 
-      'item_category2': 'Tops', 
-      'item_availability': 'In Stock', 
-      'item_material_type': 'Cotton', 
-      'item_list_id': 'shirts-123',
-      'item_list_name': 'Summer sale',
-      'index': 2,
-      'variants': {
-        'tshirt_l': {
-          'sku': 'tshirt_l',
-          'name': 'tshirt#L',
-          'display_name': 'Large',
-          'price': 30,
-          'size': 'L',
-          'image': 't-shirt.jpg',
-          'item_color': 'Yellow', // New: Default color for the product
+      default_variant: "tshirt_m",
+      item_brand: "ComfortWear",
+      item_category: "Apparel",
+      item_category2: "Tops",
+      item_availability: "Low Stock",
+      item_material_type: "Cotton",
+      item_list_id: "shirts-123",
+      item_list_name: "Summer sale",
+      index: 2,
+      variants: {
+        tshirt_l: {
+          sku: "tshirt_l",
+          name: "tshirt#L",
+          display_name: "Large",
+          price: 30,
+          size: "L",
+          image: "t-shirt.jpg",
+          item_color: "Yellow",
         },
-        'tshirt_m': {
-          'sku': 'tshirt_m',
-          'name': 'tshirt#M',
-          'display_name': 'Medium',
-          'price': 30,
-          'size': 'M',
-          'image': 't-shirt.jpg',
-          'item_color': 'Yellow', // New: Default color for the product
+        tshirt_m: {
+          sku: "tshirt_m",
+          name: "tshirt#M",
+          display_name: "Medium",
+          price: 30,
+          size: "M",
+          image: "t-shirt.jpg",
+          item_color: "Yellow",
         },
-        'tshirt_s': {
-          'sku': 'tshirt_s',
-          'name': 'tshirt#S',
-          'display_name': 'Small',
-          'price': 30,
-          'size': 'S',
-          'image': 't-shirt.jpg',
-          'item_color': 'Yellow', // New: Default color for the product
+        tshirt_s: {
+          sku: "tshirt_s",
+          name: "tshirt#S",
+          display_name: "Small",
+          price: 30,
+          size: "S",
+          image: "t-shirt.jpg",
+          item_color: "Yellow",
         },
       },
     },
-    'shoes': {
-      'id': 'shoes',
-      'name': 'Shoes',
-      'description': `These cheerful yellow lace-up shoes offer unbeatable
+    shoes: {
+      id: "shoes",
+      name: "Shoes",
+      description: `These cheerful yellow lace-up shoes offer unbeatable
                       comfort and style. Perfect for casual outings or a pop of
                       color at work.`,
-      'default_variant': 'shoes_6',
-      'item_brand': 'StepRight', // New: Example brand
-      'item_category': 'Footwear', // New: Example category
-      'item_availability': 'In Stock', // New: Example availability
-      'item_material_type': 'Synthetic', // New: Example material type
-      'item_list_id': 'shoes-123',
-      'item_list_name': 'New arrivals',
-      'index': 3,
+      default_variant: "shoes_6",
+      item_brand: "StepRight",
+      item_category: "Footwear",
+      item_availability: "In Stock",
+      item_material_type: "Synthetic",
+      item_list_id: "shoes-123",
+      item_list_name: "New arrivals",
+      index: 3,
 
-      'variants': {
-        'shoes_4': {
-          'sku': 'shoes_4',
-          'name': 'shoes#4',
-          'display_name': 'Size: 4',
-          'price': 80,
-          'size': '4',
-          'image': 'shoes.jpg',
-          'item_color': 'Black', // New: Default color for the product
+      variants: {
+        shoes_4: {
+          sku: "shoes_4",
+          name: "shoes#4",
+          display_name: "Size: 4",
+          price: 80,
+          size: "4",
+          image: "shoes.jpg",
+          item_color: "Black",
         },
-        'shoes_5': {
-          'sku': 'shoes_5',
-          'name': 'shoes#5',
-          'display_name': 'Size: 5',
-          'price': 80,
-          'size': '5',
-          'image': 'shoes.jpg',
-          'item_color': 'Gray', // New: Default color for the product
+        shoes_5: {
+          sku: "shoes_5",
+          name: "shoes#5",
+          display_name: "Size: 5",
+          price: 80,
+          size: "5",
+          image: "shoes.jpg",
+          item_color: "Gray",
         },
-        'shoes_6': {
-          'sku': 'shoes_6',
-          'name': 'shoes#6',
-          'display_name': 'Size: 6',
-          'price': 80,
-          'size': '6',
-          'image': 'shoes.jpg',
-          'item_color': 'Blue', // New: Default color for the product
+        shoes_6: {
+          sku: "shoes_6",
+          name: "shoes#6",
+          display_name: "Size: 6",
+          price: 80,
+          size: "6",
+          image: "shoes.jpg",
+          item_color: "Blue",
         },
-        'shoes_7': {
-          'sku': 'shoes_7',
-          'name': 'shoes#7',
-          'display_name': 'Size: 7',
-          'price': 80,
-          'size': '7',
-          'image': 'shoes.jpg',
-          'item_color': 'Yellow', // New: Default color for the product
+        shoes_7: {
+          sku: "shoes_7",
+          name: "shoes#7",
+          display_name: "Size: 7",
+          price: 80,
+          size: "7",
+          image: "shoes.jpg",
+          item_color: "Yellow",
         },
-        'shoes_8': {
-          'sku': 'shoes_8',
-          'name': 'shoes#8',
-          'display_name': 'Size: 8',
-          'price': 80,
-          'size': '8',
-          'image': 'shoes.jpg',
-          'item_color': 'Black', // New: Default color for the product
+        shoes_8: {
+          sku: "shoes_8",
+          name: "shoes#8",
+          display_name: "Size: 8",
+          price: 80,
+          size: "8",
+          image: "shoes.jpg",
+          item_color: "Black",
         },
       },
     },
@@ -215,7 +210,7 @@ export class ProductsService {
     if (productVariant != null) {
       return this.formatNumberAsCurrency(productVariant.price);
     }
-    return '';
+    return "";
   }
 
   /**
@@ -227,15 +222,11 @@ export class ProductsService {
   getDefaultProductVariantPriceAsCurrency(product?: Product): string {
     if (product != null) {
       return this.formatNumberAsCurrency(
-        this.getDefaultProductVariant(product).price,
+        this.getDefaultProductVariant(product).price
       );
     }
-    return '';
+    return "";
   }
-
-
-
-
 
   /**
    * Set the active promotion context.
@@ -250,7 +241,7 @@ export class ProductsService {
     promotionId: string,
     promotionName: string,
     creativeName: string,
-    creativeSlot: string,
+    creativeSlot: string
   ): void {
     this.activePromotionContext = {
       productId,
@@ -268,18 +259,6 @@ export class ProductsService {
     this.activePromotionContext = null;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
   /**
    * Format a number as a currency.
    * @param num the number to format
@@ -287,7 +266,7 @@ export class ProductsService {
    */
   private formatNumberAsCurrency(num: number): string {
     return new Intl.NumberFormat(environment.localCode, {
-      style: 'currency',
+      style: "currency",
       currency: environment.currency,
     }).format(num);
   }

@@ -1,11 +1,13 @@
 /**
- * Copyright 2025 Google LLC
+ * @fileoverview this is the component for the basket page of the app.
+ *
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,28 +16,28 @@
  * limitations under the License.
  */
 
-import {Component, OnInit} from '@angular/core';
-import {Product, ProductVariant} from 'src/app/models/products';
-import {BasketService} from 'src/app/services/basket.service';
-import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
-import {ProductsService} from 'src/app/services/products.service';
+import { Component, OnInit } from "@angular/core";
+import { Product, ProductVariant } from "src/app/models/products";
+import { BasketService } from "src/app/services/basket.service";
+import { EcommerceEventsService } from "src/app/services/ecommerce-events.service";
+import { ProductsService } from "src/app/services/products.service";
 
 /**
  * Basket page component.
  */
 @Component({
-  selector: 'app-basket-page',
-  templateUrl: './basket-page.component.html',
-  styleUrls: ['./basket-page.component.css'],
+  selector: "app-basket-page",
+  templateUrl: "./basket-page.component.html",
+  styleUrls: ["./basket-page.component.css"],
 })
 export class BasketPageComponent implements OnInit {
-  selectedShippingOption: string = ''; // Property to hold selected shipping option
-  selectedPaymentOption: string = ''; // Property to hold selected payment option
+  selectedShippingOption: string = "";
+  selectedPaymentOption: string = "";
 
   constructor(
     public basketService: BasketService,
     public productsService: ProductsService,
-    private ecommerceEventsService: EcommerceEventsService,
+    private ecommerceEventsService: EcommerceEventsService
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +53,7 @@ export class BasketPageComponent implements OnInit {
     if (basket) {
       this.ecommerceEventsService.sendBeginCheckoutEvent(
         basket,
-        this.basketService.calculateTotalBasketPrice(false) as number,
+        this.basketService.calculateTotalBasketPrice(false) as number
       );
     }
   }
@@ -66,10 +68,10 @@ export class BasketPageComponent implements OnInit {
   updateBasket(
     id: string,
     productVariant: ProductVariant,
-    changeQuantity: number,
+    changeQuantity: number
   ): void {
     if (changeQuantity === 0) {
-      return; // no change required
+      return;
     }
     const product: Product = this.productsService.products[id];
     this.basketService.updateBasket(product, productVariant, changeQuantity);
@@ -77,13 +79,13 @@ export class BasketPageComponent implements OnInit {
       this.ecommerceEventsService.sendAddToCartEvent(
         product,
         productVariant,
-        changeQuantity,
+        changeQuantity
       );
     } else {
       this.ecommerceEventsService.sendRemoveFromCartEvent(
         product,
         productVariant,
-        Math.abs(changeQuantity),
+        Math.abs(changeQuantity)
       );
     }
   }
@@ -99,7 +101,7 @@ export class BasketPageComponent implements OnInit {
       this.ecommerceEventsService.sendAddShippingInfoEvent(
         basket,
         this.basketService.calculateTotalBasketPrice(false) as number,
-        this.selectedShippingOption,
+        this.selectedShippingOption
       );
     }
   }
@@ -115,7 +117,7 @@ export class BasketPageComponent implements OnInit {
       this.ecommerceEventsService.sendAddPaymentInfoEvent(
         basket,
         this.basketService.calculateTotalBasketPrice(false) as number,
-        this.selectedPaymentOption,
+        this.selectedPaymentOption
       );
     }
   }
