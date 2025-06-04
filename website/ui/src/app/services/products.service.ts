@@ -47,10 +47,14 @@ export class ProductsService {
       item_brand: "FashionCorp",
       item_category: "Apparel",
       item_category2: "Outerwear",
+      item_category3: "Jacket",
+      item_category4: "Blazer",
+      item_category5: "Women Apparel",
       item_availability: "Limited Availability",
       item_material_type: "Wool Blend",
       item_list_id: "listing-123",
       item_list_name: "Product listing page",
+      review_rating: "4.6 out of 5",
       index: 1,
       variants: {
         blazer_red_m: {
@@ -92,10 +96,14 @@ export class ProductsService {
       item_brand: "ComfortWear",
       item_category: "Apparel",
       item_category2: "Tops",
+      item_category3: "T-Shirt",
+      item_category4: "Short Sleeve",
+      item_category5: "Adult",
       item_availability: "Available Now",
       item_material_type: "Cotton",
       item_list_id: "shirts-123",
       item_list_name: "Summer sale",
+      review_rating: "3.2 out of 5",
       index: 2,
       variants: {
         tshirt_l: {
@@ -136,12 +144,16 @@ export class ProductsService {
       default_variant: "shoes_6",
       item_brand: "StepRight",
       item_category: "Footwear",
+      item_category2: "Casual Shoes",
+      item_category3: "Sneakers",
+      item_category4: "Yellow Shoes",
+      item_category5: "Unisex Footwear",
       item_availability: "Online only",
       item_material_type: "Synthetic",
       item_list_id: "shoes-123",
       item_list_name: "New arrivals",
+      review_rating: "4.2 out of 5",
       index: 3,
-
       variants: {
         shoes_4: {
           sku: "shoes_4",

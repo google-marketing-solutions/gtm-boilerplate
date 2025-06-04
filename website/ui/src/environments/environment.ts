@@ -32,9 +32,6 @@ export const environment = {
   gtmResourcePath: 'https://www.googletagmanager.com/gtm.js',
 };
 
-
-
-
 /*
 export const environment = (() => {
   let gtmContainerId: string;
