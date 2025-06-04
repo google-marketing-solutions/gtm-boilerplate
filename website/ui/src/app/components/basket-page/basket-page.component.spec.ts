@@ -16,39 +16,39 @@
  * limitations under the License.
  */
 
-import { TestBed } from "@angular/core/testing";
-import { BasketService } from "src/app/services/basket.service";
-import { EcommerceEventsService } from "src/app/services/ecommerce-events.service";
-import { ProductsService } from "src/app/services/products.service";
-import { BasketPageComponent } from "./basket-page.component";
+import {TestBed} from '@angular/core/testing';
+import {BasketService} from 'src/app/services/basket.service';
+import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {ProductsService} from 'src/app/services/products.service';
+import {BasketPageComponent} from './basket-page.component';
 
-describe("BasketPageComponent", () => {
+describe('BasketPageComponent', () => {
   let component: BasketPageComponent;
   let mockBasketService: jasmine.SpyObj<BasketService>;
   let mockEcommerceEventsService: jasmine.SpyObj<EcommerceEventsService>;
   let mockProductsService: jasmine.SpyObj<ProductsService>;
 
   beforeEach(async () => {
-    mockBasketService = jasmine.createSpyObj("BasketService", [
-      "getBasket",
-      "updateBasket",
-      "calculateTotalBasketPrice",
+    mockBasketService = jasmine.createSpyObj('BasketService', [
+      'getBasket',
+      'updateBasket',
+      'calculateTotalBasketPrice',
     ]);
     mockEcommerceEventsService = jasmine.createSpyObj(
-      "EcommerceEventsService",
-      ["sendViewCartEvent", "sendAddToCartEvent", "sendRemoveFromCartEvent"]
+      'EcommerceEventsService',
+      ['sendViewCartEvent', 'sendAddToCartEvent', 'sendRemoveFromCartEvent']
     );
-    mockProductsService = jasmine.createSpyObj("ProductsService", ["products"]);
+    mockProductsService = jasmine.createSpyObj('ProductsService', ['products']);
 
     await TestBed.configureTestingModule({
       declarations: [BasketPageComponent],
       providers: [
-        { provide: BasketService, useValue: mockBasketService },
+        {provide: BasketService, useValue: mockBasketService},
         {
           provide: EcommerceEventsService,
           useValue: mockEcommerceEventsService,
         },
-        { provide: ProductsService, useValue: mockProductsService },
+        {provide: ProductsService, useValue: mockProductsService},
       ],
     }).compileComponents();
   });
@@ -58,12 +58,12 @@ describe("BasketPageComponent", () => {
     component = fixture.componentInstance;
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  describe("sendViewCartEvent()", () => {
-    it("should send the view cart event with basket and total price", () => {
+  describe('sendViewCartEvent()', () => {
+    it('should send the view cart event with basket and total price', () => {
       const mockBasket = {};
       const mockTotalPrice = 100;
 
@@ -80,7 +80,7 @@ describe("BasketPageComponent", () => {
       );
     });
 
-    it("should not send the event if the basket is empty", () => {
+    it('should not send the event if the basket is empty', () => {
       mockBasketService.getBasket.and.returnValue(undefined);
 
       component.sendViewCartEvent();

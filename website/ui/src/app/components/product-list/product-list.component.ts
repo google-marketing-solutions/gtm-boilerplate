@@ -16,19 +16,19 @@
  * limitations under the License.
  */
 
-import { Component, OnInit } from "@angular/core";
-import { BasketService } from "src/app/services/basket.service";
-import { ProductsService } from "src/app/services/products.service";
-import { EcommerceEventsService } from "src/app/services/ecommerce-events.service";
-import { Product } from "src/app/models/products";
+import {Component, OnInit} from '@angular/core';
+import {BasketService} from 'src/app/services/basket.service';
+import {ProductsService} from 'src/app/services/products.service';
+import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {Product} from 'src/app/models/products';
 
 /**
  * Product List Component
  */
 @Component({
-  selector: "app-product-list",
-  templateUrl: "./product-list.component.html",
-  styleUrls: ["./product-list.component.css"],
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
   constructor(

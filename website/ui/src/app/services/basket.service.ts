@@ -16,30 +16,30 @@
  * limitations under the License.
  */
 
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { CookieService } from "ngx-cookie-service";
-import { Subject } from "rxjs";
-import { environment } from "../../environments/environment";
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
+import {Subject} from 'rxjs';
+import {environment} from '../../environments/environment';
 import {
   Basket,
   BasketProduct,
   BasketProductCookie,
   Product,
   ProductVariant,
-} from "../models/products";
-import { ProductsService } from "./products.service";
+} from '../models/products';
+import {ProductsService} from './products.service';
 
 /**
  * Service for managing the user's basket.
  */
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class BasketService {
   basket?: Basket;
   private addToCartSubject = new Subject<boolean>();
-  private cookieName = "basket-cookie";
+  private cookieName = 'basket-cookie';
   private cookieExpiryDays = 365;
 
   constructor(
@@ -124,7 +124,7 @@ export class BasketService {
    */
   buyWithOneClick(product: Product, productVariant: ProductVariant): void {
     this.updateBasket(product, productVariant, 1);
-    this.router.navigate(["/thank-you"]);
+    this.router.navigate(['/thank-you']);
   }
 
   /**
@@ -197,13 +197,13 @@ export class BasketService {
    */
   private getBasketFromCookie(): Basket {
     const basketJson = this.cookieService.get(this.cookieName);
-    if (basketJson == null || basketJson === "") {
+    if (basketJson == null || basketJson === '') {
       return {};
     } else {
       try {
         return this.parseCookieToBasket(JSON.parse(basketJson));
       } catch (error) {
-        console.error("Error parsing cookie to a basket: ", error);
+        console.error('Error parsing cookie to a basket: ', error);
         return {};
       }
     }
@@ -236,7 +236,7 @@ export class BasketService {
       return total;
     }
     return new Intl.NumberFormat(environment.localCode, {
-      style: "currency",
+      style: 'currency',
       currency: environment.currency,
     }).format(total);
   }
@@ -261,7 +261,7 @@ export class BasketService {
       return total;
     }
     return new Intl.NumberFormat(environment.localCode, {
-      style: "currency",
+      style: 'currency',
       currency: environment.currency,
     }).format(total);
   }

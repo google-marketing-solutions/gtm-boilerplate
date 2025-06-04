@@ -34,17 +34,17 @@ export interface EcommerceObject {
  * Enums for each of the ecommerce events that are configured.
  */
 export enum EcommerceEventName {
-  VIEW_ITEM_LIST = "view_item_list",
-  VIEW_ITEM = "view_item",
-  ADD_TO_CART = "add_to_cart",
-  REMOVE_FROM_CART = "remove_from_cart",
-  BEGIN_CHECKOUT = "begin_checkout",
-  PURCHASE = "purchase",
-  SELECT_ITEM = "select_item",
-  VIEW_PROMOTION = "view_promotion",
-  SELECT_PROMOTION = "select_promotion",
-  ADD_SHIPPING_INFO = "add_shipping_info",
-  ADD_PAYMENT_INFO = "add_payment_info",
+  VIEW_ITEM_LIST = 'view_item_list',
+  VIEW_ITEM = 'view_item',
+  ADD_TO_CART = 'add_to_cart',
+  REMOVE_FROM_CART = 'remove_from_cart',
+  BEGIN_CHECKOUT = 'begin_checkout',
+  PURCHASE = 'purchase',
+  SELECT_ITEM = 'select_item',
+  VIEW_PROMOTION = 'view_promotion',
+  SELECT_PROMOTION = 'select_promotion',
+  ADD_SHIPPING_INFO = 'add_shipping_info',
+  ADD_PAYMENT_INFO = 'add_payment_info',
 }
 
 /**

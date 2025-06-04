@@ -20,10 +20,10 @@
  * limitations under the License.
  */
 
-import { Injectable } from "@angular/core";
-import { GoogleTagManagerService } from "angular-google-tag-manager";
-import { js_beautify } from "js-beautify";
-import { environment } from "src/environments/environment";
+import {Injectable} from '@angular/core';
+import {GoogleTagManagerService} from 'angular-google-tag-manager';
+import {js_beautify} from 'js-beautify';
+import {environment} from 'src/environments/environment';
 import {
   AddToCart,
   EcommerceEvent,
@@ -36,16 +36,16 @@ import {
   SelectPromotion,
   AddShippingInfo,
   AddPaymentInfo,
-} from "../models/ecommerce-events";
-import { Basket, Product, ProductVariant, Products } from "../models/products";
-import { ProductsService } from "./products.service";
-import { isNgTemplate } from "@angular/compiler";
+} from '../models/ecommerce-events';
+import {Basket, Product, ProductVariant, Products} from '../models/products';
+import {ProductsService} from './products.service';
+import {isNgTemplate} from '@angular/compiler';
 
 /**
  * Service for sending ecommerce events to Google Tag Manager.
  */
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class EcommerceEventsService {
   events: string[] = [];
@@ -142,7 +142,7 @@ export class EcommerceEventsService {
       item_list_id: product.item_list_id,
       item_list_name: product.item_list_name,
       index: product.index,
-      location_id: "loc_" + product.id.toUpperCase().substring(0, 3),
+      location_id: 'loc_' + product.id.toUpperCase().substring(0, 3),
     };
 
     if (
@@ -210,7 +210,7 @@ export class EcommerceEventsService {
    * @param event the event to output
    */
   private logEvent(event: EcommerceEvent): void {
-    console.log("Generated ecommerce event:", event);
+    console.log('Generated ecommerce event:', event);
   }
 
   /**
@@ -476,7 +476,7 @@ export class EcommerceEventsService {
    * @param products the products to include.
    */
   sendViewItemListEvent(products: Products): void {
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getViewItemListEvent(products);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -488,7 +488,7 @@ export class EcommerceEventsService {
    * @param productVariant The variant of the product that was selected.
    */
   sendSelectItemEvent(product: Product, productVariant: ProductVariant): void {
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getSelectItemEvent(product, productVariant);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -500,7 +500,7 @@ export class EcommerceEventsService {
    * @param productVariant the variant of the product to use.
    */
   sendViewItemEvent(product: Product, productVariant: ProductVariant): void {
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getViewItemEvent(product, productVariant);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -517,7 +517,7 @@ export class EcommerceEventsService {
     productVariant: ProductVariant,
     quantity = 1
   ): void {
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getAddToCartEvent(product, productVariant, quantity);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -535,7 +535,7 @@ export class EcommerceEventsService {
     productVariant: ProductVariant,
     quantity: number
   ): void {
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getRemoveFromCartEvent(
       product,
       productVariant,
@@ -551,7 +551,7 @@ export class EcommerceEventsService {
    * @param value the total value of the basket.
    */
   sendBeginCheckoutEvent(basket: Basket, value: number): void {
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getBeginCheckoutEvent(basket, value);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -570,7 +570,7 @@ export class EcommerceEventsService {
     shippingTier?: string,
     paymentType?: string
   ): void {
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getPurchaseEvent(
       basket,
       value,
@@ -599,7 +599,7 @@ export class EcommerceEventsService {
     creativeName: string,
     creativeSlot: string
   ): void {
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getViewPromotionEvent(
       product,
       productVariant,
@@ -636,7 +636,7 @@ export class EcommerceEventsService {
       creativeName,
       creativeSlot
     );
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getSelectPromotionEvent(
       product,
       productVariant,
@@ -660,7 +660,7 @@ export class EcommerceEventsService {
     value: number,
     shippingTier: string
   ): void {
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getAddShippingInfoEvent(basket, value, shippingTier);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -677,7 +677,7 @@ export class EcommerceEventsService {
     value: number,
     paymentType: string
   ): void {
-    this.gtmService.pushTag({ ecommerce: null });
+    this.gtmService.pushTag({ecommerce: null});
     const event = this.getAddPaymentInfoEvent(basket, value, paymentType);
     this.gtmService.pushTag(event);
     this.events.unshift(this.formatEcommerceEventAsString(event));
@@ -693,7 +693,7 @@ export class EcommerceEventsService {
     const options = {
       indent_size: 2,
       space_in_empty_paren: true,
-      brace_style: "expand" as "expand",
+      brace_style: 'expand' as 'expand',
     };
     return js_beautify(eventJson, options);
   }

@@ -16,23 +16,23 @@
  * limitations under the License.
  */
 
-import { Component, OnInit } from "@angular/core";
-import { Product, ProductVariant } from "src/app/models/products";
-import { BasketService } from "src/app/services/basket.service";
-import { EcommerceEventsService } from "src/app/services/ecommerce-events.service";
-import { ProductsService } from "src/app/services/products.service";
+import {Component, OnInit} from '@angular/core';
+import {Product, ProductVariant} from 'src/app/models/products';
+import {BasketService} from 'src/app/services/basket.service';
+import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {ProductsService} from 'src/app/services/products.service';
 
 /**
  * Basket page component.
  */
 @Component({
-  selector: "app-basket-page",
-  templateUrl: "./basket-page.component.html",
-  styleUrls: ["./basket-page.component.css"],
+  selector: 'app-basket-page',
+  templateUrl: './basket-page.component.html',
+  styleUrls: ['./basket-page.component.css'],
 })
 export class BasketPageComponent implements OnInit {
-  selectedShippingOption: string = "";
-  selectedPaymentOption: string = "";
+  selectedShippingOption: string = '';
+  selectedPaymentOption: string = '';
 
   constructor(
     public basketService: BasketService,

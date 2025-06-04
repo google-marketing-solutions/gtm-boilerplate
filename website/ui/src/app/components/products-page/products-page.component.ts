@@ -17,11 +17,11 @@
  * limitations under the License.
  */
 
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Product, ProductVariant } from "src/app/models/products";
-import { EcommerceEventsService } from "src/app/services/ecommerce-events.service";
-import { ProductsService } from "src/app/services/products.service";
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Product, ProductVariant} from 'src/app/models/products';
+import {EcommerceEventsService} from 'src/app/services/ecommerce-events.service';
+import {ProductsService} from 'src/app/services/products.service';
 
 interface PromotionData {
   promotion_id: string;
@@ -34,35 +34,35 @@ interface PromotionData {
  * Products page component.
  */
 @Component({
-  selector: "app-products-page",
-  templateUrl: "./products-page.component.html",
-  styleUrls: ["./products-page.component.css"],
+  selector: 'app-products-page',
+  templateUrl: './products-page.component.html',
+  styleUrls: ['./products-page.component.css'],
 })
 export class ProductsPageComponent implements OnInit {
   private promotionDataOptions: PromotionData[] = [
     {
-      promotion_id: "summer_sale_hats",
-      promotion_name: "Summer Hats Blowout",
-      creative_name: "Summer Hats Banner A",
-      creative_slot: "products_page_bottom_slot_1",
+      promotion_id: 'summer_sale_hats',
+      promotion_name: 'Summer Hats Blowout',
+      creative_name: 'Summer Hats Banner A',
+      creative_slot: 'products_page_bottom_slot_1',
     },
     {
-      promotion_id: "new_arrivals_hats",
-      promotion_name: "Fresh Hat Styles",
-      creative_name: "New Hat Styles Banner B",
-      creative_slot: "products_page_bottom_slot_2",
+      promotion_id: 'new_arrivals_hats',
+      promotion_name: 'Fresh Hat Styles',
+      creative_name: 'New Hat Styles Banner B',
+      creative_slot: 'products_page_bottom_slot_2',
     },
     {
-      promotion_id: "hat_clearance",
-      promotion_name: "Hat Clearance Event",
-      creative_name: "Clearance Hat Banner C",
-      creative_slot: "products_page_bottom_slot_3",
+      promotion_id: 'hat_clearance',
+      promotion_name: 'Hat Clearance Event',
+      creative_name: 'Clearance Hat Banner C',
+      creative_slot: 'products_page_bottom_slot_3',
     },
     {
-      promotion_id: "hat_essentials",
-      promotion_name: "Everyday Hat Essentials",
-      creative_name: "Essential Hat Banner D",
-      creative_slot: "products_page_bottom_slot_4",
+      promotion_id: 'hat_essentials',
+      promotion_name: 'Everyday Hat Essentials',
+      creative_name: 'Essential Hat Banner D',
+      creative_slot: 'products_page_bottom_slot_4',
     },
   ];
   private currentPromotionData: PromotionData | null = null;
@@ -83,7 +83,7 @@ export class ProductsPageComponent implements OnInit {
       this.productsService.products
     );
 
-    const tshirtProduct: Product = this.productsService.products["tshirt"];
+    const tshirtProduct: Product = this.productsService.products['tshirt'];
     const tshirtVariant: ProductVariant =
       this.productsService.getDefaultProductVariant(tshirtProduct);
 
@@ -104,7 +104,7 @@ export class ProductsPageComponent implements OnInit {
    * Sends a select_promotion event and navigates to the T-shirt product page.
    */
   onPromotionClick(): void {
-    const tshirtProduct: Product = this.productsService.products["tshirt"];
+    const tshirtProduct: Product = this.productsService.products['tshirt'];
     const tshirtVariant: ProductVariant =
       this.productsService.getDefaultProductVariant(tshirtProduct);
 
@@ -118,6 +118,6 @@ export class ProductsPageComponent implements OnInit {
         this.currentPromotionData.creative_slot
       );
     }
-    this.router.navigate(["/product", "tshirt"]);
+    this.router.navigate(['/product', 'tshirt']);
   }
 }

@@ -28,7 +28,7 @@ export interface Product {
   name: string;
   description: string;
   default_variant: string;
-  variants: { [sku: string]: ProductVariant };
+  variants: {[sku: string]: ProductVariant};
   item_brand?: string;
   item_category?: string;
   item_category2?: string;
