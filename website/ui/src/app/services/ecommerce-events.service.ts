@@ -202,7 +202,6 @@ export class EcommerceEventsService {
       promotion_name: promotionName,
       creative_name: creativeName,
       creative_slot: creativeSlot,
-      index: product.index,
     };
   }
 
