@@ -1,4 +1,3 @@
-// website/ui/src/app/components/products-page/products-page.component.ts
 /**
  * @fileoverview this is the component for the products page.
  *
