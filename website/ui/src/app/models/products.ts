@@ -27,8 +27,25 @@ export interface Product {
   id: string;
   name: string;
   description: string;
-  default_variant: string; // the sku of the default variant
+  default_variant: string;
   variants: {[sku: string]: ProductVariant};
+  item_brand?: string;
+  item_category?: string;
+  item_category2?: string;
+  item_category3?: string;
+  item_category4?: string;
+  item_category5?: string;
+  item_availability?: string;
+  item_material_type?: string;
+  item_list_id?: string;
+  item_list_name?: string;
+  index?: number;
+  promotion_id?: string;
+  promotion_name?: string;
+  creative_name?: string;
+  creative_slot?: string;
+  location_id?: string;
+  review_rating?: string;
 }
 
 /**
@@ -43,6 +60,8 @@ export interface ProductVariant {
   size: string;
   image: string;
   price: number;
+  item_color?: string;
+  item_size?: string;
 }
 
 /**

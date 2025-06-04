@@ -21,9 +21,14 @@
 }
 
 #clear-basket.btn {
-  float:left;
+  float: left;
 }
 
 #buy.btn {
   float: right;
+}
+
+.form-check {
+  text-align: left;
+  margin-bottom: 10px;
 }

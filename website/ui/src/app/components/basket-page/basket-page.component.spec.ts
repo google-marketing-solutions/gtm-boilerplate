@@ -29,7 +29,6 @@ describe('BasketPageComponent', () => {
   let mockProductsService: jasmine.SpyObj<ProductsService>;
 
   beforeEach(async () => {
-    // Create mock services with spies
     mockBasketService = jasmine.createSpyObj('BasketService', [
       'getBasket',
       'updateBasket',
@@ -37,7 +36,7 @@ describe('BasketPageComponent', () => {
     ]);
     mockEcommerceEventsService = jasmine.createSpyObj(
       'EcommerceEventsService',
-      ['sendViewCartEvent', 'sendAddToCartEvent', 'sendRemoveFromCartEvent'],
+      ['sendViewCartEvent', 'sendAddToCartEvent', 'sendRemoveFromCartEvent']
     );
     mockProductsService = jasmine.createSpyObj('ProductsService', ['products']);
 
@@ -45,7 +44,10 @@ describe('BasketPageComponent', () => {
       declarations: [BasketPageComponent],
       providers: [
         {provide: BasketService, useValue: mockBasketService},
-        {provide: EcommerceEventsService, useValue: mockEcommerceEventsService},
+        {
+          provide: EcommerceEventsService,
+          useValue: mockEcommerceEventsService,
+        },
         {provide: ProductsService, useValue: mockProductsService},
       ],
     }).compileComponents();
@@ -67,14 +69,14 @@ describe('BasketPageComponent', () => {
 
       mockBasketService.getBasket.and.returnValue(mockBasket);
       mockBasketService.calculateTotalBasketPrice.and.returnValue(
-        mockTotalPrice,
+        mockTotalPrice
       );
 
       component.sendViewCartEvent();
 
       expect(mockEcommerceEventsService.sendViewCartEvent).toHaveBeenCalledWith(
         mockBasket,
-        mockTotalPrice,
+        mockTotalPrice
       );
     });
 
@@ -84,7 +86,7 @@ describe('BasketPageComponent', () => {
       component.sendViewCartEvent();
 
       expect(
-        mockEcommerceEventsService.sendViewCartEvent,
+        mockEcommerceEventsService.sendViewCartEvent
       ).not.toHaveBeenCalled();
     });
   });

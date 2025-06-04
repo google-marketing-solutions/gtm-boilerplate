@@ -31,26 +31,29 @@ import {ProductsService} from 'src/app/services/products.service';
   styleUrls: ['./basket-page.component.css'],
 })
 export class BasketPageComponent implements OnInit {
+  selectedShippingOption: string = '';
+  selectedPaymentOption: string = '';
+
   constructor(
     public basketService: BasketService,
     public productsService: ProductsService,
-    private ecommerceEventsService: EcommerceEventsService,
+    private ecommerceEventsService: EcommerceEventsService
   ) {}
 
   ngOnInit(): void {
-    this.sendViewCartEvent();
+    this.sendBeginCheckoutEvent();
   }
 
   /**
-   * Sends the 'view_cart' event to Google Tag Manager, including current
-   * basket contents
+   * Sends the 'begin_checkout' event to Google Tag Manager, including current
+   * basket contents.
    */
-  sendViewCartEvent(): void {
+  sendBeginCheckoutEvent(): void {
     const basket = this.basketService.getBasket();
     if (basket) {
-      this.ecommerceEventsService.sendViewCartEvent(
+      this.ecommerceEventsService.sendBeginCheckoutEvent(
         basket,
-        this.basketService.calculateTotalBasketPrice(false) as number,
+        this.basketService.calculateTotalBasketPrice(false) as number
       );
     }
   }
@@ -60,15 +63,15 @@ export class BasketPageComponent implements OnInit {
    * @param id The ID of the product to update.
    * @param productVariant The specific variant of the product.
    * @param changeQuantity The number of items to add (positive) or remove
-   *   (negative).
+   * (negative).
    */
   updateBasket(
     id: string,
     productVariant: ProductVariant,
-    changeQuantity: number,
+    changeQuantity: number
   ): void {
     if (changeQuantity === 0) {
-      return; // no change required
+      return;
     }
     const product: Product = this.productsService.products[id];
     this.basketService.updateBasket(product, productVariant, changeQuantity);
@@ -76,13 +79,45 @@ export class BasketPageComponent implements OnInit {
       this.ecommerceEventsService.sendAddToCartEvent(
         product,
         productVariant,
-        changeQuantity,
+        changeQuantity
       );
     } else {
       this.ecommerceEventsService.sendRemoveFromCartEvent(
         product,
         productVariant,
-        Math.abs(changeQuantity),
+        Math.abs(changeQuantity)
+      );
+    }
+  }
+
+  /**
+   * Handles the change event for shipping options and sends add_shipping_info.
+   * @param event The change event from the radio button.
+   */
+  onShippingOptionChange(event: Event): void {
+    this.selectedShippingOption = (event.target as HTMLInputElement).value;
+    const basket = this.basketService.getBasket();
+    if (basket) {
+      this.ecommerceEventsService.sendAddShippingInfoEvent(
+        basket,
+        this.basketService.calculateTotalBasketPrice(false) as number,
+        this.selectedShippingOption
+      );
+    }
+  }
+
+  /**
+   * Handles the change event for payment options and sends add_payment_info.
+   * @param event The change event from the radio button.
+   */
+  onPaymentOptionChange(event: Event): void {
+    this.selectedPaymentOption = (event.target as HTMLInputElement).value;
+    const basket = this.basketService.getBasket();
+    if (basket) {
+      this.ecommerceEventsService.sendAddPaymentInfoEvent(
+        basket,
+        this.basketService.calculateTotalBasketPrice(false) as number,
+        this.selectedPaymentOption
       );
     }
   }

@@ -32,7 +32,7 @@
       <a class="btn buy-one-click" (click)="basketService.buyWithOneClick(product, productVariant)">
         Buy
       </a>
-      <a class="btn add-to-basket" [ngClass]="{'added': addedToCart}" (click)="addToBasket()">
+      <a class="btn add-to-basket" id="add-to-basket" [ngClass]="{'added': addedToCart}" (click)="addToBasket()">
         {{ addToCartText }}
       </a>
     </div>

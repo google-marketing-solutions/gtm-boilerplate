@@ -45,7 +45,7 @@ export class BasketService {
   constructor(
     private cookieService: CookieService,
     private router: Router,
-    private productsService: ProductsService,
+    private productsService: ProductsService
   ) {
     this.refreshBasketFromCookie();
   }
@@ -92,7 +92,7 @@ export class BasketService {
   updateBasket(
     product: Product,
     productVariant: ProductVariant,
-    changeQuantity = 1,
+    changeQuantity = 1
   ): void {
     let basketProduct: BasketProduct;
     const basket = this.getBasketFromCookie();
@@ -152,10 +152,7 @@ export class BasketService {
     expiryDate.setTime(
       expiryDate.getTime() + this.cookieExpiryDays * 24 * 60 * 60 * 1000
     );
-    this.cookieService.set(
-      this.cookieName,
-      JSON.stringify(cookieProducts)
-    );
+    this.cookieService.set(this.cookieName, JSON.stringify(cookieProducts));
   }
 
   /**
@@ -205,8 +202,7 @@ export class BasketService {
     } else {
       try {
         return this.parseCookieToBasket(JSON.parse(basketJson));
-      }
-      catch (error) {
+      } catch (error) {
         console.error('Error parsing cookie to a basket: ', error);
         return {};
       }
@@ -233,7 +229,7 @@ export class BasketService {
    */
   calculateBasketProductPrice(
     basketProduct: BasketProduct,
-    formatAsCurrency = true,
+    formatAsCurrency = true
   ): string | number {
     const total = basketProduct.quantity * basketProduct.productVariant.price;
     if (formatAsCurrency === false) {
@@ -253,9 +249,12 @@ export class BasketService {
    */
   calculateTotalBasketPrice(formatAsCurrency = true): string | number {
     let total = 0;
-    if (this.basket){
+    if (this.basket) {
       for (const basketProduct of Object.values(this.basket)) {
-        total += this.calculateBasketProductPrice(basketProduct, false) as number;
+        total += this.calculateBasketProductPrice(
+          basketProduct,
+          false
+        ) as number;
       }
     }
     if (formatAsCurrency === false) {
