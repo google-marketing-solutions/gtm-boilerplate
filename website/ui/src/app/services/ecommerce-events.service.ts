@@ -141,6 +141,7 @@ export class EcommerceEventsService {
       item_material_type: product.item_material_type,
       item_list_id: product.item_list_id,
       item_list_name: product.item_list_name,
+      index: product.index,
       location_id: "loc_" + product.id.toUpperCase().substring(0, 3),
     };
 
@@ -201,6 +202,7 @@ export class EcommerceEventsService {
       promotion_name: promotionName,
       creative_name: creativeName,
       creative_slot: creativeSlot,
+      index: product.index,
     };
   }
 
