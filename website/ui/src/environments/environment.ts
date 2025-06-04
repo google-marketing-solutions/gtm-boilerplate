@@ -31,31 +31,3 @@ export const environment = {
   //The path the scripts are loaded from. Change for loading scripts from your server instead (https://developers.google.com/tag-platform/tag-manager/server-side/dependency-serving)
   gtmResourcePath: 'https://www.googletagmanager.com/gtm.js',
 };
-
-/*
-export const environment = (() => {
-  let gtmContainerId: string;
-  let gtmResourcePath: string;
-  const hostname = window.location.hostname;
-
-  if (hostname === 'domain-a.com') {
-    gtmContainerId = 'GTM-AAAAAA';
-    gtmResourcePath = 'https://www.googletagmanager.com/gtm.js';
-
-  } else if (hostname === 'domain-b.com') {
-    gtmContainerId = 'GTM-BBBBB';
-    gtmResourcePath = 'https://www.googletagmanager.com/gtm.js';
-  } else {
-    // Default values for other hostnames or development
-    gtmContainerId = 'GTM-XXXXX';
-    gtmResourcePath = 'https://www.googletagmanager.com/gtm.js';
-  }
-  return {
-    production: true,
-    currency: 'EUR',
-    localCode: 'en-GB',
-    gtmContainerId: gtmContainerId,
-    gtmResourcePath: gtmResourcePath,
-  };
-})();
-*/
