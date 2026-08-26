@@ -13,3 +13,15 @@
 # limitations under the License.
 
 runtime: python312
+
+handlers:
+  - url: /robots.txt
+    static_files: ui/dist/gtm-boilerplate/robots.txt
+    upload: ui/dist/gtm-boilerplate/robots.txt
+    http_headers:
+      X-Robots-Tag: "noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate"
+      Cache-Control: "no-store, no-cache, must-revalidate"
+      Content-Type: "text/plain"
+
+  - url: /.*
+    script: auto
