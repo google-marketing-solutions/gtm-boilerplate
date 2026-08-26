@@ -49,7 +49,7 @@ might seem unusual and would need to be amended._
 Click the Open in Cloud Shell button to open this repository in Google Cloud
 Shell and follow a guided tutorial.
 
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fijuric0%2Fgtm-boilerplate&cloudshell_git_branch=new-changes&cloudshell_workspace=.%2Fwebsite&cloudshell_tutorial=tutorial.md)
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fgoogle-marketing-solutions%2Fgtm-boilerplate&cloudshell_git_branch=main&cloudshell_workspace=.%2Fwebsite&cloudshell_tutorial=tutorial.md)
 
 
 
