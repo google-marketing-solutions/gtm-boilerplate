@@ -25,10 +25,21 @@ ANGULAR_BUILD_PATH = './ui/dist/gtm-boilerplate'
 app = flask.Flask(__name__)
 
 
+@app.after_request
+def add_robots_tag(response):
+    response.headers['X-Robots-Tag'] = 'noindex, nofollow, noarchive, nosnippet, noimageindex'
+    return response
+
+
+@app.route('/robots.txt')
+def robots():
+    return flask.Response("User-agent: *\nDisallow: /\n", mimetype='text/plain')
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
-    if path.endswith('.js') or path.endswith('.css') or path.startswith('assets'):
+    if path.endswith('.js') or path.endswith('.css') or path.startswith('assets') or path == 'favicon.ico' or path == 'robots.txt':
         return flask.send_from_directory(
             ANGULAR_BUILD_PATH,
             path,
