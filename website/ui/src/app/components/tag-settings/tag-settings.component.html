@@ -82,6 +82,12 @@
                 <span class="info-icon ms-2"
                   data-tooltip="Uses CDN provider configurations (like Cloudflare) to automatically inject scripts with updated GTG paths. No code changes are required on this website.">ⓘ</span>
               </div>
+              <div class="form-check d-flex align-items-center">
+                <input class="form-check-input" type="radio" id="gtmGtgStape" value="stape" formControlName="gtmGtgType">
+                <label class="form-check-label ms-2" for="gtmGtgStape">via Stape</label>
+                <span class="info-icon ms-2"
+                  data-tooltip="Loads script dependencies from a Stape container / Custom Loader URL.">ⓘ</span>
+              </div>
             </div>
 
             <div class="gtg-options p-3 mb-3 border rounded border-secondary bg-dark-purple">
@@ -112,6 +118,43 @@
                   script with updated GTG path. You don't need to adjust the existing script on the website. Enable In-UI
                   integration in CDN provider settings.</small>
               </div>
+              }
+
+              <!-- Stape Proxy Fields -->
+              @if (settingsForm.get('gtmGtgType')?.value === 'stape') {
+              <div class="form-group mb-3 text-start">
+                <div class="form-check form-switch d-flex align-items-center">
+                  <input class="form-check-input" type="checkbox" id="gtmStapeUseCustomLoader"
+                    formControlName="gtmStapeUseCustomLoader">
+                  <label class="form-check-label form-label mb-0 ms-2" for="gtmStapeUseCustomLoader">Use Custom Loader</label>
+                </div>
+              </div>
+
+              @if (!settingsForm.get('gtmStapeUseCustomLoader')?.value) {
+              <div class="form-group mb-3 text-start">
+                <label for="gtmStapeTagServingUrl" class="form-label">Stape Tag Serving URL</label>
+                <input type="text" id="gtmStapeTagServingUrl" class="form-control bg-dark text-white border-secondary"
+                  formControlName="gtmStapeTagServingUrl" placeholder="e.g. https://example.com">
+                <small class="text-muted">Domain path serving the Stape GTM container.</small>
+              </div>
+              } @else {
+              <div class="form-group mb-3 text-start">
+                <label for="gtmStapeHeadSnippet" class="form-label">Head Code Snippet (&lt;head&gt;)</label>
+                <textarea id="gtmStapeHeadSnippet" rows="4"
+                  class="form-control bg-dark text-white border-secondary font-monospace snippet-textarea"
+                  formControlName="gtmStapeHeadSnippet"
+                  placeholder="<!-- Google Tag Manager -->&#10;<script>...</script>&#10;<!-- End Google Tag Manager -->"></textarea>
+                <small class="text-muted">Inserted as close as possible to the top of the &lt;head&gt;&lt;/head&gt; section of each page (replaces standard web GTM code).</small>
+              </div>
+              <div class="form-group mb-3 text-start">
+                <label for="gtmStapeBodySnippet" class="form-label">Body Code Snippet (&lt;body&gt;)</label>
+                <textarea id="gtmStapeBodySnippet" rows="3"
+                  class="form-control bg-dark text-white border-secondary font-monospace snippet-textarea"
+                  formControlName="gtmStapeBodySnippet"
+                  placeholder="<!-- Google Tag Manager (noscript) -->&#10;<noscript><iframe src=&quot;...&quot;></iframe></noscript>&#10;<!-- End Google Tag Manager (noscript) -->"></textarea>
+                <small class="text-muted">Inserted immediately after the opening &lt;body&gt; tag.</small>
+              </div>
+              }
               }
             </div>
           }

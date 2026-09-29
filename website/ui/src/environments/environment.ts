@@ -31,5 +31,6 @@ export const environment = {
   googleTagId: 'G-YYYYY',
   sgtmTagServingUrl: 'https://www.googletagmanager.com',
   sgtmEndpointUrl: 'https://example.com',
+  stapeTagServingUrl: 'https://example.com',
   //The path the scripts are loaded from. Change for loading scripts from your server instead (https://developers.google.com/tag-platform/tag-manager/server-side/dependency-serving)
 };

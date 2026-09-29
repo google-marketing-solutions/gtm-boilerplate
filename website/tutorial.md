@@ -53,6 +53,7 @@ gtmContainerId       | Paste your GTM Web Container ID here (formatted as GTM-XX
 googleTagId          | Paste your GA Measurement ID
 sgtmTagServingUrl    | Paste your URL for first-party script serving via sGTM
 sgtmEndpointUrl      | Paste your sGTM endpoint URL
+stapeTagServingUrl   | Paste your URL for first-party script serving via Stape
 
 After that, let's get the deployment started.
 

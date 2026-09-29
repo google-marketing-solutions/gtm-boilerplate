@@ -49,7 +49,12 @@ export class TagSettingsComponent implements OnInit {
     }
   }
 
-  private setImplementationLabel(library: string, enableGtg: boolean, gtgType: string): void {
+  private setImplementationLabel(
+    library: string,
+    enableGtg: boolean,
+    gtgType: string,
+    stapeUseCustomLoader = false
+  ): void {
     const libLabel = library === 'gtm' ? 'GTM' : 'Gtag';
     if (!enableGtg) {
       this.currentImplementationLabel = `${libLabel} | Standard`;
@@ -62,6 +67,10 @@ export class TagSettingsComponent implements OnInit {
       this.currentImplementationLabel = `${libLabel} | GTG via CDN`;
     } else if (gtgType === 'cdn-1click') {
       this.currentImplementationLabel = `${libLabel} | GTG via CDN (in UI)`;
+    } else if (gtgType === 'stape') {
+      this.currentImplementationLabel = stapeUseCustomLoader
+        ? `${libLabel} | GTG via Stape (Custom Loader)`
+        : `${libLabel} | GTG via Stape`;
     }
   }
 
@@ -92,6 +101,10 @@ export class TagSettingsComponent implements OnInit {
     let gtmGtgType = 'server';
     let gtmSgtmTagServingUrl = environment.sgtmTagServingUrl;
     let gtmCdnTagServingUrl = 'https://www.googletagmanager.com';
+    let gtmStapeTagServingUrl = environment.stapeTagServingUrl;
+    let gtmStapeUseCustomLoader = false;
+    let gtmStapeHeadSnippet = '';
+    let gtmStapeBodySnippet = '';
 
     // Gtag:
     let gtagEnableGtg = false;
@@ -114,10 +127,16 @@ export class TagSettingsComponent implements OnInit {
         let prevGtmGtgType = 'server';
         if (storedTagType.startsWith('gtm-gtg-')) {
           prevGtmEnableGtg = true;
-          prevGtmGtgType = storedTagType.endsWith('via-cdn') ? 'cdn' : 'server';
-          const hasCustomCdnCookie = localStorage.getItem('cdn-tag-serving-url') !== null;
-          if (storedTagType.endsWith('via-cdn') && !hasCustomCdnCookie) {
-            prevGtmGtgType = 'cdn-1click';
+          if (storedTagType.includes('via-stape')) {
+            prevGtmGtgType = 'stape';
+          } else if (storedTagType.endsWith('via-cdn')) {
+            prevGtmGtgType = 'cdn';
+            const hasCustomCdnCookie = localStorage.getItem('cdn-tag-serving-url') !== null;
+            if (!hasCustomCdnCookie) {
+              prevGtmGtgType = 'cdn-1click';
+            }
+          } else {
+            prevGtmGtgType = 'server';
           }
         }
 
@@ -131,6 +150,16 @@ export class TagSettingsComponent implements OnInit {
         gtmCdnTagServingUrl = localStorage.getItem('gtm-cdn-tag-serving-url')
           || (storedTagType.startsWith('gtm') ? localStorage.getItem('cdn-tag-serving-url') : null)
           || 'https://www.googletagmanager.com';
+
+        gtmStapeTagServingUrl = localStorage.getItem('gtm-stape-tag-serving-url')
+          || environment.stapeTagServingUrl;
+
+        gtmStapeUseCustomLoader = loadBoolean(
+          'gtm-stape-use-custom-loader',
+          storedTagType === 'gtm-gtg-via-stape-custom-loader'
+        );
+        gtmStapeHeadSnippet = localStorage.getItem('gtm-stape-head-snippet') || '';
+        gtmStapeBodySnippet = localStorage.getItem('gtm-stape-body-snippet') || '';
 
         let prevGtagEnableGtg = false;
         let prevGtagGtgType = 'server';
@@ -165,7 +194,7 @@ export class TagSettingsComponent implements OnInit {
 
     const activeEnableGtg = library === 'gtag' ? gtagEnableGtg : gtmEnableGtg;
     const activeGtgType = library === 'gtag' ? gtagGtgType : gtmGtgType;
-    this.setImplementationLabel(library, activeEnableGtg, activeGtgType);
+    this.setImplementationLabel(library, activeEnableGtg, activeGtgType, gtmStapeUseCustomLoader);
 
     this.settingsForm = this.fb.group({
       library: [library],
@@ -176,6 +205,10 @@ export class TagSettingsComponent implements OnInit {
       gtmGtgType: [gtmGtgType],
       gtmSgtmTagServingUrl: [gtmSgtmTagServingUrl],
       gtmCdnTagServingUrl: [gtmCdnTagServingUrl],
+      gtmStapeTagServingUrl: [gtmStapeTagServingUrl],
+      gtmStapeUseCustomLoader: [gtmStapeUseCustomLoader],
+      gtmStapeHeadSnippet: [gtmStapeHeadSnippet],
+      gtmStapeBodySnippet: [gtmStapeBodySnippet],
 
       gtagEnableGtg: [gtagEnableGtg],
       gtagGtgType: [gtagGtgType],
@@ -199,6 +232,10 @@ export class TagSettingsComponent implements OnInit {
     localStorage.setItem('gtm-enable-gtg', String(formValue.gtmEnableGtg));
     localStorage.setItem('gtm-gtg-type', formValue.gtmGtgType);
     localStorage.setItem('gtm-sgtm-tag-serving-url', formValue.gtmSgtmTagServingUrl);
+    localStorage.setItem('gtm-stape-tag-serving-url', formValue.gtmStapeTagServingUrl);
+    localStorage.setItem('gtm-stape-use-custom-loader', String(formValue.gtmStapeUseCustomLoader));
+    localStorage.setItem('gtm-stape-head-snippet', formValue.gtmStapeHeadSnippet || '');
+    localStorage.setItem('gtm-stape-body-snippet', formValue.gtmStapeBodySnippet || '');
     if (formValue.gtmGtgType === 'cdn') {
       localStorage.setItem('gtm-cdn-tag-serving-url', formValue.gtmCdnTagServingUrl);
     } else {
@@ -226,7 +263,15 @@ export class TagSettingsComponent implements OnInit {
       }
     } else {
       if (formValue.gtmEnableGtg) {
-        tagType = formValue.gtmGtgType.startsWith('cdn') ? 'gtm-gtg-via-cdn' : 'gtm-gtg-via-sgtm';
+        if (formValue.gtmGtgType === 'stape') {
+          tagType = formValue.gtmStapeUseCustomLoader
+            ? 'gtm-gtg-via-stape-custom-loader'
+            : 'gtm-gtg-via-stape';
+        } else if (formValue.gtmGtgType.startsWith('cdn')) {
+          tagType = 'gtm-gtg-via-cdn';
+        } else {
+          tagType = 'gtm-gtg-via-sgtm';
+        }
       } else {
         tagType = 'gtm-default';
       }
@@ -250,6 +295,10 @@ export class TagSettingsComponent implements OnInit {
     localStorage.removeItem('gtm-gtg-type');
     localStorage.removeItem('gtm-sgtm-tag-serving-url');
     localStorage.removeItem('gtm-cdn-tag-serving-url');
+    localStorage.removeItem('gtm-stape-tag-serving-url');
+    localStorage.removeItem('gtm-stape-use-custom-loader');
+    localStorage.removeItem('gtm-stape-head-snippet');
+    localStorage.removeItem('gtm-stape-body-snippet');
 
     localStorage.removeItem('gtag-enable-gtg');
     localStorage.removeItem('gtag-gtg-type');
