@@ -14,11 +14,12 @@ fi
 echo "🚀 Configuring Master IAM permissions for Project ID: ${PROJECT_ID}..."
 
 # 2. Enable Google Cloud APIs automatically
-echo "⚙️ Enabling Google Cloud APIs (Cloud Build, App Engine & Artifact Registry)..."
+echo "⚙️ Enabling Google Cloud APIs (Cloud Build, App Engine, Artifact Registry & Compute Engine)..."
 gcloud services enable \
   cloudbuild.googleapis.com \
   appengine.googleapis.com \
   artifactregistry.googleapis.com \
+  compute.googleapis.com \
   --project="${PROJECT_ID}"
 
 # 3. Grant Owner & App Engine Admin to your active user account FIRST
@@ -53,12 +54,26 @@ else
   echo "✅ App Engine is already initialized."
 fi
 
-# 5. Wait briefly for newly created Service Accounts to propagate
-echo "⏳ Waiting 10 seconds for backend service accounts to propagate..."
-sleep 10
-
-# 6. Fetch project number now that APIs are fully active
+# 5. Fetch project number now that APIs are fully active
 PROJECT_NUM=$(gcloud projects list --filter="projectId:${PROJECT_ID}" --format="value(projectNumber)")
+
+# 6. Wait for the Compute Engine default Service Account to be created (up to ~2 min)
+COMPUTE_SA="${PROJECT_NUM}-compute@developer.gserviceaccount.com"
+COMPUTE_SA_READY=false
+echo "⏳ Waiting for Compute Engine default Service Account to propagate..."
+for i in {1..12}; do
+  if gcloud iam service-accounts describe "${COMPUTE_SA}" --project="${PROJECT_ID}" >/dev/null 2>&1; then
+    echo "✅ Compute Engine default Service Account is ready."
+    COMPUTE_SA_READY=true
+    break
+  fi
+  echo "   ...not ready yet (attempt ${i}/12), retrying in 10s"
+  sleep 10
+done
+
+if [ "${COMPUTE_SA_READY}" != "true" ]; then
+  echo "⚠️ WARNING: ${COMPUTE_SA} not found after 2 min. Step 9 will be skipped — re-run this script later."
+fi
 
 # 7. Grant Storage Admin to App Engine Service Account
 echo "🔑 Assigning Storage Admin to App Engine Service Account..."
@@ -70,10 +85,10 @@ gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:
 gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:${PROJECT_NUM}@cloudbuild.gserviceaccount.com" --role="roles/artifactregistry.createOnPushWriter" --no-user-output-enabled
 
 # 9. Grant Artifact Registry permissions to Default Compute Service Account (if present)
-if gcloud iam service-accounts describe "${PROJECT_NUM}-compute@developer.gserviceaccount.com" --project="${PROJECT_ID}" >/dev/null 2>&1; then
+if [ "${COMPUTE_SA_READY}" = "true" ]; then
   echo "🔑 Assigning Artifact Registry permissions to Default Compute Service Account..."
-  gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:${PROJECT_NUM}-compute@developer.gserviceaccount.com" --role="roles/artifactregistry.admin" --no-user-output-enabled
-  gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:${PROJECT_NUM}-compute@developer.gserviceaccount.com" --role="roles/artifactregistry.createOnPushWriter" --no-user-output-enabled
+  gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:${COMPUTE_SA}" --role="roles/artifactregistry.admin" --no-user-output-enabled
+  gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:${COMPUTE_SA}" --role="roles/artifactregistry.createOnPushWriter" --no-user-output-enabled
 fi
 
 # 10. Grant Artifact Registry permissions to App Engine Service Account
