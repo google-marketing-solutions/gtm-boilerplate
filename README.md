@@ -20,6 +20,10 @@ The GTM configurations are set up to showcase both Enhanced Conversions & Consen
 2. [Deploy the sample e-commerce Android app](app/README.md).
 3. Go to the Android app data stream in Google Analytics and ensure the correct stream URL is set.
 
+### Google Tag Gateway (GTG) Readiness & Endpoint Validator
+
+1. [Validate first-party Google Tag Gateway (GTG) endpoints, CDN routing, and CSP headers](./tools/gtg-validator/README.md).
+
 ## Disclaimers
 
 **This is not an officially supported Google product.**
